@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Logout from '@/components/Logout'
 import Navbar from '@/components/Navbar'
 import Provider from '@/components/Provider'
+import {StateProvider} from '@/components/Context'
 
 export const metadata = {
   title: 'Caroubuy',
