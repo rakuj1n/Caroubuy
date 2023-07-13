@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react"
 import { useState } from "react"
 import Image from 'next/image'
-import { Browse, Mylist, Createlisting, Profile } from "@/utils/svg"
+import { Browse, Mylist, Createlisting, Profile, Basket } from "@/utils/svg"
 
 
 export default function Navbar() {
@@ -18,9 +18,11 @@ export default function Navbar() {
             <Browse />
             <Mylist />
             <Createlisting />
+            <Basket />
 
-            { <Image className='profile-pic' alt='profile-pic' src={session?.user.image} width={50} height={50} /> ||
-                <Profile />
+            { 
+            <Image className='profile-pic' alt='profile-pic' src={session?.user.image} width={50} height={50} /> ||
+            <Profile />
             }
         </div> 
 

@@ -5,7 +5,7 @@ import { styled } from 'styled-components'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useState,useEffect } from 'react'
-import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
+import { signIn, useSession, getProviders } from 'next-auth/react'
 
 
 
@@ -36,15 +36,17 @@ export default function Home() {
           <div className='sign-in-provider-list'>
             {Object.values(providers).map((provider) => (
                 <motion.button 
+                  className='provider-button'
                   type='button'
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
                 >Sign in with Google</motion.button>
               ))}
           </div>
+          <p className='or'>or</p>
           <div className='manual-sign'>
-            <motion.p>
-              or <Link href='/signup'>Sign Up</Link> / <Link href='login'>Login</Link> here
+            <motion.p className='or-sign-up-login'>
+              <Link href='/signup'>Sign Up</Link> / <Link href='login'>Login</Link>
             </motion.p>
           </div>
         </div>

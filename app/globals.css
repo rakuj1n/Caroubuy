@@ -8,6 +8,7 @@
   --color-three: #E3F4F4;
   --color-four: #F8CBA6;
   --accent: #97FEED;
+  
 }
 
 @media (prefers-color-scheme: dark) {
@@ -51,10 +52,10 @@ body {
   position: absolute;
   top: 20px;
   right: 30px;
-  cursor: pointer;
 }
 
 .logout-button {
+  cursor: pointer;
   margin:20px;
 }
 
@@ -96,6 +97,7 @@ body {
   text-transform: uppercase;
   margin: 0;
   padding: 0;
+  
 }
 
 .caroubuy {
@@ -106,4 +108,78 @@ body {
   font-weight: 800;
   margin: 0;
   padding: 0;
+}
+
+.sign-up-page-container {
+ width: 100vw;
+ height: 100vh;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.form-container > h2 {
+  font-size: 4.5rem;
+}
+
+.form-container > input {
+  padding: 12px;
+  border: 1px solid rgb(139, 139, 139);
+  border-radius: 15px;
+  width: 300px;
+  background-color: transparent;
+}
+
+.form-container > input:focus {
+  outline: none;
+  border: 0.05rem solid #0011ff6f;
+}
+
+.back-sign-up {
+  margin: 20px 0px;
+}
+
+.sign-in-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:10px;
+  margin-top: 10px;
+}
+
+.provider-button {
+  border: 0.05rem solid;
+  border-image: linear-gradient(45deg, purple, orange) 1;
+  /* background: linear-gradient(#ffffff00, #ffffff00) padding-box,
+  linear-gradient(60deg, rgba(90, 194, 205, 0.153), rgba(80, 232, 255, 0.214)) border-box;
+  border: 1px solid transparent; */
+  padding: 10px 15px;
+  border-radius: 15px;
+  font-size:1.05rem;
+  font-style: italic;
+}
+
+.or {
+  padding: 10px;
+  margin-left:10px;
+  font-size:1.05rem;
+}
+
+.or-sign-up-login {
+  padding: 10px;
+  margin: 10px 0;
+  font-size:1.05rem;
+}
+
+.caroubuy {
+  
 }
