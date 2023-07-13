@@ -3,9 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --color-one: #C4DFDF;
+  --color-two: #FFFBEB;
+  --color-three: #E3F4F4;
+  --color-four: #F8CBA6;
+  --accent: #97FEED;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,11 +19,91 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background: #C9D6FF;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #E2E2E2, #c9d6ffa6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #E2E2E2, #c9d6ffa6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-family: 'Bellota Text';
+  /* font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif ; */
+}
+
+.home {
+  /* font-family: 'Bellota Text'; */
+  /* font-size: 9rem; */
+  /* font-weight: 700; */
+  /* background: #121FCF; */
+  /* background: linear-gradient(to right, #12accf99 0%, #cfc612c7 44%); */
+  /* -webkit-background-clip: text; */
+  /* -webkit-text-fill-color: transparent; */
+}
+
+.about-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.logout {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  cursor: pointer;
+}
+
+.logout-button {
+  margin:20px;
+}
+
+.navbar-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right:40px;
+  display: flex;
+  flex-direction: column;
+  
+  background: rgb(255,255,255);
+  background: linear-gradient(140deg, rgba(252, 238, 227, 0.734) 0%, rgba(166, 232, 248, 0.734) 100%);
+  
+  border-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  
+  justify-content: center;
+  align-items: center;
+  padding: 40px 30px;
+  gap: 40px;
+}
+
+.profile-pic {
+  border-radius: 50%;
+}
+
+.home-main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-to {
+  font-size: 3.75rem;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+}
+
+.caroubuy {
+  background: -webkit-linear-gradient(#000000, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 9rem;
+  font-weight: 800;
+  margin: 0;
+  padding: 0;
 }
