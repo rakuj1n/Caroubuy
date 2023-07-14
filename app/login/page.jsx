@@ -1,12 +1,16 @@
 'use client'
 
+import { StateContext } from "@/components/Context";
 import { Back } from "@/utils/svg";
+import { getUser, request } from "@/utils/tokenAndFetch";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
 
 
 export default function LogIn() {
-  
+    const glob = useContext(StateContext)
+    const router = useRouter()
     const [disableSubmit,setDisableSubmit] = useState(false)
     const [formData,setFormData] = useState({
         username: "",
@@ -30,11 +34,23 @@ export default function LogIn() {
         return true
     }
     
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
         if (handleValidation()) {
             console.log('submitted')
             setDisableSubmit(true) //to set false once fetch is over
+            try {
+                const response = await request('/api/users/login','POST',formData)
+                if (response) {
+                    localStorage.setItem('token',response)
+                    glob.setState(prev => ({...prev, usermanual:getUser()}))
+                    router.push('/')
+                }
+            } catch (err) {
+                console.log(err)
+            } finally {
+                setDisableSubmit(false)
+            }
         } else {
             console.log('error')
         }
