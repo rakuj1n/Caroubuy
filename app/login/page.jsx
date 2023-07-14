@@ -27,7 +27,7 @@ export default function LogIn() {
             (console.log('check password'))
             return false
         }
-        if (password.length < 7) {
+        if (password.length < 8) {
             console.log('check password length')
             return false
         }

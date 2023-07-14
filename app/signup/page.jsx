@@ -33,8 +33,12 @@ export default function SignUp() {
             (console.log('check email'))
             return false
         }
-        if (password.length < 7) {
+        if (password.length < 8) {
             console.log('check password length')
+            return false
+        }
+        if (username.length === 0) {
+            console.log('check username')
             return false
         }
         return true
@@ -47,9 +51,11 @@ export default function SignUp() {
             setDisableSubmit(true) 
             try {
                 const response = await request('/api/users','POST',formData)
-                localStorage.setItem('token',response)
-                glob.setState(prev => ({...prev, usermanual:getUser()}))
-                router.push('/')
+                if (response) {
+                    localStorage.setItem('token',response)
+                    glob.setState(prev => ({...prev, usermanual:getUser()}))
+                    router.push('/')
+                }
             } catch (err) {
                 console.log(err)
             } finally {
