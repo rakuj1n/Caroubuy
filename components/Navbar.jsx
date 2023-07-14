@@ -23,7 +23,7 @@ export default function Navbar() {
             <Basket />
 
             { 
-            <Image className='profile-pic' alt='profile-pic' src={session?.user.image || glob.state.usermanual.image} width={50} height={50} /> ||
+            <Image className='profile-pic' alt='profile-pic' src={session?.user.image || glob.state?.userimage } width={50} height={50} /> ||
             <Profile />
             }
         </div> 

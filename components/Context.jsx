@@ -14,6 +14,7 @@ export const StateProvider = ({children}) => {
     const [state, setState] = useState({
         usermanual:null,
         useroauth:session,
+        userimage:'',
     })
 
     return (

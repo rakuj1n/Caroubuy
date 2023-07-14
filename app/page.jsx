@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useState,useEffect, useContext } from 'react'
 import { signIn, useSession, getProviders } from 'next-auth/react'
 import { StateContext } from '@/components/Context'
-import { getUser } from '@/utils/tokenAndFetch'
+import { getUser, request } from '@/utils/tokenAndFetch'
 
 
 
@@ -22,12 +22,18 @@ export default function Home() {
       setProviders(response)
     }
     setUp()
-    
+
     const loggedInManual = getUser()
     if (loggedInManual) {
       glob.setState(prev => ({...prev, usermanual: loggedInManual}))
     }
-  },[])
+
+    const getImage = async (userid) => {
+      const user = await request(`api/users/${userid}/image`)
+      glob.setState(prev => ({...prev,userimage: user?.image}))
+    }
+    getImage(glob.state.usermanual?._id)
+  },[glob.state.usermanual?._id])
 
   return (
     <main className='home-main'>
@@ -39,7 +45,7 @@ export default function Home() {
         >Welcome to</motion.h2>
         <motion.h1 className='caroubuy'>Caroubuy</motion.h1>
 
-        {providers && !session?.user && 
+        {providers && (!session?.user && !glob.state.usermanual) && 
         <div className='sign-in-container'>
           <div className='sign-in-provider-list'>
             {Object.values(providers).map((provider) => (

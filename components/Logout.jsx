@@ -5,20 +5,18 @@ import { Logoutbutton } from "@/utils/svg"
 import { logOut } from "@/utils/tokenAndFetch"
 import { useContext } from "react"
 import { StateContext } from "./Context"
+import { useRouter } from "next/navigation"
 
 
 
 export default function Logout() {
     const { data: session } = useSession()
     const glob = useContext(StateContext)
+    const router = useRouter()
 
     function handleLogOut() {
-        const token = localStorage.getItem('token')
-        if (token) {
             logOut()
-        } else {
             signOut()
-        }
     }
 
     return (
