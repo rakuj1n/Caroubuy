@@ -46,7 +46,7 @@ export default function RootLayout({ children }) {
 
             <Logout />
             <Navbar />
-          {children}
+            {children}
           </main>
 
         </Provider>

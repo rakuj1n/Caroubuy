@@ -144,6 +144,47 @@ body {
   border: 0.05rem solid #0011ff6f;
 }
 
+/* create-listing */
+
+.form-container-create-listing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.form-container-create-listing > h2 {
+  font-size: 4.5rem;
+}
+
+.form-container-create-listing > input {
+  padding: 12px;
+  border: 1px solid rgb(139, 139, 139);
+  border-radius: 15px;
+  width: 300px;
+  background-color: transparent;
+}
+
+.form-container-create-listing > input:focus {
+  outline: none;
+  border: 0.05rem solid #0011ff6f;
+}
+
+.form-container-create-listing > textarea {
+  padding: 12px;
+  border: 1px solid rgb(139, 139, 139);
+  border-radius: 15px;
+  background-color: transparent;
+}
+
+.form-container-create-listing > textarea:focus {
+  outline: none;
+  border: 0.05rem solid #0011ff6f;
+}
+
+/* create-listing */
+
 .back-sign-up {
   margin: 20px 0px;
 }
@@ -182,4 +223,22 @@ body {
 
 .caroubuy {
   
+}
+
+.overall-page-container {
+  /* border: 1px solid red; */
+  width:70vw;
+  height:80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding-top: 25px;
+}
+
+.back-above-content {
+  position: absolute;
+  top:0;
+  left:0;
 }

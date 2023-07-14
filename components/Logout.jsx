@@ -16,7 +16,7 @@ export default function Logout() {
 
     function handleLogOut() {
             logOut()
-            signOut()
+            signOut({ callbackUrl: '/' })
     }
 
     return (

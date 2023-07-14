@@ -5,6 +5,7 @@ import { useContext, useState } from "react"
 import Image from 'next/image'
 import { Browse, Mylist, Createlisting, Profile, Basket } from "@/utils/svg"
 import { StateContext } from "./Context"
+import Link from "next/link"
 
 
 export default function Navbar() {
@@ -19,7 +20,7 @@ export default function Navbar() {
         <div className="navbar-container">
             <Browse />
             <Mylist />
-            <Createlisting />
+            <Link href='/create-listing'><Createlisting /></Link>
             <Basket />
 
             { 
