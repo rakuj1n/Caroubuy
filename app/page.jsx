@@ -4,12 +4,15 @@ import Image from 'next/image'
 import { styled } from 'styled-components'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { useState,useEffect } from 'react'
+import { useState,useEffect, useContext } from 'react'
 import { signIn, useSession, getProviders } from 'next-auth/react'
+import { StateContext } from '@/components/Context'
+import { getUser } from '@/utils/tokenAndFetch'
 
 
 
 export default function Home() {
+  const glob = useContext(StateContext)
   const [providers, setProviders] = useState(null)
   const { data: session } = useSession()
 
@@ -19,6 +22,11 @@ export default function Home() {
       setProviders(response)
     }
     setUp()
+    
+    const loggedInManual = getUser()
+    if (loggedInManual) {
+      glob.setState(prev => ({...prev, usermanual: loggedInManual}))
+    }
   },[])
 
   return (

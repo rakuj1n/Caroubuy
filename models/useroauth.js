@@ -1,11 +1,11 @@
 import { Schema, model, models } from 'mongoose'
 
-const userSchema = new Schema({
+const userOAuthSchema = new Schema({
     email: {type:String,unique:[true,'Email already exists.'],required:[true,'Email is required.']},
     username: {type:String,required:[true,'Username is required.']},
     image: {type:String}
-})
+},{timestamps:true})
 
-const User = models.User || model('User',userSchema)
+const UserOAuth = models.UserOAuth || model('UserOAuth',userOAuthSchema)
 
-export default User
+export default UserOAuth

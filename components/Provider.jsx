@@ -7,10 +7,10 @@ export default function Provider({ children, session }) {
 
 
     return (
-        <StateProvider>
-            <SessionProvider session={session}>
+        <SessionProvider session={session}>
+            <StateProvider>
                 {children}
-            </SessionProvider>
-        </StateProvider>
+            </StateProvider>
+        </SessionProvider>
     )
 }

@@ -5,11 +5,11 @@ import { useContext } from "react"
 
 export default function About() {
 
-    const user = useContext(StateContext)
+    const glob = useContext(StateContext)
 
     return (
         <> 
-        {user}
+        {console.log(glob)}
         </>
     )
 }
