@@ -7,11 +7,12 @@ import { getUser, request } from "@/utils/tokenAndFetch"
 import { getToken } from "next-auth/jwt"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
 
 
 export default function CreateListing() {
-
+    const router = useRouter()
     const {data:session} = useSession()
     const glob = useContext(StateContext)
     // const [file,setFile] = useState(null)
@@ -60,7 +61,13 @@ export default function CreateListing() {
         }
 
         try {
-            await request('/api/listing','POST',{...formDetails,imageSrc})
+            await request('/api/listing','POST',{
+                ...formDetails,
+                imageSrc,
+                usermanualid: glob.state.usermanual?._id,
+                useroauthid: session?.user.id
+            })
+            router.push('/listing')
         } catch (err) {
             console.log(err)
         }
