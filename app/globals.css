@@ -285,7 +285,7 @@ body {
 }
 
 .listing-container {
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   display: grid;
   grid-gap:1em;
   padding:0.5em;
@@ -295,9 +295,16 @@ body {
 }
 
 .listing-card {
-  border: 1px solid red;
+  /* background: rgb(255,255,255); */
+  /* background: linear-gradient(30deg, rgba(255, 255, 255, 0.671) 0%, rgba(255, 234, 218, 0.603) 100%); */
+  /* background-color: #c9d6ff6c; */
+  padding:20px;
   position: relative;
   height: 340px;
+  width: 450px;
+  border-radius: 15px;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; */
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
 .heart {
@@ -305,7 +312,7 @@ body {
   position: absolute;
   right:0;
   padding: 2px;
-  margin: 5px;
+  margin: 8px;
 }
 
 .listing-card {
@@ -315,6 +322,7 @@ body {
 .listing-content {
   border: 1px solid orange;
   display: flex;
+  gap: 5px;
 }
 
 .text-content {
@@ -322,6 +330,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 260px;
+  padding: 5px 10px;
 }
 
 .text-content-inner > h2 {
@@ -333,4 +343,99 @@ body {
   font-style:italic;
 }
 
+.image-container {
+  width:190px;
+  height:190px;
+  border-radius: 15px;
+}
+
 /* pagination */
+
+/* pagination2 https://uiverse.io/Sashank02/new-warthog-10 */
+
+.card {
+  padding: 20px;
+  width: 330px;
+  min-height: 370px;
+  border-radius: 20px;
+  background: #e8e8e8;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  /* box-shadow: 5px 5px 6px #dadada,
+               -5px -5px 6px #f6f6f6; */
+  transition: 0.4s;
+}
+
+.card:hover {
+  translate: 0 -10px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2e54a7;
+  margin: 15px 0 0 10px;
+  width:280px;
+  height:27px;
+  overflow: hidden;
+}
+
+.card-image {
+  height: 170px;
+  width: 290px;
+  overflow: hidden; /* Add this line to hide overflowing content */
+  position: relative; /* Add this line to position the image properly */
+  background-color: #c9c9c9;
+  border-radius: 15px;
+  box-shadow: inset 8px 8px 10px #c3c3c3,
+            inset -8px -8px 10px #cfcfcf;
+}
+
+.card-body {
+  margin: 13px 0 0 10px;
+  color: rgb(31, 31, 31);
+  font-size: 15px;
+  width:280px;
+  height: 67.5px;
+  overflow: hidden;
+}
+
+.footer {
+  float: right;
+  margin: 28px 0 0 18px;
+  font-size: 13.25px;
+  color: #636363;
+}
+
+.by-name {
+  font-weight: 700;
+}
+
+/* pagination2 https://uiverse.io/Sashank02/new-warthog-10 */
+
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(110, 110, 110);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(110, 110, 110);
+}
+
+::-webkit-scrollbar-track-piece {
+  /* background: #304158; */
+  /* background: #27374D; */
+}
+
+/* scrollbar */
