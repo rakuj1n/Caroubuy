@@ -77,6 +77,8 @@ body {
   align-items: center;
   padding: 40px 30px;
   gap: 40px;
+
+  z-index: 99;
 }
 
 .profile-pic {
@@ -286,6 +288,7 @@ body {
 
 .listing-container {
   /* border: 1px solid blue; */
+  margin-bottom: 20px;
   display: grid;
   grid-gap:1em;
   padding:0.5em;
@@ -305,14 +308,6 @@ body {
   border-radius: 15px;
   /* box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; */
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-}
-
-.heart {
-  border: 1px solid green;
-  position: absolute;
-  right:0;
-  padding: 2px;
-  margin: 8px;
 }
 
 .listing-card {
@@ -351,9 +346,25 @@ body {
 
 /* pagination */
 
+.heart {
+  position: absolute;
+  z-index: 50;
+  bottom: 20px;
+  opacity:0.5;
+}
+
+.addtobasket {
+  position: absolute;
+  z-index: 50;
+  bottom: 22px;
+  left: 50px;
+  opacity:0.5;
+}
+
 /* pagination2 https://uiverse.io/Sashank02/new-warthog-10 */
 
 .card {
+  position: relative;
   padding: 20px;
   width: 330px;
   min-height: 370px;

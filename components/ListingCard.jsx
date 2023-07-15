@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Heart } from '@/utils/svg'
+import { AddToBasket, Heart } from '@/utils/svg'
 
 export default function ListingCard({item}) {
 
@@ -28,13 +28,15 @@ export default function ListingCard({item}) {
         // card design from https://uiverse.io/Sashank02/new-warthog-10 
 
         <div class="card">
-        <div class="card-image"><Image style={{ objectFit:'cover', borderRadius:'15px'}} 
+            <div className='heart'><Heart/></div>
+            <div className='addtobasket'><AddToBasket /></div>
+            <div class="card-image"><Image style={{ objectFit:'cover', borderRadius:'15px'}} 
                     alt='thumbnail' src={item.listingthumbnail} fill /></div>
-        <p class="card-title">{item.listingname}</p>
-        <p class="card-body">
-            {item.listingdescription}
-        </p>
-        <p class="footer">Sold by <span class="by-name">{item.seller.usermanual?.username || item.seller.useroauth?.username}</span> at <span class="date">${item.listingprice}</span></p>
+            <p class="card-title">{item.listingname}</p>
+            <p class="card-body">
+                {item.listingdescription}
+            </p>
+            <p class="footer">Sold by <span class="by-name">{item.seller.usermanual?.username || item.seller.useroauth?.username}</span> at <span class="date">${item.listingprice}</span></p>
         </div>
 
 
