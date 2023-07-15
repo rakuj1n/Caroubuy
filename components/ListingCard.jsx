@@ -28,8 +28,13 @@ export default function ListingCard({item,usermanual,useroauth}) {
         // card design from https://uiverse.io/Sashank02/new-warthog-10 
 
         <div className="card">
-            <div className='heart'><Heart/></div>
-            <div className='addtobasket' onClick={()=>{console.log('itemid',item._id,'accid',usermanual,useroauth)}}><AddToBasket /></div>
+            {(usermanual != item.seller.usermanual?._id || useroauth != item.seller.useroauth?._id) &&
+            <>
+                <div className='heart'><Heart/></div>
+                <div className='addtobasket' onClick={()=>{console.log('itemid',item._id,'accid',usermanual,useroauth)}}><AddToBasket /></div>
+            </>
+            }
+
             <div className="card-image"><Image style={{ objectFit:'cover', borderRadius:'15px'}} 
                     alt='thumbnail' src={item.listingthumbnail} fill /></div>
             <p className="card-title">{item.listingname}</p>
