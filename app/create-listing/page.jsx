@@ -69,7 +69,7 @@ export default function CreateListing() {
                 usermanualid: glob.state.usermanual?._id,
                 useroauthid: session?.user.id
             })
-            router.push('/listing')
+            router.push('/mylisting')
         } catch (err) {
             console.log(err)
         }

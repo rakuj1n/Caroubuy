@@ -34,4 +34,20 @@ export const POST = async (req,res) => {
     }
 }
 
+export const GET = async (req,res) => {
+    try {
+        if (req.nextUrl.searchParams.get('usermanual')) {
+            const account = await Account.findOne({usermanual:req.nextUrl.searchParams.get('usermanual')})
+            const listings = await Listing.find({seller:account._id})
+            return new Response(JSON.stringify(listings),{status:200})
+        }
+        if (req.nextUrl.searchParams.get('useroauth')) {
+            const account = await Account.findOne({useroauth:req.nextUrl.searchParams.get('useroauth')})
+            const listings = await Listing.find({seller:account._id})
+            return new Response(JSON.stringify(listings),{status:200})
+        }
+    } catch (err) {
+        return new Response("Failed request.",{status:500})
+    }
+}
 

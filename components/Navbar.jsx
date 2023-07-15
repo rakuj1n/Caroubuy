@@ -19,7 +19,7 @@ export default function Navbar() {
 
         <div className="navbar-container">
             <Link href='/listing'><Browse /></Link>
-            <Mylist />
+            <Link href='/mylisting'><Mylist /></Link>
             <Link href='/create-listing'><Createlisting /></Link>
             <Basket />
 
