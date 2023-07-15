@@ -18,7 +18,7 @@ export default function Navbar() {
         session?.user || glob.state.usermanual ? 
 
         <div className="navbar-container">
-            <Browse />
+            <Link href='/listing'><Browse /></Link>
             <Mylist />
             <Link href='/create-listing'><Createlisting /></Link>
             <Basket />

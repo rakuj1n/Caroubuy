@@ -12,6 +12,7 @@ import { useContext, useEffect, useState } from "react"
 
 
 export default function CreateListing() {
+    const [submitting,setSubmitting] = useState(false)
     const router = useRouter()
     const {data:session} = useSession()
     const glob = useContext(StateContext)
@@ -61,6 +62,7 @@ export default function CreateListing() {
         }
 
         try {
+            setSubmitting(true)
             await request('/api/listing','POST',{
                 ...formDetails,
                 imageSrc,
@@ -81,7 +83,7 @@ export default function CreateListing() {
     return (
         <div className="home-main">
             <div className="overall-page-container">
-                <Link className='back-above-content' href='/'><Back /></Link>
+                {/* <Link className='back-above-content' href='/'><Back /></Link> */}
                 <div className="content-container">
                     <form onSubmit={handleSubmit} className="form-container-create-listing">
                         <h2>Create Your Listing</h2>
@@ -90,7 +92,7 @@ export default function CreateListing() {
                         <textarea onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.description} name='description' rows="5" cols="90" placeholder="Describe your listing"/>
                         {/* <input name='thumbnail' placeholder="Upload Thumbnail" type='file' onChange={handleFileChange}/> */}
                         <ImageUpload onChange={(value) => setImageSrc(value)} value={imageSrc}/>
-                        <button>Create Listing</button>
+                        <button disabled={submitting}>Create Listing</button>
                     </form>
                 </div>
             </div>
