@@ -37,11 +37,17 @@ export async function checkToken() {
     .then(dateStr => new Date(dateStr))
 }
 
-export async function request(url, method = 'GET', payload = null) {
+export async function request(url, method = 'GET', payload = null,image=false) {
     const options = {method}
     if (payload) {
-        options.headers = { 'Content-Type': 'application/json' }
-        options.body = JSON.stringify(payload)
+        if (image) {
+            // options.headers = { 'Content-Type': 'multipart/form-data' }
+            // options.body = JSON.stringify(payload)
+            options.body = payload
+        } else {
+            options.headers = { 'Content-Type': 'application/json' }
+            options.body = JSON.stringify(payload)
+        }
     }
     const token = getToken()
     if (token) {

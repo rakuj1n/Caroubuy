@@ -3,11 +3,15 @@
 import { StateContext } from "@/components/Context"
 import { Back } from "@/utils/svg"
 import { getUser, request } from "@/utils/tokenAndFetch"
+import { getToken } from "next-auth/jwt"
+import { useSession } from "next-auth/react"
 import Link from "next/link"
 import { useContext, useEffect, useState } from "react"
 
+
 export default function CreateListing() {
 
+    const {data:session} = useSession()
     const glob = useContext(StateContext)
     const [file,setFile] = useState(null)
     const [formDetails,setFormDetails] = useState({
@@ -39,7 +43,7 @@ export default function CreateListing() {
         }
       }
 
-      function handleSubmit(e) {
+      async function handleSubmit(e) {
         e.preventDefault()
 
         const formData = new FormData()
@@ -47,9 +51,24 @@ export default function CreateListing() {
         formData.append('listingname', formDetails.listingname)
         formData.append('price', formDetails.price)
         formData.append('description', formDetails.description)
+
+        
         
         if (!file) {
-            console.log('Please check uploaded file. Only images are allowed.')
+            return console.log('Please check uploaded file. Only images are allowed.')
+        }
+        if (formDetails.listingname.length === 0 || formDetails.price.length === 0 || formDetails.description.length === 0) {
+            return console.log('Please ensure your listing name, price and description are filled up.')
+        }
+
+        if (!glob.state.usermanual?._id && !session?.user) {
+            return console.log('No user.')
+        }
+
+        try {
+            await request('/api/listing','POST',formData,true)
+        } catch (err) {
+            console.log(err)
         }
 
         // 'Content-Type': 'multipart/form-data' auto set when sending formdata???
