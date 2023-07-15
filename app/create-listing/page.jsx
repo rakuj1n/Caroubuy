@@ -1,6 +1,7 @@
 'use client'
 
 import { StateContext } from "@/components/Context"
+import ImageUpload from "@/components/ImageUpload"
 import { Back } from "@/utils/svg"
 import { getUser, request } from "@/utils/tokenAndFetch"
 import { getToken } from "next-auth/jwt"
@@ -13,7 +14,8 @@ export default function CreateListing() {
 
     const {data:session} = useSession()
     const glob = useContext(StateContext)
-    const [file,setFile] = useState(null)
+    // const [file,setFile] = useState(null)
+    const [imageSrc, setImageSrc] =  useState(null)
     const [formDetails,setFormDetails] = useState({
         listingname: '',
         price: '',
@@ -33,28 +35,20 @@ export default function CreateListing() {
         getImage(glob.state.usermanual?._id)
       },[glob.state.usermanual?._id])
 
-      function handleFileChange(e) {
-        const image = e.target.files[0]
-        if (image && image.type.startsWith('image/')) {
-            setFile(image)
-        } else {
-            setFile(null)
-            console.error('Invalid file format. Please upload an image.')
-        }
-      }
+    //   function handleFileChange(e) {
+    //     const image = e.target.files[0]
+    //     if (image && image.type.startsWith('image/')) {
+    //         setFile(image)
+    //     } else {
+    //         setFile(null)
+    //         console.error('Invalid file format. Please upload an image.')
+    //     }
+    //   }
 
       async function handleSubmit(e) {
         e.preventDefault()
 
-        const formData = new FormData()
-        formData.append('thumbnail', file)
-        formData.append('listingname', formDetails.listingname)
-        formData.append('price', formDetails.price)
-        formData.append('description', formDetails.description)
-
-        
-        
-        if (!file) {
+        if (!imageSrc) {
             return console.log('Please check uploaded file. Only images are allowed.')
         }
         if (formDetails.listingname.length === 0 || formDetails.price.length === 0 || formDetails.description.length === 0) {
@@ -66,7 +60,7 @@ export default function CreateListing() {
         }
 
         try {
-            await request('/api/listing','POST',formData,true)
+            await request('/api/listing','POST',{...formDetails,imageSrc})
         } catch (err) {
             console.log(err)
         }
@@ -87,7 +81,8 @@ export default function CreateListing() {
                         <input onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.listingname} name='listingname' type='text' placeholder="Listing Name"/>
                         <input onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.price} name='price' type='number' step="0.01" placeholder="Enter a price"/>
                         <textarea onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.description} name='description' rows="5" cols="90" placeholder="Describe your listing"/>
-                        <input name='thumbnail' placeholder="Upload Thumbnail" type='file' onChange={handleFileChange}/>
+                        {/* <input name='thumbnail' placeholder="Upload Thumbnail" type='file' onChange={handleFileChange}/> */}
+                        <ImageUpload onChange={(value) => setImageSrc(value)} value={imageSrc}/>
                         <button>Create Listing</button>
                     </form>
                 </div>
