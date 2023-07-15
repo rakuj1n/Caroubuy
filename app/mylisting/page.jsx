@@ -62,7 +62,7 @@ export default function Listing() {
             <div className="overall-page-container">
                 {/* <Link className='back-above-content' href='/'><Back /></Link> */}
                 <div className="content-container">
-                    <Feed data={fetchListing}/>
+                    <Feed usermanual={glob.state.usermanual?._id} useroauth={session?.user.id} data={fetchListing}/>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { AddToBasket, Heart } from '@/utils/svg'
 
-export default function ListingCard({item}) {
+export default function ListingCard({item,usermanual,useroauth}) {
 
 
     return (
@@ -27,16 +27,16 @@ export default function ListingCard({item}) {
 
         // card design from https://uiverse.io/Sashank02/new-warthog-10 
 
-        <div class="card">
+        <div className="card">
             <div className='heart'><Heart/></div>
-            <div className='addtobasket'><AddToBasket /></div>
-            <div class="card-image"><Image style={{ objectFit:'cover', borderRadius:'15px'}} 
+            <div className='addtobasket' onClick={()=>{console.log('itemid',item._id,'accid',usermanual,useroauth)}}><AddToBasket /></div>
+            <div className="card-image"><Image style={{ objectFit:'cover', borderRadius:'15px'}} 
                     alt='thumbnail' src={item.listingthumbnail} fill /></div>
-            <p class="card-title">{item.listingname}</p>
-            <p class="card-body">
+            <p className="card-title">{item.listingname}</p>
+            <p className="card-body">
                 {item.listingdescription}
             </p>
-            <p class="footer">Sold by <span class="by-name">{item.seller.usermanual?.username || item.seller.useroauth?.username}</span> at <span class="date">${item.listingprice}</span></p>
+            <p className="footer">Sold by <span className="by-name">{item.seller.usermanual?.username || item.seller.useroauth?.username}</span> at <span className="date">${item.listingprice}</span></p>
         </div>
 
 
