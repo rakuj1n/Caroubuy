@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+import ListingCard from "./ListingCard";
 
 
-export default function Feed() {
+export default function Feed({data}) {
 
     const [pageCount,setPageCount] = useState(0)
     const [itemOffset, setItemOffset] = useState(0);
@@ -13,25 +14,27 @@ export default function Feed() {
 
     useEffect(() => {
         const endOffset = itemOffset + itemsPerPage;
-        setCurrentItems(items.slice(itemOffset, endOffset))
-        setPageCount(Math.ceil(items.length / itemsPerPage))
+        setCurrentItems(data?.slice(itemOffset, endOffset))
+        setPageCount(Math.ceil(data?.length / itemsPerPage))
         console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    },[itemOffset,itemsPerPage])
+    },[itemOffset,itemsPerPage,data])
 
-
+    console.log(data) 
     
     const handlePageClick = (event) => {
-        const newOffset = (event.selected * itemsPerPage) % items.length;
+        const newOffset = (event.selected * itemsPerPage) % data?.length;
         console.log(
         `User requested page number ${event.selected}, which is offset ${newOffset}`
         );
         setItemOffset(newOffset);
-    };
+    }; 
 
     return (
-        <>
-            <div className="listing-card">
-                
+        <div className="listing-overall">
+            <div className="listing-container">
+                {currentItems?.map((item,index) => 
+                    <ListingCard key={index} item={item} />
+                )}
             </div>
             <ReactPaginate
             breakLabel="..."
@@ -41,7 +44,8 @@ export default function Feed() {
             pageCount={pageCount}
             previousLabel="< previous"
             renderOnZeroPageCount={null}
+            containerClassName="pagination-container"
             />
-        </>
+        </div>
     )
 }

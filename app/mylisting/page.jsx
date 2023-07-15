@@ -17,6 +17,7 @@ export default function Listing() {
     const router = useRouter()
     const {data:session} = useSession()
     const glob = useContext(StateContext)
+    const [fetchListing,setFetchListing] = useState([])
 
     useEffect(() => {
         const loggedInManual = getUser()
@@ -36,14 +37,14 @@ export default function Listing() {
             if (type == 'manual') {
                 try {
                     const myListing = await request(`api/listing?usermanual=${userid}`)
-                    console.log(myListing)
+                    setFetchListing(myListing)
                 } catch (err) {
                     console.log(err)
                 }
             } else {
                 try {
                     const myListing = await request(`api/listing?useroauth=${userid}`)
-                    console.log(myListing)
+                    setFetchListing(myListing)
                 } catch (err) {
                     console.log(err)
                 }
@@ -61,7 +62,7 @@ export default function Listing() {
             <div className="overall-page-container">
                 {/* <Link className='back-above-content' href='/'><Back /></Link> */}
                 <div className="content-container">
-                    {/* <Feed /> */}
+                    <Feed data={fetchListing}/>
                 </div>
             </div>
         </div>
