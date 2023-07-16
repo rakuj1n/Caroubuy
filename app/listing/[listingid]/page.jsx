@@ -44,6 +44,8 @@ export default function CreateListing({params}) {
       fetchindivlisting()
     },[params.listingid])
 
+console.log(glob.state.usermanual?._id, indivListing.seller?.usermanual?._id, session?.user?.id,indivListing.seller?.useroauth?._id)
+
     return (
         <div className="home-main">
             <div className="overall-page-container">
@@ -54,7 +56,11 @@ export default function CreateListing({params}) {
                     <p>Listed by <strong>{indivListing.seller?.usermanual?.username || indivListing.seller?.useroauth?.username}</strong> on {indivListing.createdAt?.split("T")[0]}</p>
                     <p><em>${indivListing.listingprice}</em></p>
                     <p>{indivListing.listingdescription}</p>
-                    {/* <div>delete listing button if own listing</div> */}
+                    {(glob.state.usermanual?._id && (glob.state.usermanual?._id == indivListing.seller?.usermanual?._id)) ? 
+                    <button>Delete Listing</button>
+                    : (session?.user?.id && (session?.user?.id == indivListing.seller?.useroauth?._id)) ?
+                    <button>Delete Listing</button> : <></>
+                    }
                 </div>
             </div>
         </div>

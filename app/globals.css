@@ -497,6 +497,22 @@ body {
   gap:1.5rem;
 }
 
+.content-container > button {
+  border: 1px solid #F47174;
+  padding:5px;
+  font-size: 0.8rem;
+  border-radius: 5px;
+}
+
+.content-container > button:hover {
+  background-color: #F47174;
+  color:white;
+  border: 1px solid #F47174;
+  padding:5px;
+  font-size: 0.8rem;
+  border-radius: 5px;
+}
+
 .listingname {
   font-size: 2rem;
   font-weight: 700;
