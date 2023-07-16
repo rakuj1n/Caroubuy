@@ -11,13 +11,14 @@ export const POST = async (req,res) => {
         await connectToDB()
         const existingUserManual = await UserManual.findOne({email:email})
         if (existingUserManual) throw new Error('Email is already registered.')
-        await UserManual.create({
+        const newUserManual = await UserManual.create({
             username,
             email,
             password
         })
-        const newUserManual = await UserManual.findOne({email:email})
-        await Account.create({usermanual:newUserManual._id})
+        const newaccountmanual = await Account.create({usermanual:newUserManual._id})
+        newUserManual.account = newaccountmanual._id
+        await newUserManual.save()
         const token = createJWT(newUserManual)
         return new Response(JSON.stringify(token),{status:201})
     } catch (err) {

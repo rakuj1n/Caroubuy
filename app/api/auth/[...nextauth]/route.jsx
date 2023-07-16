@@ -33,10 +33,12 @@ const handler = NextAuth({
                         username: profile.name.replace(" ", "").toLowerCase(),
                         image: profile.picture
                     })
-                    await Account.create({
+                    const linkedaccount = await Account.create({
                         useroauth: newuser._id,
                         image: profile.picture
                     })
+                    newuser.account = linkedaccount._id
+                    await newuser.save()
                 }
     
                 return true
