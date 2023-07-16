@@ -28,3 +28,13 @@ export const GET = async (req,{params}) => {
     }
 }
 
+export const DELETE = async (req,{params}) => {
+    try {
+        await connectToDB()
+        await Listing.findByIdAndDelete(params.listingid)
+        return new Response(JSON.stringify("Delete successful"),{status:200})
+    } catch (err) {
+        return new Response("Failed request.",{status:500})
+    }
+}
+

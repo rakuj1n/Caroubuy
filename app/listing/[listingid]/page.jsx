@@ -44,7 +44,14 @@ export default function CreateListing({params}) {
       fetchindivlisting()
     },[params.listingid])
 
-console.log(glob.state.usermanual?._id, indivListing.seller?.usermanual?._id, session?.user?.id,indivListing.seller?.useroauth?._id)
+    async function handleDelete(listingid) {
+      try {
+        await request(`/api/listing/${listingid}`,"DELETE")
+      } catch (err) {
+        console.log(err)
+      }
+      router.push('/mylisting')
+    }
 
     return (
         <div className="home-main">
@@ -57,9 +64,9 @@ console.log(glob.state.usermanual?._id, indivListing.seller?.usermanual?._id, se
                     <p><em>${indivListing.listingprice}</em></p>
                     <p>{indivListing.listingdescription}</p>
                     {(glob.state.usermanual?._id && (glob.state.usermanual?._id == indivListing.seller?.usermanual?._id)) ? 
-                    <button>Delete Listing</button>
+                    <button onClick={() => handleDelete(indivListing._id)}>Delete Listing</button>
                     : (session?.user?.id && (session?.user?.id == indivListing.seller?.useroauth?._id)) ?
-                    <button>Delete Listing</button> : <></>
+                    <button onClick={() => handleDelete(indivListing._id)}>Delete Listing</button> : <></>
                     }
                 </div>
             </div>
