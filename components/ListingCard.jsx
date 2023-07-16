@@ -1,11 +1,15 @@
+'use client'
+
 import Image from 'next/image'
 import { AddToBasket, Heart, FilledHeart } from '@/utils/svg'
 import { useRouter } from 'next/navigation'
 import { request } from '@/utils/tokenAndFetch'
+import { useState } from 'react'
 
 export default function ListingCard({item,usermanual,useroauth}) {
 
     const router = useRouter()
+    const [favByUser,setFavByUser] = useState(null)
 
     function handleGoToListing(listingId) {
         router.push(`/listing/${listingId}`)
@@ -34,6 +38,8 @@ export default function ListingCard({item,usermanual,useroauth}) {
             }
         }
     }
+
+    console.log(item.favby,usermanual,useroauth,item.favby == usermanual, item.favby == useroauth)
 
     return (
         // <div className='listing-card'>

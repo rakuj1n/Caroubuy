@@ -51,6 +51,8 @@ export default function Listing() {
         if (e.target.value === '') setFilter(fetchListing)
       }
 
+      console.log('okay',glob.state.usermanual)
+
     return (
         <div className="home-main">
             <div className='searchinput' href='/'><input name='searchinput' onChange={handleSearchChange} placeholder="Search a listing"/></div>

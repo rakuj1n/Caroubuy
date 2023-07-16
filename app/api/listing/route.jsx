@@ -41,14 +41,14 @@ export const GET = async (req,res) => {
         await connectToDB()
         if (req.nextUrl.searchParams.get('usermanual')) {
             const account = await Account.findOne({usermanual:req.nextUrl.searchParams.get('usermanual')})
-            const listings = await Listing.find({seller:account._id}).populate('seller')
+            const listings = await Listing.find({seller:account._id}).sort({createdAt:-1}).populate('seller')
             const listings2 = await UserManual.populate(listings,{
                 path:"seller.usermanual", select: 'username'
             })
             return new Response(JSON.stringify(listings2),{status:200})
         } else if (req.nextUrl.searchParams.get('useroauth')) {
             const account = await Account.findOne({useroauth:req.nextUrl.searchParams.get('useroauth')})
-            const listings = await Listing.find({seller:account._id}).populate('seller')
+            const listings = await Listing.find({seller:account._id}).sort({createdAt:-1}).populate('seller')
             const listings2 = await UserOAuth.populate(listings,{
                 path:"seller.useroauth", select: 'username'
             })
