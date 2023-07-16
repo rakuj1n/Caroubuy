@@ -9,14 +9,13 @@ import { useEffect, useState } from 'react'
 export default function ListingCard({item,usermanual,useroauth,usermanualaccount,useroauthaccount,key}) {
 
     const router = useRouter()
+    const [isFav, setIsFav] = useState((item.favby.includes(useroauthaccount) || item.favby.includes(usermanualaccount)) ? true : false)
 
     function handleGoToListing(listingId) {
         router.push(`/listing/${listingId}`)
     }
 
-    async function handleAddToFav(e,listingId) {
-        e.stopPropagation()
-
+    async function handleAddToFav(listingId) {
         if (usermanual) {
             try {
                 await request(`/api/users/${usermanual}/fav`,"PATCH",{
@@ -38,9 +37,7 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
         }
     }
 
-    async function handleDeleteFromFav(e,listingId) {
-        e.stopPropagation()
-
+    async function handleDeleteFromFav(listingId) {
         if (usermanual) {
             try {
                 await request(`/api/users/${usermanual}/fav`,"DELETE",{
@@ -62,24 +59,34 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
         }
     }
 
+    function handleHeartClick(e,itemid) {
+        e.stopPropagation()
+        if (isFav) {
+            setIsFav(prev => !prev)
+            return handleDeleteFromFav(itemid)
+        } else {
+            setIsFav(prev => !prev)
+            return handleAddToFav(itemid)
+        }
+    }
+
     console.log(item.favby.includes(usermanualaccount), item.favby.includes(useroauthaccount))
+
+
 
     return (
         <div className="card" key={key} onClick={() => handleGoToListing(item._id)}>
             {(!(usermanual || useroauth)) ?
-            <>
-            </>
+            <></>
             : (usermanual != item.seller.usermanual?._id || useroauth != item.seller.useroauth?._id) ? 
             <>
-                {
-                (item.favby.includes(useroauthaccount) || item.favby.includes(usermanualaccount)) ? 
-                <div className='heart' onClick={(e) => handleDeleteFromFav(e,item._id)}><FilledHeart/></div> 
-                : 
-                <div className='heart' onClick={(e) => handleAddToFav(e,item._id)}><Heart/></div>
-                }
+                <div className='heart' onClick={(e) => handleHeartClick(e,item._id)}>
+                { isFav ? <FilledHeart/> : <Heart/> }
+                </div>
 
                 <div className='addtobasket' onClick={(e)=>{e.stopPropagation();console.log('itemid',item._id,'accid',usermanual,useroauth)}}><AddToBasket /></div>
-            </> :
+            </> 
+            :
             <></>
             }
 
@@ -93,6 +100,12 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
         </div>
     )
 }
+
+
+// (item.favby.includes(useroauthaccount) || item.favby.includes(usermanualaccount)) ? 
+// <div className='heart' onClick={(e) => handleDeleteFromFav(e,item._id)}><FilledHeart/></div> 
+// : 
+// <div className='heart' onClick={(e) => handleAddToFav(e,item._id)}><Heart/></div>
 
         // <div className='listing-card'>
         //     <div className='heart'><Heart/></div>
