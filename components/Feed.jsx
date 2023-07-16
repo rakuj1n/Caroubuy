@@ -5,7 +5,7 @@ import ReactPaginate from "react-paginate";
 import ListingCard from "./ListingCard";
 
 
-export default function Feed({data,usermanual,useroauth}) {
+export default function Feed({data,usermanual,useroauth,filter}) {
 
     const [pageCount,setPageCount] = useState(0)
     const [itemOffset, setItemOffset] = useState(0);
@@ -28,6 +28,10 @@ export default function Feed({data,usermanual,useroauth}) {
         );
         setItemOffset(newOffset);
     }; 
+
+    useEffect(() => {
+        setItemOffset(0)
+    },[filter])
 
     return (
         <div className="listing-overall">
