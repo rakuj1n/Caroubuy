@@ -5,7 +5,7 @@ import ReactPaginate from "react-paginate";
 import ListingCard from "./ListingCard";
 
 
-export default function Feed({data,usermanual,useroauth,filter}) {
+export default function Feed({data,usermanual,useroauth,filter,useroauthaccount,usermanualaccount}) {
 
     const [pageCount,setPageCount] = useState(0)
     const [itemOffset, setItemOffset] = useState(0);
@@ -37,7 +37,7 @@ export default function Feed({data,usermanual,useroauth,filter}) {
         <div className="listing-overall">
             <div className="listing-container">
                 {currentItems?.map((item,index) => 
-                    <ListingCard key={index} item={item} usermanual={usermanual} useroauth={useroauth}/>
+                    <ListingCard key={index} item={item} usermanualaccount={usermanualaccount} usermanual={usermanual} useroauthaccount={useroauthaccount} useroauth={useroauth}/>
                 )}
             </div>
             <ReactPaginate

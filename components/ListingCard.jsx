@@ -4,12 +4,11 @@ import Image from 'next/image'
 import { AddToBasket, Heart, FilledHeart } from '@/utils/svg'
 import { useRouter } from 'next/navigation'
 import { request } from '@/utils/tokenAndFetch'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-export default function ListingCard({item,usermanual,useroauth}) {
+export default function ListingCard({item,usermanual,useroauth,usermanualaccount,useroauthaccount,key}) {
 
     const router = useRouter()
-    const [favByUser,setFavByUser] = useState(null)
 
     function handleGoToListing(listingId) {
         router.push(`/listing/${listingId}`)
@@ -39,7 +38,31 @@ export default function ListingCard({item,usermanual,useroauth}) {
         }
     }
 
-    console.log(item.favby,usermanual,useroauth,item.favby == usermanual, item.favby == useroauth)
+    async function handleDeleteFromFav(e,listingId) {
+        e.stopPropagation()
+
+        if (usermanual) {
+            try {
+                await request(`/api/users/${usermanual}/fav`,"DELETE",{
+                    listingId
+                })
+                console.log('DELETE done')
+            } catch (err) {
+                console.log(err)
+            }
+        } else {
+            try {
+                await request(`/api/users/${useroauth}/fav`,"DELETE",{
+                    listingId
+                })
+                console.log('DELETE done oauth')
+            } catch (err) {
+                console.log(err)
+            }
+        }
+    }
+
+    console.log(item.favby.includes(usermanualaccount), item.favby.includes(useroauthaccount))
 
     return (
         // <div className='listing-card'>
@@ -65,13 +88,19 @@ export default function ListingCard({item,usermanual,useroauth}) {
         // card design from https://uiverse.io/Sashank02/new-warthog-10 
 
 
-        <div className="card" onClick={() => handleGoToListing(item._id)}>
+        <div className="card" key={key} onClick={() => handleGoToListing(item._id)}>
             {(!(usermanual || useroauth)) ?
             <>
             </>
             : (usermanual != item.seller.usermanual?._id || useroauth != item.seller.useroauth?._id) ? 
             <>
-                {true ? <div className='heart' onClick={(e) => handleAddToFav(e,item._id)}><Heart/></div> : <div className='heart' onClick={(e) => handleAddToFav(e,item._id)}><FilledHeart/></div>}
+                {
+                (item.favby.includes(useroauthaccount) || item.favby.includes(usermanualaccount)) ? 
+                <div className='heart' onClick={(e) => handleDeleteFromFav(e,item._id)}><FilledHeart/></div> 
+                : 
+                <div className='heart' onClick={(e) => handleAddToFav(e,item._id)}><Heart/></div>
+                }
+
                 <div className='addtobasket' onClick={(e)=>{e.stopPropagation();console.log('itemid',item._id,'accid',usermanual,useroauth)}}><AddToBasket /></div>
             </> :
             <></>

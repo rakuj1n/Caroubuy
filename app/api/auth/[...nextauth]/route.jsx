@@ -18,6 +18,7 @@ const handler = NextAuth({
             })
     
             session.user.id = sessionUser._id.toString()
+            session.user.account = sessionUser.account
     
             return session
         },

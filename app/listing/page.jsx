@@ -51,14 +51,12 @@ export default function Listing() {
         if (e.target.value === '') setFilter(fetchListing)
       }
 
-      console.log('okay',glob.state.usermanual)
-
     return (
         <div className="home-main">
             <div className='searchinput' href='/'><input name='searchinput' onChange={handleSearchChange} placeholder="Search a listing"/></div>
             <div className="overall-page-container">
                 <div className="content-container">
-                    <Feed filter={filter} usermanual={glob.state.usermanual?._id} useroauth={session?.user.id} data={filter}/>
+                    <Feed filter={filter} usermanualaccount={glob.state.usermanual?.account} usermanual={glob.state.usermanual?._id} useroauthaccount={session?.user?.account} useroauth={session?.user.id} data={filter}/>
                 </div>
             </div>
         </div>
