@@ -269,7 +269,7 @@ body {
   border-radius: 10px;
 }
 
-/* pagination */
+/* pagination ---------------------------------start---------------------*/
 
 .listing-overall {
   position: relative;
@@ -344,7 +344,7 @@ body {
   border-radius: 15px;
 }
 
-/* pagination */
+/* pagination ---------------------------------end---------------------*/
 
 .heart {
   position: absolute;
@@ -375,7 +375,7 @@ body {
   cursor: pointer;
 }
 
-/* pagination2 https://uiverse.io/Sashank02/new-warthog-10 */
+/* listingcard https://uiverse.io/Sashank02/new-warthog-10 */
 
 .card {
   position: relative;
@@ -436,7 +436,7 @@ body {
   font-weight: 700;
 }
 
-/* pagination2 https://uiverse.io/Sashank02/new-warthog-10 */
+/* listingcard https://uiverse.io/Sashank02/new-warthog-10 */
 
 
 /* scrollbar */
@@ -471,6 +471,7 @@ body {
   top:20px;
   left:50%;
   transform: translateX(-50%);
+  z-index:55;
 }
 
 .searchinput > input {
@@ -485,3 +486,20 @@ body {
   outline: none;
   border: 0.05rem solid #0011ff6f;
 }
+
+/* /listing/listingid */
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap:1.5rem;
+}
+
+.listingname {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* /listing/listingid */

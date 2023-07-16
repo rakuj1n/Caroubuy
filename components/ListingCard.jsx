@@ -112,7 +112,7 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
             <p className="card-body">
                 {item.listingdescription}
             </p>
-            <p className="footer">Sold by <span className="by-name">{item.seller.usermanual?.username || item.seller.useroauth?.username}</span> at <span className="date">${item.listingprice}</span></p>
+            <p className="footer">Listed by <span className="by-name">{item.seller.usermanual?.username || item.seller.useroauth?.username}</span> at <span className="date">${item.listingprice}</span></p>
         </div>
 
 
