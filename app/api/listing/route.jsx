@@ -54,7 +54,7 @@ export const GET = async (req,res) => {
             })
             return new Response(JSON.stringify(listings2),{status:200})
         } else {
-            const listings = await Listing.find({}).sort({updatedAt:-1}).populate('seller')
+            const listings = await Listing.find({}).sort({createdAt:-1}).populate('seller')
             const listings2 = await UserManual.populate(listings,{
                 path:"seller.usermanual", select: 'username'
             })

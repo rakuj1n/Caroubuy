@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { AddToBasket, Heart } from '@/utils/svg'
+import { AddToBasket, Heart, FilledHeart } from '@/utils/svg'
 import { useRouter } from 'next/navigation'
 import { request } from '@/utils/tokenAndFetch'
 
@@ -65,7 +65,7 @@ export default function ListingCard({item,usermanual,useroauth}) {
             </>
             : (usermanual != item.seller.usermanual?._id || useroauth != item.seller.useroauth?._id) ? 
             <>
-                <div className='heart' onClick={(e) => handleAddToFav(e,item._id)}><Heart/></div>
+                {true ? <div className='heart' onClick={(e) => handleAddToFav(e,item._id)}><Heart/></div> : <div className='heart' onClick={(e) => handleAddToFav(e,item._id)}><FilledHeart/></div>}
                 <div className='addtobasket' onClick={(e)=>{e.stopPropagation();console.log('itemid',item._id,'accid',usermanual,useroauth)}}><AddToBasket /></div>
             </> :
             <></>

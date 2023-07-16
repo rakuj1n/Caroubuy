@@ -7,7 +7,8 @@ const listingSchema = new Schema({
     listingprice: {type: String, required:true},
     seller: {type:Schema.Types.ObjectId,ref:'Account',required:true},
     buyer: {type:Schema.Types.ObjectId,ref:'Account'},
-    checkedOut: {type:Schema.Types.ObjectId,ref:'Account'}
+    checkedOut: {type:Schema.Types.ObjectId,ref:'Account'},
+    favby: [{type:Schema.Types.ObjectId,ref:'Account'}]
 },{timestamps:true})
 
 const Listing = models.Listing || model('Listing',listingSchema)
