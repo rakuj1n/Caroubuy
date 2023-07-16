@@ -1,8 +1,39 @@
 import Image from 'next/image'
 import { AddToBasket, Heart } from '@/utils/svg'
+import { useRouter } from 'next/navigation'
+import { request } from '@/utils/tokenAndFetch'
 
 export default function ListingCard({item,usermanual,useroauth}) {
 
+    const router = useRouter()
+
+    function handleGoToListing(listingId) {
+        router.push(`/listing/${listingId}`)
+    }
+
+    async function handleAddToFav(e,listingId) {
+        e.stopPropagation()
+
+        if (usermanual) {
+            try {
+                await request(`/api/users/${usermanual}/fav`,"PATCH",{
+                    listingId
+                })
+                console.log('req done')
+            } catch (err) {
+                console.log(err)
+            }
+        } else {
+            try {
+                await request(`/api/users/${useroauth}/fav`,"PATCH",{
+                    listingId
+                })
+                console.log('req done oauth')
+            } catch (err) {
+                console.log(err)
+            }
+        }
+    }
 
     return (
         // <div className='listing-card'>
@@ -28,14 +59,14 @@ export default function ListingCard({item,usermanual,useroauth}) {
         // card design from https://uiverse.io/Sashank02/new-warthog-10 
 
 
-        <div className="card">
+        <div className="card" onClick={() => handleGoToListing(item._id)}>
             {(!(usermanual || useroauth)) ?
             <>
             </>
             : (usermanual != item.seller.usermanual?._id || useroauth != item.seller.useroauth?._id) ? 
             <>
-                <div className='heart'><Heart/></div>
-                <div className='addtobasket' onClick={()=>{console.log('itemid',item._id,'accid',usermanual,useroauth)}}><AddToBasket /></div>
+                <div className='heart' onClick={(e) => handleAddToFav(e,item._id)}><Heart/></div>
+                <div className='addtobasket' onClick={(e)=>{e.stopPropagation();console.log('itemid',item._id,'accid',usermanual,useroauth)}}><AddToBasket /></div>
             </> :
             <></>
             }
