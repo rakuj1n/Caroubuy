@@ -29,7 +29,7 @@ export default function Home() {
     }
 
     const getImage = async (userid) => {
-      const user = await request(`api/users/${userid}/image`)
+      const user = await request(`/api/users/${userid}/image`)
       glob.setState(prev => ({...prev,userimage: user?.image}))
     }
     getImage(glob.state.usermanual?._id)

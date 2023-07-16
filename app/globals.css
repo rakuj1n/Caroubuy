@@ -464,3 +464,23 @@ body {
 }
 
 /* scrollbar */
+
+.searchinput {
+  position:absolute;
+  top:20px;
+  left:50%;
+  transform: translateX(-50%);
+}
+
+.searchinput > input {
+  padding: 12px;
+  border: 1px solid rgb(139, 139, 139);
+  border-radius: 15px;
+  width: 300px;
+  background-color: transparent;
+}
+
+.searchinput > input:focus {
+  outline: none;
+  border: 0.05rem solid #0011ff6f;
+}

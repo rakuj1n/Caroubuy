@@ -26,7 +26,7 @@ export default function Listing() {
         }
     
         const getImage = async (userid) => {
-          const user = await request(`api/users/${userid}/image`)
+          const user = await request(`/api/users/${userid}/image`)
           glob.setState(prev => ({...prev,userimage: user?.image}))
         }
         getImage(glob.state.usermanual?._id)
@@ -36,14 +36,14 @@ export default function Listing() {
         const fetchMyListing = async (userid,type) => {
             if (type == 'manual') {
                 try {
-                    const myListing = await request(`api/listing?usermanual=${userid}`)
+                    const myListing = await request(`/api/listing?usermanual=${userid}`)
                     setFetchListing(myListing)
                 } catch (err) {
                     console.log(err)
                 }
             } else {
                 try {
-                    const myListing = await request(`api/listing?useroauth=${userid}`)
+                    const myListing = await request(`/api/listing?useroauth=${userid}`)
                     setFetchListing(myListing)
                 } catch (err) {
                     console.log(err)
