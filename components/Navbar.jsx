@@ -32,7 +32,7 @@ export default function Navbar() {
         :
 
         <div className="navbar-container">
-            <Browse />
+            <Link href='/listing'><Browse /></Link>
         </div>
         }
     </>

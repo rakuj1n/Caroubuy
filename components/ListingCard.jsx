@@ -22,17 +22,22 @@ export default function ListingCard({item,usermanual,useroauth}) {
         //                 <p>Sold by {item.seller.usermanual?.username || item.seller.useroauth?.username}</p>
         //             </div>
         //         </div>
-        //     </div>
-        // </div>
+        //     </div> 
+        // </div> ((usermanual || useroauth) || (usermanual != item.seller.usermanual?._id || useroauth != item.seller.useroauth?._id))
 
         // card design from https://uiverse.io/Sashank02/new-warthog-10 
 
+
         <div className="card">
-            {(usermanual != item.seller.usermanual?._id || useroauth != item.seller.useroauth?._id) &&
+            {(!(usermanual || useroauth)) ?
+            <>
+            </>
+            : (usermanual != item.seller.usermanual?._id || useroauth != item.seller.useroauth?._id) ? 
             <>
                 <div className='heart'><Heart/></div>
                 <div className='addtobasket' onClick={()=>{console.log('itemid',item._id,'accid',usermanual,useroauth)}}><AddToBasket /></div>
-            </>
+            </> :
+            <></>
             }
 
             <div className="card-image"><Image style={{ objectFit:'cover', borderRadius:'15px'}} 
