@@ -2,6 +2,7 @@
 
 import { StateContext } from "@/components/Context"
 import ImageUpload from "@/components/ImageUpload"
+import { FilledHeart, Heart } from "@/utils/svg"
 import { getUser, request } from "@/utils/tokenAndFetch"
 import { getToken } from "next-auth/jwt"
 import { useSession } from "next-auth/react"
@@ -11,12 +12,13 @@ import { useRouter } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
 
 
-export default function CreateListing({params}) {
+export default function IndividualListing({params}) {
     const [submitting,setSubmitting] = useState(false)
     const router = useRouter()
     const {data:session} = useSession()
     const glob = useContext(StateContext)
     const [indivListing,setIndivListing] = useState({})
+    const [isFav, setIsFav] = useState(false)
 
     useEffect(() => {
         const loggedInManual = getUser()
@@ -44,6 +46,10 @@ export default function CreateListing({params}) {
       fetchindivlisting()
     },[params.listingid])
 
+    useEffect(() => {
+      setIsFav((indivListing.favby?.includes(glob.state.usermanual?.account) || indivListing.favby?.includes(session?.user.account)) ? true : false)
+    },[indivListing])
+
     async function handleDelete(listingid) {
       try {
         await request(`/api/listing/${listingid}`,"DELETE")
@@ -53,6 +59,62 @@ export default function CreateListing({params}) {
       router.push('/mylisting')
     }
 
+    function handleHeartClick(e,itemid) {
+      e.stopPropagation()
+      if (isFav) {
+          setIsFav(prev => !prev)
+          return handleDeleteFromFav(itemid)
+      } else {
+          setIsFav(prev => !prev)
+          return handleAddToFav(itemid)
+      }
+  }
+
+  async function handleAddToFav(listingId) {
+    if (glob.state.usermanual?.account) {
+        try {
+            await request(`/api/users/${glob.state.usermanual?._id}/fav`,"PATCH",{
+                listingId
+            })
+            console.log('req done')
+        } catch (err) {
+            console.log(err)
+        }
+    } else {
+        try {
+            await request(`/api/users/${session?.user?.id}/fav`,"PATCH",{
+                listingId
+            })
+            console.log('req done oauth')
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+async function handleDeleteFromFav(listingId) {
+    if (glob.state.usermanual?.account) {
+        try {
+            await request(`/api/users/${glob.state.usermanual?._id}/fav`,"DELETE",{
+                listingId
+            })
+            console.log('DELETE done')
+        } catch (err) {
+            console.log(err)
+        }
+    } else {
+        try {
+            await request(`/api/users/${session?.user?.id}/fav`,"DELETE",{
+                listingId
+            })
+            console.log('DELETE done oauth')
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+//  (glob.state.usermanual?._id != indivListing.seller.usermanual?._id || session?.user?.id != indivListing.seller.useroauth?._id) ? 
+
     return (
         <div className="home-main">
             <div className="overall-page-container">
@@ -61,6 +123,17 @@ export default function CreateListing({params}) {
                     <div><Image src={indivListing.listingthumbnail} height={200} width={200} /></div>
                     <p className="listingname">{indivListing.listingname}</p>
                     <p>Listed by <strong>{indivListing.seller?.usermanual?.username || indivListing.seller?.useroauth?.username}</strong> on {indivListing.createdAt?.split("T")[0]}</p>
+                    
+                    {(!(glob.state.usermanual?._id || session?.user?.id)) ?
+                    <></> 
+                    : (glob.state.usermanual?._id != indivListing.seller?.usermanual?._id || session?.user?.id != indivListing.seller?.useroauth?._id) ? 
+                      <div className='heart-in-indiv' onClick={(e) => handleHeartClick(e,indivListing._id)}>
+                      { isFav ? <FilledHeart/> : <Heart/> }
+                      </div>
+                      :
+                      <></>
+                    }
+                    
                     <p><em>${indivListing.listingprice}</em></p>
                     <p>{indivListing.listingdescription}</p>
                     {(glob.state.usermanual?._id && (glob.state.usermanual?._id == indivListing.seller?.usermanual?._id)) ? 

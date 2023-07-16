@@ -518,4 +518,14 @@ body {
   font-weight: 700;
 }
 
+.heart-in-indiv {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.heart-in-indiv:hover {
+  cursor: pointer;
+  scale:1.1;
+}
+
 /* /listing/listingid */

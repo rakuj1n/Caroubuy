@@ -70,10 +70,6 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
         }
     }
 
-    console.log(item.favby.includes(usermanualaccount), item.favby.includes(useroauthaccount))
-
-
-
     return (
         <div className="card" key={key} onClick={() => handleGoToListing(item._id)}>
             {(!(usermanual || useroauth)) ?
