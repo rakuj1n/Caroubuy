@@ -546,6 +546,24 @@ body {
 
 /* /listing/listingid */
 
+/* profile page */
+
+.profile-detail-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:50px;
+}
+
+.profile-links {
+  margin-left: auto;
+  display: flex;
+  gap:10px;
+}
+
+/* profile page */
+
+
 
 @media (max-height: 850px) {
   .listing-container {
