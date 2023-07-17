@@ -11,7 +11,7 @@ import Link from "next/link"
 export default function Navbar() {
     const { data: session } = useSession()
     const glob = useContext(StateContext)
-
+    console.log(glob.state.usermanual.account,session)
     return (
     <>
         {
@@ -23,7 +23,7 @@ export default function Navbar() {
             <Link href='/create-listing'><Createlisting /></Link>
             <Basket />
 
-            <Link href={`/profile/${1}`}>{ // update this to the correct variable
+            <Link href={`/profile/${session?.user?.account || glob.state?.usermanual?.account}`}>{ 
             <Image className='profile-pic' alt='profile-pic' src={session?.user.image || glob.state?.userimage } width={50} height={50} /> ||
             <Profile />
             }</Link>

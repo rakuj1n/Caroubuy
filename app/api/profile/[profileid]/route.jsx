@@ -10,21 +10,18 @@ export const GET = async (req,{params}) => {
         // RMBR TO ADD PURCHASE HISTORY IN MODELS!
         const profileaccount = await Account.findById(params.profileid)
         if (profileaccount.usermanual) {
-            const listings = await Listing.find({seller:profileaccount._id}).sort({createdAt:-1}).populate('seller')
-            const listings2 = await UserManual.populate(listings,{
-                path:"seller.usermanual", select: ['username','email']
-            }) 
-
-            return new Response(JSON.stringify(listings2),{status:200})
+            const profileaccount2 = await UserManual.populate(profileaccount,{
+                path:'usermanual', select:['username','email']
+            })
+            const listing = await Listing.find({seller:params.profileid})
+            return new Response(JSON.stringify({profile:profileaccount2,listings:listing}),{status:200})
         } else {
-            const listings = await Listing.find({seller:profileaccount._id}).sort({createdAt:-1}).populate('seller')
-            const listings2 = await UserOAuth.populate(listings,{
-                path:"seller.useroauth", select: ['username','email']
-            }) 
-
-            return new Response(JSON.stringify(listings2),{status:200})
+            const profileaccount2 = await UserOAuth.populate(profileaccount,{
+                path:'useroauth', select:['username','email']
+            })
+            const listing = await Listing.find({seller:params.profileid})
+            return new Response(JSON.stringify({profile:profileaccount2,listings:listing}),{status:200})
         }
-
     } catch (err) {
         return new Response("Failed request.",{status:500})
     }

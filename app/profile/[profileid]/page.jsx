@@ -38,7 +38,6 @@ export default function Profile({params}) {
         try {
             console.log('hello')
           const indivaccount = await request(`/api/profile/${params.profileid}`)
-          console.log(indivaccount)
           setAccount(indivaccount)
         } catch (err) {
           console.log(err)
@@ -48,17 +47,15 @@ export default function Profile({params}) {
     },[params.profileid])
 
 //  (glob.state.usermanual?._id != indivListing.seller.usermanual?._id || session?.user?.id != indivListing.seller.useroauth?._id) ? 
-console.log(account)
 
-//code the situation for when user has no listings, if (account[0]) else...
     return (
         <div className="home-main">
             <div className="overall-page-container">
                 <div className="profile-detail-section">
-                    <Image alt='profile-pic' style={{borderRadius:'50%'}} src={account[0]?.seller.image} width={55} height={55}/>
-                    <h2 style={{fontSize:'1.7rem'}}>{account[0]?.seller.usermanual.username || account[0]?.seller.useroauth.username}</h2>
-                    <p>Account created on {account[0]?.seller.createdAt.split("T")[0]}</p>
-                    <p>Contact: {account[0]?.seller.usermanual.email || account[0]?.seller.useroauth.email}</p>
+                    <Image alt='profile-pic' style={{borderRadius:'50%'}} src={account?.profile?.image} width={55} height={55}/>
+                    <h2 style={{fontSize:'1.7rem'}}>{account?.profile?.usermanual?.username || account?.profile?.useroauth?.username }</h2>
+                    <p>Account created on {account?.profile?.createdAt.split("T")[0]}</p>
+                    <p>Contact: {account?.profile?.usermanual?.email || account?.profile?.useroauth?.email}</p>
                     <div className="user-links">
                         <Link href={`/profile/${params.profileid}/settings`}><small>Change my password</small></Link>
                         <Link href={`/profile/${params.profileid}/myfavs`}>My Favourites</Link>
