@@ -53,11 +53,12 @@ console.log(account)
         <div className="home-main">
             <div className="overall-page-container">
                 <div className="profile-detail-section">
-                    <Image alt='profile-pic' src='' width={50} height={50}/>
-                    <h2>profile username</h2>
-                    <p>profile creation date</p>
-                    <p>profile email</p>
-                    <div className="profile-links">
+                    <Image alt='profile-pic' src={account[0]?.seller.image} width={50} height={50}/>
+                    <h2 style={{fontSize:'1.7rem'}}>{account[0]?.seller.usermanual.username || account[0]?.seller.useroauth.username}</h2>
+                    <p>Account created on {account[0]?.seller.createdAt.split("T")[0]}</p>
+                    <p>Contact: {account[0]?.seller.usermanual.email || account[0]?.seller.useroauth.email}</p>
+                    <div className="user-links">
+                        <Link href='/'><small>Change my password</small></Link>
                         <Link href='/'>My Favourites</Link>
                         <Link href='/'>My Purchase History</Link>
                     </div>
