@@ -49,11 +49,13 @@ export default function Profile({params}) {
 
 //  (glob.state.usermanual?._id != indivListing.seller.usermanual?._id || session?.user?.id != indivListing.seller.useroauth?._id) ? 
 console.log(account)
+
+//code the situation for when user has no listings, if (account[0]) else...
     return (
         <div className="home-main">
             <div className="overall-page-container">
                 <div className="profile-detail-section">
-                    <Image alt='profile-pic' src={account[0]?.seller.image} width={50} height={50}/>
+                    <Image alt='profile-pic' style={{borderRadius:'50%'}} src={account[0]?.seller.image} width={55} height={55}/>
                     <h2 style={{fontSize:'1.7rem'}}>{account[0]?.seller.usermanual.username || account[0]?.seller.useroauth.username}</h2>
                     <p>Account created on {account[0]?.seller.createdAt.split("T")[0]}</p>
                     <p>Contact: {account[0]?.seller.usermanual.email || account[0]?.seller.useroauth.email}</p>

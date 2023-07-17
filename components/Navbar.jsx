@@ -23,10 +23,10 @@ export default function Navbar() {
             <Link href='/create-listing'><Createlisting /></Link>
             <Basket />
 
-            { 
+            <Link href={`/profile/${1}`}>{ // update this to the correct variable
             <Image className='profile-pic' alt='profile-pic' src={session?.user.image || glob.state?.userimage } width={50} height={50} /> ||
             <Profile />
-            }
+            }</Link>
         </div> 
 
         :
