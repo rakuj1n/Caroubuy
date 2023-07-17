@@ -11,7 +11,7 @@ import Link from "next/link"
 export default function Navbar() {
     const { data: session } = useSession()
     const glob = useContext(StateContext)
-    console.log(glob.state.usermanual.account,session)
+
     return (
     <>
         {

@@ -46,8 +46,7 @@ export default function Profile({params}) {
       fetchindivaccount()
     },[params.profileid])
 
-//  (glob.state.usermanual?._id != indivListing.seller.usermanual?._id || session?.user?.id != indivListing.seller.useroauth?._id) ? 
-
+    console.log(params.profileid,glob.state.usermanual?.account,session?.user?.account)
     return (
         <div className="home-main">
             <div className="overall-page-container">
@@ -56,11 +55,12 @@ export default function Profile({params}) {
                     <h2 style={{fontSize:'1.7rem'}}>{account?.profile?.usermanual?.username || account?.profile?.useroauth?.username }</h2>
                     <p>Account created on {account?.profile?.createdAt.split("T")[0]}</p>
                     <p>Contact: {account?.profile?.usermanual?.email || account?.profile?.useroauth?.email}</p>
-                    <div className="user-links">
+                    { (params.profileid === glob.state.usermanual?.account || params.profileid === session?.user?.account) &&
+                      <div className="user-links">
                         <Link href={`/profile/${params.profileid}/settings`}><small>Change my password</small></Link>
                         <Link href={`/profile/${params.profileid}/myfavs`}>My Favourites</Link>
                         <Link href={`/profile/${params.profileid}/purchase-history`}>My Purchase History</Link>
-                    </div>
+                    </div>}
                 </div>
                 <div className="profile-listing-feed">
                     feed goes here

@@ -2,6 +2,7 @@ import { connectToDB } from "@/utils/database"
 import UserManual from "@/models/usermanual"
 import Account from "@/models/account"
 import { createJWT } from "@/utils/tokenAndFetch"
+import bcrypt from 'bcrypt'
 
 
 export const POST = async (req,res) => {
@@ -23,5 +24,20 @@ export const POST = async (req,res) => {
         return new Response(JSON.stringify(token),{status:201})
     } catch (err) {
         return new Response('Failed.',{status:500})
+    }
+}
+
+export const PUT = async (req) => {
+    try {
+        const details = await req.json() 
+        let user = await UserManual.findOne({account:details.user})
+        if (!user) throw new Error('No such user.')
+        const match = await bcrypt.compare(details.old, user.password);
+        if (!match) throw new Error();
+        user.password = details.new;
+        await user.save();
+        return new Response(JSON.stringify(user),{status:200})
+    } catch (err) {
+        return new Response('Failed.', {status:500})
     }
 }
