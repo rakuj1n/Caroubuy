@@ -1,6 +1,7 @@
 'use client'
 
 import { StateContext } from "@/components/Context"
+import FeedOneRow from "@/components/FeedOneRow"
 import ImageUpload from "@/components/ImageUpload"
 import Loading from "@/components/Loading"
 import { AddToBasket, FilledHeart, Heart } from "@/utils/svg"
@@ -67,7 +68,7 @@ export default function Profile({params}) {
                     </div>}
                 </div>
                 <div className="profile-listing-feed">
-                    feed goes here
+                    <FeedOneRow data={account?.listings} usermanualaccount={glob.state.usermanual?.account} usermanual={glob.state.usermanual?._id} useroauthaccount={session?.user?.account} useroauth={session?.user.id}/>
                 </div>
             </div>
         </div>

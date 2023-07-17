@@ -13,13 +13,13 @@ export const GET = async (req,{params}) => {
             const profileaccount2 = await UserManual.populate(profileaccount,{
                 path:'usermanual', select:['username','email']
             })
-            const listing = await Listing.find({seller:params.profileid})
+            const listing = await Listing.find({seller:params.profileid}).populate('seller').populate({path:'seller',populate:{path:'usermanual',model:'UserManual'}})
             return new Response(JSON.stringify({profile:profileaccount2,listings:listing}),{status:200})
         } else {
             const profileaccount2 = await UserOAuth.populate(profileaccount,{
                 path:'useroauth', select:['username','email']
             })
-            const listing = await Listing.find({seller:params.profileid})
+            const listing = await Listing.find({seller:params.profileid}).populate('seller').populate({path:'seller',populate:{path:'useroauth',model:'UserOAuth'}})
             return new Response(JSON.stringify({profile:profileaccount2,listings:listing}),{status:200})
         }
     } catch (err) {

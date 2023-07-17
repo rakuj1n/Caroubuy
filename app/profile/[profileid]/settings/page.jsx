@@ -65,7 +65,7 @@ export default function Settings({params}) {
                     <h2 className="sign-up">Change Password</h2>    
                     <input name='old' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="Current Password" value={formData.old}/>
                     <input name='new' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="New Password" value={formData.new}/>
-                    <button>Change Password</button>
+                    <button disabled={formData.old === formData.new}>Change Password</button>
                 </form>
             </div>
         </div>
