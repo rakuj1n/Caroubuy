@@ -2,6 +2,18 @@ import { connectToDB } from "@/utils/database"
 import Account from "@/models/account"
 import Listing from "@/models/listing"
 
+export const GET = async (req,{params}) => {
+    try {
+        await connectToDB()
+        let listings = await Listing.find({favby:params.userid}).populate('seller')
+        .populate({path:'seller',populate:{path:'usermanual',model:'UserManual'}})
+        .populate({path:'seller',populate:{path:'useroauth',model:'UserOAuth'}})
+        return new Response(JSON.stringify(listings),{status:200})
+    } catch (err) {
+        return new Response('Failed request.',{status:500})
+    }
+}
+
 export const PATCH = async (req,{params}) => {
     try {
         await connectToDB()
