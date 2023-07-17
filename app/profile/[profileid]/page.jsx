@@ -60,9 +60,9 @@ console.log(account)
                     <p>Account created on {account[0]?.seller.createdAt.split("T")[0]}</p>
                     <p>Contact: {account[0]?.seller.usermanual.email || account[0]?.seller.useroauth.email}</p>
                     <div className="user-links">
-                        <Link href='/'><small>Change my password</small></Link>
-                        <Link href='/'>My Favourites</Link>
-                        <Link href='/'>My Purchase History</Link>
+                        <Link href={`/profile/${params.profileid}/settings`}><small>Change my password</small></Link>
+                        <Link href={`/profile/${params.profileid}/myfavs`}>My Favourites</Link>
+                        <Link href={`/profile/${params.profileid}/purchase-history`}>My Purchase History</Link>
                     </div>
                 </div>
                 <div className="profile-listing-feed">
