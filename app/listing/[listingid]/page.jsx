@@ -2,7 +2,7 @@
 
 import { StateContext } from "@/components/Context"
 import ImageUpload from "@/components/ImageUpload"
-import { FilledHeart, Heart } from "@/utils/svg"
+import { AddToBasket, FilledHeart, Heart } from "@/utils/svg"
 import { getUser, request } from "@/utils/tokenAndFetch"
 import { getToken } from "next-auth/jwt"
 import { useSession } from "next-auth/react"
@@ -120,15 +120,18 @@ async function handleDeleteFromFav(listingId) {
             <div className="overall-page-container">
                 {/* <Link className='back-above-content' href='/'><Back /></Link> */}
                 <div className="content-container">
-                    <div><Image src={indivListing.listingthumbnail} height={200} width={200} /></div>
+                    <div><Image alt='thumbnail' src={indivListing.listingthumbnail} height={200} width={200} /></div>
                     <p className="listingname">{indivListing.listingname}</p>
                     <p>Listed by <strong>{indivListing.seller?.usermanual?.username || indivListing.seller?.useroauth?.username}</strong> on {indivListing.createdAt?.split("T")[0]}</p>
                     
                     {(!(glob.state.usermanual?._id || session?.user?.id)) ?
                     <></> 
                     : (glob.state.usermanual?._id != indivListing.seller?.usermanual?._id || session?.user?.id != indivListing.seller?.useroauth?._id) ? 
-                      <div className='heart-in-indiv' onClick={(e) => handleHeartClick(e,indivListing._id)}>
-                      { isFav ? <FilledHeart/> : <Heart/> }
+                      <div className="clickables-in-indiv">
+                        <div className='heart-in-indiv' onClick={(e) => handleHeartClick(e,indivListing._id)}>
+                        { isFav ? <FilledHeart/> : <Heart/> }
+                        </div>
+                        <div className='basket-in-indiv' onClick={(e)=>{e.stopPropagation();console.log('itemid',item._id,'accid',usermanual,useroauth)}}><AddToBasket /></div>
                       </div>
                       :
                       <></>

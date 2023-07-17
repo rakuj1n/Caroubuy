@@ -524,8 +524,38 @@ body {
 }
 
 .heart-in-indiv:hover {
-  cursor: pointer;
   scale:1.1;
 }
 
+.basket-in-indiv {
+  cursor: pointer;
+  transform: translateY(-2px);
+  transition: all 0.2s ease;
+}
+
+.basket-in-indiv:hover {
+  scale:1.1;
+}
+
+.clickables-in-indiv {
+  display: flex;
+  gap:15px;
+  justify-content: center;
+  align-items: center;
+}
+
 /* /listing/listingid */
+
+
+@media (max-height: 850px) {
+  .listing-container {
+    /* border: 1px solid blue; */
+    margin-bottom: 20px;
+    display: grid;
+    grid-gap:1em;
+    padding:0.5em;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    /* grid-template-columns: repeat(autofit,minmax(250px,1fr)); */
+  }
+}
