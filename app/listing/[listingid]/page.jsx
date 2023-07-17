@@ -2,6 +2,7 @@
 
 import { StateContext } from "@/components/Context"
 import ImageUpload from "@/components/ImageUpload"
+import Loading from "@/components/Loading"
 import { AddToBasket, FilledHeart, Heart } from "@/utils/svg"
 import { getUser, request } from "@/utils/tokenAndFetch"
 import { getToken } from "next-auth/jwt"
@@ -13,13 +14,14 @@ import { useContext, useEffect, useState } from "react"
 
 
 export default function IndividualListing({params}) {
+    const [status,setStatus] = useState('loading')
     const [submitting,setSubmitting] = useState(false)
     const router = useRouter()
     const {data:session} = useSession()
     const glob = useContext(StateContext)
     const [indivListing,setIndivListing] = useState({})
     const [isFav, setIsFav] = useState(false)
-
+    
     useEffect(() => {
         const loggedInManual = getUser()
         if (loggedInManual) {
@@ -37,8 +39,10 @@ export default function IndividualListing({params}) {
     useEffect(() => {
       const fetchindivlisting = async () => {
         try {
+          setStatus('loading')
           const indivlisting = await request(`/api/listing/${params.listingid}`)
           setIndivListing(indivlisting)
+          setStatus('success')
         } catch (err) {
           console.log(err)
         }
@@ -113,14 +117,15 @@ async function handleDeleteFromFav(listingId) {
         }
     }
 }
-//  (glob.state.usermanual?._id != indivListing.seller.usermanual?._id || session?.user?.id != indivListing.seller.useroauth?._id) ? 
+
+  if (status === 'loading') return <Loading />
 
     return (
         <div className="home-main">
             <div className="overall-page-container">
                 {/* <Link className='back-above-content' href='/'><Back /></Link> */}
                 <div className="content-container">
-                    <div><Image alt='thumbnail' src={indivListing.listingthumbnail} height={200} width={200} /></div>
+                    <div><img alt='thumbnail' src={indivListing.listingthumbnail} height={200} width={200} /></div>
                     <p className="listingname">{indivListing.listingname}</p>
                     <p>Listed by <Link href={`/profile/${indivListing.seller?._id}`}><strong>{indivListing.seller?.usermanual?.username || indivListing.seller?.useroauth?.username}</strong></Link> on {indivListing.createdAt?.split("T")[0]}</p>
                     

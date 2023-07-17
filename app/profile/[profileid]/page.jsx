@@ -2,6 +2,7 @@
 
 import { StateContext } from "@/components/Context"
 import ImageUpload from "@/components/ImageUpload"
+import Loading from "@/components/Loading"
 import { AddToBasket, FilledHeart, Heart } from "@/utils/svg"
 import { getUser, request } from "@/utils/tokenAndFetch"
 import { getToken } from "next-auth/jwt"
@@ -13,6 +14,7 @@ import { useContext, useEffect, useState } from "react"
 
 
 export default function Profile({params}) {
+    const [status,setStatus] = useState('loading')
     const [submitting,setSubmitting] = useState(false)
     const router = useRouter()
     const {data:session} = useSession()
@@ -39,6 +41,7 @@ export default function Profile({params}) {
             console.log('hello')
           const indivaccount = await request(`/api/profile/${params.profileid}`)
           setAccount(indivaccount)
+          setStatus('success')
         } catch (err) {
           console.log(err)
         }
@@ -46,7 +49,8 @@ export default function Profile({params}) {
       fetchindivaccount()
     },[params.profileid])
 
-    console.log(params.profileid,glob.state.usermanual?.account,session?.user?.account)
+    if (status === 'loading') return <Loading />
+
     return (
         <div className="home-main">
             <div className="overall-page-container">

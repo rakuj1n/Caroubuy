@@ -3,6 +3,7 @@
 import { StateContext } from "@/components/Context"
 import Feed from "@/components/Feed"
 import ImageUpload from "@/components/ImageUpload"
+import Loading from "@/components/Loading"
 import { Back } from "@/utils/svg"
 import { getUser, request } from "@/utils/tokenAndFetch"
 import { getToken } from "next-auth/jwt"
@@ -13,7 +14,7 @@ import { useContext, useEffect, useState } from "react"
 import ReactPaginate from 'react-paginate';
 
 export default function Listing() {
-    
+    const [status,setStatus] = useState('loading')
     const router = useRouter()
     const {data:session} = useSession()
     const glob = useContext(StateContext)
@@ -38,6 +39,7 @@ export default function Listing() {
                 try {
                     const myListing = await request(`/api/listing?usermanual=${userid}`)
                     setFetchListing(myListing)
+                    setStatus('success')
                 } catch (err) {
                     console.log(err)
                 }
@@ -45,6 +47,7 @@ export default function Listing() {
                 try {
                     const myListing = await request(`/api/listing?useroauth=${userid}`)
                     setFetchListing(myListing)
+                    setStatus('success')
                 } catch (err) {
                     console.log(err)
                 }
@@ -52,10 +55,14 @@ export default function Listing() {
         }
         if (glob.state.usermanual?._id) {
             fetchMyListing(glob.state.usermanual?._id,'manual')
+            setStatus('success')
         } else {
             fetchMyListing(session?.user.id)
+            setStatus('success')
         }
       },[glob.state.usermanual?._id,session?.user.id])
+
+      if (status === 'loading') return <Loading />
 
     return (
         <div className="home-main">

@@ -3,6 +3,7 @@
 import { StateContext } from "@/components/Context"
 import Feed from "@/components/Feed"
 import ImageUpload from "@/components/ImageUpload"
+import Loading from "@/components/Loading"
 import { Back } from "@/utils/svg"
 import { getUser, request } from "@/utils/tokenAndFetch"
 import { getToken } from "next-auth/jwt"
@@ -13,7 +14,7 @@ import { useContext, useEffect, useState } from "react"
 import ReactPaginate from 'react-paginate';
 
 export default function Listing() {
-    
+    const [status,setStatus] = useState('loading')
     const router = useRouter()
     const {data:session} = useSession()
     const glob = useContext(StateContext)
@@ -37,6 +38,7 @@ export default function Listing() {
         const fetchAllListing = async () => {
           const allListing = await request('/api/listing')
           setFetchListing(allListing)
+          setStatus('success')
         }
         fetchAllListing()
       },[])
@@ -50,6 +52,8 @@ export default function Listing() {
         setFilter(filtered)
         if (e.target.value === '') setFilter(fetchListing)
       }
+
+      if (status === 'loading') return <Loading />
 
     return (
         <div className="home-main">
