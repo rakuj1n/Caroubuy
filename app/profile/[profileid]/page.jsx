@@ -62,7 +62,7 @@ export default function Profile({params}) {
                     <p>Contact: {account?.profile?.usermanual?.email || account?.profile?.useroauth?.email}</p>
                     { (params.profileid === glob.state.usermanual?.account || params.profileid === session?.user?.account) &&
                       <div className="user-links">
-                        <Link href={`/profile/${params.profileid}/settings`}><small>Change my password</small></Link>
+                        <Link href={`/profile/${params.profileid}/settings`}>Change my password</Link>
                         <Link href={`/profile/${params.profileid}/myfavs`}>My Favourites</Link>
                         <Link href={`/profile/${params.profileid}/purchase-history`}>My Purchase History</Link>
                     </div>}

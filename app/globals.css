@@ -557,6 +557,10 @@ body {
 
 /* /listing/listingid */
 
+.seller-name:hover {
+  color:white;
+}
+
 /* profile page */
 
 .profile-detail-section {
@@ -572,8 +576,20 @@ body {
   gap:10px;
 }
 
+.user-links > a:hover {
+  color:white;
+}
+
 .profile-listing-feed {
   margin-top:20px;
+}
+
+.user-links {
+  background-color: #b7ccfa63;
+  padding: 10px;
+  display: flex;
+  gap:25px;
+  border-radius: 15px;
 }
 
 /* profile page */
