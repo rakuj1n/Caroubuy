@@ -8,10 +8,12 @@ import { useState,useEffect, useContext } from 'react'
 import { signIn, useSession, getProviders } from 'next-auth/react'
 import { StateContext } from '@/components/Context'
 import { getUser, request } from '@/utils/tokenAndFetch'
+import Loading from '@/components/Loading'
 
 
 
 export default function Home() {
+  const [status,setStatus] = useState('loading')
   const glob = useContext(StateContext)
   const [providers, setProviders] = useState(null)
   const { data: session } = useSession()
@@ -31,9 +33,12 @@ export default function Home() {
     const getImage = async (userid) => {
       const user = await request(`/api/users/${userid}/image`)
       glob.setState(prev => ({...prev,userimage: user?.image}))
+      setStatus('success')
     }
     getImage(glob.state.usermanual?._id)
   },[glob.state.usermanual?._id])
+
+  if (status === 'loading') return <Loading />
 
   return (
     <main className='home-main'>

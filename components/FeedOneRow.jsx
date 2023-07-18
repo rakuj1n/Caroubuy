@@ -49,6 +49,7 @@ export default function FeedOneRow({data,usermanual,useroauth,filter,useroauthac
             previousLabel="< previous"
             renderOnZeroPageCount={null}
             containerClassName="pagination-container"
+            activeClassName="active"
             />
         </div>
     )

@@ -6,6 +6,7 @@ import { getUser, request } from "@/utils/tokenAndFetch";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
+import toast, {Toaster} from 'react-hot-toast'
 
 
 export default function LogIn() {
@@ -20,15 +21,15 @@ export default function LogIn() {
     function handleValidation() {
         const {username,password} = formData
         if (username.length === 0) {
-            (console.log('check username'))
+            toast.error("Check username.")
             return false
         }
         if (password.length === 0) {
-            (console.log('check password'))
+            toast.error("Check password.")
             return false
         }
         if (password.length < 8) {
-            console.log('check password length')
+            toast.error("Please check password.")
             return false
         }
         return true
@@ -44,12 +45,17 @@ export default function LogIn() {
                 if (response) {
                     localStorage.setItem('token',response)
                     glob.setState(prev => ({...prev, usermanual:getUser()}))
-                    router.push('/')
+                    toast.success('Sign Up Successful! Redirecting...')
+                    setTimeout(() => {
+                        router.push('/')
+                    },1000)
                 }
             } catch (err) {
                 console.log(err)
             } finally {
-                setDisableSubmit(false)
+                setTimeout(() => {                
+                    setDisableSubmit(false)
+                },2000)
             }
         } else {
             console.log('error')
@@ -58,6 +64,7 @@ export default function LogIn() {
 
     return (
         <section className="sign-up-page-container">
+            <Toaster/>
             <div className="back-sign-up">
                 <Link href='/'><Back /></Link>
             </div>

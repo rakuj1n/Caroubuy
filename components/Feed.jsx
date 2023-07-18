@@ -74,6 +74,7 @@ export default function Feed({data,usermanual,useroauth,filter,useroauthaccount,
             previousLabel="< previous"
             renderOnZeroPageCount={null}
             containerClassName="pagination-container"
+            activeClassName="active"
             />
         </div>
     )

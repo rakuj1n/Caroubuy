@@ -289,6 +289,11 @@ body {
   /* position: absolute; */
 }
 
+.active {
+  font-weight: 800;
+  color: #ff0019;
+}
+
 .listing-container {
   /* border: 1px solid blue; */
   margin-bottom: 20px;
@@ -515,6 +520,7 @@ body {
   background-color: #b7ccfa33;
   padding:30px;
   border-radius: 20px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
 .content-container > button {

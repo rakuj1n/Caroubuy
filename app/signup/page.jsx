@@ -7,6 +7,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useContext } from "react"
 import { StateContext } from "@/components/Context"
+import toast, { Toaster } from 'react-hot-toast'
 
 export default function SignUp() {
     const glob = useContext(StateContext)
@@ -22,23 +23,23 @@ export default function SignUp() {
     function handleValidation() {
         const {username,email,password,confirm} = formData
         if (password !== confirm) {
-            (console.log('check confirm password'))
+            toast.error('Please re-confirm your password.')
             return false
         }
         if (password.length === 0) {
-            (console.log('check password'))
+            toast.error("Check password field.")
             return false
         }
         if (email.length === 0) {
-            (console.log('check email'))
+            toast.error("Check email field.")
             return false
         }
         if (password.length < 8) {
-            console.log('check password length')
+            toast.error("Password must be at least 8 characters.")
             return false
         }
         if (username.length === 0) {
-            console.log('check username')
+            toast.error("Please enter a username.")
             return false
         }
         return true
@@ -54,20 +55,28 @@ export default function SignUp() {
                 if (response) {
                     localStorage.setItem('token',response)
                     glob.setState(prev => ({...prev, usermanual:getUser()}))
-                    router.push('/')
+                    toast.success('Sign Up Successful! Redirecting...')
+                    setTimeout(() => {
+                        router.push('/')
+                    },1000)
+                } else {
+                    toast.error("Username and/or email already exists.")
                 }
             } catch (err) {
                 console.log(err)
             } finally {
-                setDisableSubmit(false)
+                setTimeout(() => {                
+                    setDisableSubmit(false)
+                },2000)
             }
         } else {
             console.log('error')
         }
     }
-
+    
     return (
         <section className="sign-up-page-container">
+            <Toaster />
             <div className="back-sign-up">
                 <Link href='/'><Back /></Link>
             </div>
