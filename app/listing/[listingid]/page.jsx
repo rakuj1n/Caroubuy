@@ -124,7 +124,7 @@ async function handleDeleteFromFav(listingId) {
         <div className="home-main">
             <div className="overall-page-container">
                 {/* <Link className='back-above-content' href='/'><Back /></Link> */}
-                <div className="content-container">
+                <div className="content-container indiv">
                     <div><img alt='thumbnail' src={indivListing.listingthumbnail} height={200} width={200} /></div>
                     <p className="listingname">{indivListing.listingname}</p>
                     <p>Listed by <Link href={`/profile/${indivListing.seller?._id}`}><strong className="seller-name">{indivListing.seller?.usermanual?.username || indivListing.seller?.useroauth?.username}</strong></Link> on {indivListing.createdAt?.split("T")[0]}</p>
