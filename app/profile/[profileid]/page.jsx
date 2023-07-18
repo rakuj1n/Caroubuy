@@ -59,7 +59,7 @@ export default function Profile({params}) {
             <div className="overall-page-container">
                 <div className="profile-detail-section">
 
-                    <Image alt='profile-pic' style={{borderRadius:'50%'}} src={account?.profile?.image} width={55} height={55}/>
+                    <Image alt='profile-pic' style={{borderRadius:'50%', objectFit:'cover', maxHeight:'55px', maxWidth:'55px'}} src={account?.profile?.image} width={55} height={55}/>
 
                     <h2 style={{fontSize:'1.7rem'}}>{account?.profile?.usermanual?.username || account?.profile?.useroauth?.username }</h2>
                     <p>Account created on {account?.profile?.createdAt.split("T")[0]}</p>

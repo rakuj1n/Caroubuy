@@ -56,7 +56,7 @@ export default function Feed({data,usermanual,useroauth,filter,useroauthaccount,
 
     useEffect(() => {
         setItemOffset(0)
-    },[filter])
+    },[filter]) //try to reset this back to a submit and fetch style
 
     return (
         <div className="listing-overall">
