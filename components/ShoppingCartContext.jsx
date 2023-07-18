@@ -1,4 +1,7 @@
+'use client'
+
 import { createContext, useContext, useState } from "react";
+import { useLocalStorage } from "./useLocalStorage";
 
 const ShoppingCartContext = createContext({})
 
@@ -7,7 +10,7 @@ export function useShoppingCart() {
 }
 
 export function ShoppingCartProvider({children}) {
-    const [cartItems,setCartItems] = useState([])
+    const [cartItems,setCartItems] = useLocalStorage("shopping-cart",[])
 
     function getCart() {
         return cartItems
