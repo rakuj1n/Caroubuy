@@ -52,17 +52,21 @@ export default function Profile({params}) {
 
     if (status === 'loading') return <Loading />
 
+    
+
     return (
         <div className="home-main">
             <div className="overall-page-container">
                 <div className="profile-detail-section">
+
                     <Image alt='profile-pic' style={{borderRadius:'50%'}} src={account?.profile?.image} width={55} height={55}/>
+
                     <h2 style={{fontSize:'1.7rem'}}>{account?.profile?.usermanual?.username || account?.profile?.useroauth?.username }</h2>
                     <p>Account created on {account?.profile?.createdAt.split("T")[0]}</p>
                     <p>Contact: {account?.profile?.usermanual?.email || account?.profile?.useroauth?.email}</p>
                     { (params.profileid === glob.state.usermanual?.account || params.profileid === session?.user?.account) &&
                       <div className="user-links">
-                        <Link href={`/profile/${params.profileid}/settings`}>Change my password</Link>
+                        {!session?.user?.account && <Link href={`/profile/${params.profileid}/settings`}>Change my settings</Link>}
                         <Link href={`/profile/${params.profileid}/myfavs`}>My Favourites</Link>
                         <Link href={`/profile/${params.profileid}/purchase-history`}>My Purchase History</Link>
                     </div>}

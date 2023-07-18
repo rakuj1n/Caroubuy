@@ -1,7 +1,7 @@
 'use client'
 
 import { StateContext } from "@/components/Context"
-import ImageUpload from "@/components/ImageUpload"
+import ProfileImageUpload from "@/components/ProfileImageUpload"
 import { AddToBasket, FilledHeart, Heart } from "@/utils/svg"
 import { getUser, request } from "@/utils/tokenAndFetch"
 import { getToken } from "next-auth/jwt"
@@ -11,6 +11,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
 
+// PREVENT OAUTH USERS FROM ACCESSING THIS PAGE
 
 export default function Settings({params}) {
     const [submitting,setSubmitting] = useState(false)
@@ -22,6 +23,7 @@ export default function Settings({params}) {
         old:'',
         new:''
     })
+    const [picData,setPicData] = useState('')
 
     useEffect(() => {
         const loggedInManual = getUser()
@@ -58,6 +60,19 @@ export default function Settings({params}) {
         }
       }
 
+      async function handleSubmitPic(e) {
+        e.preventDefault()
+
+        try {
+            const res = await request(`/api/profile/${params.profileid}`,"PUT",picData)
+            if (res !== undefined) {
+                router.push(`/profile/${params.profileid}`)
+            }
+        } catch (err) {
+            console.log(err)
+        }
+      }
+
     return (
         <div className="home-main">
             <div className="overall-page-container">
@@ -66,6 +81,11 @@ export default function Settings({params}) {
                     <input name='old' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="Current Password" value={formData.old}/>
                     <input name='new' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="New Password" value={formData.new}/>
                     <button disabled={formData.old === formData.new}>Change Password</button>
+                </form>
+                <form style={{marginTop:'20px'}} className="form-container" onSubmit={handleSubmitPic}>
+                    <h2 className="sign-up">Change Profile Image</h2>    
+                    <ProfileImageUpload onChange={(value) => setPicData(value)} value={picData}/>
+                    <button disabled={picData.length === 0}>Change Profile Image</button>
                 </form>
             </div>
         </div>
