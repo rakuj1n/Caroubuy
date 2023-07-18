@@ -1,15 +1,24 @@
 'use client'
 
 import Image from 'next/image'
-import { AddToBasket, Heart, FilledHeart } from '@/utils/svg'
+import { AddToBasket, Heart, FilledHeart, AddToBasketGreen } from '@/utils/svg'
 import { useRouter } from 'next/navigation'
 import { request } from '@/utils/tokenAndFetch'
 import { useEffect, useState } from 'react'
+import { useShoppingCart } from './ShoppingCartContext'
 
 export default function ListingCard({item,usermanual,useroauth,usermanualaccount,useroauthaccount,key}) {
 
     const router = useRouter()
     const [isFav, setIsFav] = useState((item.favby.includes(useroauthaccount) || item.favby.includes(usermanualaccount)) ? true : false)
+
+    // ShoppingContext--------------------------
+
+    const { getCart,getTotalQty,addItem,removeItem } = useShoppingCart()
+    const cart = getCart()
+
+    // ShoppingContext--------------------------
+
 
     function handleGoToListing(listingId) {
         router.push(`/listing/${listingId}`)
@@ -70,6 +79,15 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
         }
     }
 
+    function handleBasket(e,itemid) {
+        e.stopPropagation()
+        if (cart.includes(itemid)) {
+          removeItem(itemid)
+        } else {
+            addItem(itemid)
+        }
+    }
+
     return (
         <div className="card" key={key} onClick={() => handleGoToListing(item._id)}>
             {(!(usermanual || useroauth)) ?
@@ -80,7 +98,9 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
                 { isFav ? <FilledHeart/> : <Heart/> }
                 </div>
 
-                <div className='addtobasket' onClick={(e)=>{e.stopPropagation();console.log('itemid',item._id,'accid',usermanual,useroauth)}}><AddToBasket /></div>
+                <div className='addtobasket' onClick={(e) => handleBasket(e,item._id)}>
+                    {(cart.includes(item._id)) ? <AddToBasketGreen /> : <AddToBasket />}
+                </div>
             </> 
             :
             <></>
@@ -96,6 +116,9 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
         </div>
     )
 }
+
+{/* <div className='addtobasket' onClick={(e)=>{e.stopPropagation();console.log('itemid',item._id,'accid',usermanual,useroauth)}}><AddToBasket /></div> */}
+
 
 
 // (item.favby.includes(useroauthaccount) || item.favby.includes(usermanualaccount)) ? 

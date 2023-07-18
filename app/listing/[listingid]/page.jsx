@@ -3,7 +3,8 @@
 import { StateContext } from "@/components/Context"
 import ImageUpload from "@/components/ImageUpload"
 import Loading from "@/components/Loading"
-import { AddToBasket, FilledHeart, Heart } from "@/utils/svg"
+import { useShoppingCart } from "@/components/ShoppingCartContext"
+import { AddToBasket, AddToBasketGreen, FilledHeart, Heart } from "@/utils/svg"
 import { getUser, request } from "@/utils/tokenAndFetch"
 import { getToken } from "next-auth/jwt"
 import { useSession } from "next-auth/react"
@@ -21,6 +22,13 @@ export default function IndividualListing({params}) {
     const glob = useContext(StateContext)
     const [indivListing,setIndivListing] = useState({})
     const [isFav, setIsFav] = useState(false)
+
+    // ShoppingContext--------------------------
+
+    const { getCart,getTotalQty,addItem,removeItem } = useShoppingCart()
+    const cart = getCart()
+
+    // ShoppingContext--------------------------
     
     useEffect(() => {
         const loggedInManual = getUser()
@@ -118,6 +126,15 @@ async function handleDeleteFromFav(listingId) {
     }
 }
 
+function handleBasket(e,itemid) {
+  e.stopPropagation()
+  if (cart.includes(itemid)) {
+    removeItem(itemid)
+  } else {
+      addItem(itemid)
+  }
+}
+
   if (status === 'loading') return <Loading />
 
     return (
@@ -136,7 +153,9 @@ async function handleDeleteFromFav(listingId) {
                         <div className='heart-in-indiv' onClick={(e) => handleHeartClick(e,indivListing._id)}>
                         { isFav ? <FilledHeart/> : <Heart/> }
                         </div>
-                        <div className='basket-in-indiv' onClick={(e)=>{e.stopPropagation();console.log('itemid',item._id,'accid',usermanual,useroauth)}}><AddToBasket /></div>
+                        <div className='basket-in-indiv' onClick={(e) => handleBasket(e,indivListing._id)}>
+                            {(cart.includes(indivListing._id)) ? <AddToBasketGreen /> : <AddToBasket />}
+                        </div>
                       </div>
                       :
                       <></>

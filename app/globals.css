@@ -675,7 +675,26 @@ body {
 }
 /* --------------------------- https://loading.io/css/----------------------------*/
 
+.basket-container {
+  position:relative;
+}
 
+.basketqty {
+  position:absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right:-10px;
+  bottom:-10px;
+  /* background-color: #77DD77; */
+  background-color: #F47174;
+  height:20px;
+  width: 20px;
+  border-radius: 50%;
+  color: white;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
 
 @media (max-height: 950px) {
   .listing-container {
