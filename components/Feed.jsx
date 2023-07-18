@@ -7,10 +7,35 @@ import ListingCard from "./ListingCard";
 
 export default function Feed({data,usermanual,useroauth,filter,useroauthaccount,usermanualaccount}) {
 
+    // Smaller screen----------------
+
+    const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            const isSmallScreenQuery = window.matchMedia('(max-height: 950px)')
+            setIsSmallScreen(isSmallScreenQuery.matches)
+        }
+
+        handleResize()
+
+        window.addEventListener('resize', handleResize)
+
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
+
+    useEffect(() => {
+        setItemOffset(0)
+    },[isSmallScreen])
+
+    // Smaller screen----------------
+
     const [pageCount,setPageCount] = useState(0)
     const [itemOffset, setItemOffset] = useState(0);
     const [currentItems,setCurrentItems] = useState([])
-    const itemsPerPage = 6
+    const itemsPerPage = isSmallScreen ? 3 : 6
 
     useEffect(() => {
         const endOffset = itemOffset + itemsPerPage;
