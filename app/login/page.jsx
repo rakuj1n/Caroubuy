@@ -45,12 +45,14 @@ export default function LogIn() {
                 if (response) {
                     localStorage.setItem('token',response)
                     glob.setState(prev => ({...prev, usermanual:getUser()}))
-                    toast.success('Sign Up Successful! Redirecting...')
+                    
+                    toast.success('Login Successful! Redirecting...')
                     setTimeout(() => {
                         router.push('/')
                     },1000)
                 }
             } catch (err) {
+                toast.error("Username/Password is incorrect. Please try again.")
                 console.log(err)
             } finally {
                 setTimeout(() => {                

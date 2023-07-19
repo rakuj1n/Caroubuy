@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 
 const userManualSchema = new Schema({
     email: {type:String, trim:true, lowercase:true, unique:[true,'Email already exists.'], required:[true,'Email is required.']},
-    username: {type:String, unique:[true,'Username already exists.'], required:[true,'Username is required.']},
+    username: {type:String, unique:[true,'Username already exists.'], required:[true,'Username is required.'], maxLength:20},
     password: {type:String, trim:true, minLength:8, required:[true,'Password is required.']},
     account: {type:Schema.Types.ObjectId,ref:"Account"} 
 },{

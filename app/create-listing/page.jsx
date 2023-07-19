@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
-
+import toast, { Toaster } from 'react-hot-toast'
 
 export default function CreateListing() {
     const [submitting,setSubmitting] = useState(false)
@@ -51,14 +51,20 @@ export default function CreateListing() {
         e.preventDefault()
 
         if (!imageSrc) {
-            return console.log('Please check uploaded file. Only images are allowed.')
+            return toast.error('An uploaded image is necessary for a listing. Only images are allowed. Please try again.')
         }
         if (formDetails.listingname.length === 0 || formDetails.price.length === 0 || formDetails.description.length === 0) {
-            return console.log('Please ensure your listing name, price and description are filled up.')
+            return toast.error('Please ensure your listing name, price and description are filled up.')
+        }
+        if (formDetails.description.length > 1150) {
+            return toast.error("Your description is beyond the maximum allowed limit of 1150 characters.")
+        }
+        if (formDetails.listingname.length > 30) {
+            return toast.error('Your listing name is beyond the maximum allowed limit of 30 characters.')
         }
 
         if (!glob.state.usermanual?._id && !session?.user) {
-            return console.log('No user.')
+            return toast.error('No user.')
         }
 
         try {
@@ -82,6 +88,7 @@ export default function CreateListing() {
 
     return (
         <div className="home-main">
+            <Toaster />
             <div className="overall-page-container">
                 {/* <Link className='back-above-content' href='/'><Back /></Link> */}
                 <div className="content-container">

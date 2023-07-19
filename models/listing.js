@@ -1,8 +1,8 @@
 import { Schema, models, model } from "mongoose";
 
 const listingSchema = new Schema({
-    listingname: {type:String,required:true},
-    listingdescription: {type:String, required:true},
+    listingname: {type:String,required:true,maxLength:30},
+    listingdescription: {type:String, required:true,maxLength:1150},
     listingthumbnail: {type:String,required:true},
     listingprice: {type: String, required:true},
     seller: {type:Schema.Types.ObjectId,ref:'Account',required:true},

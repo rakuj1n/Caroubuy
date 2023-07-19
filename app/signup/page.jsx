@@ -42,6 +42,10 @@ export default function SignUp() {
             toast.error("Please enter a username.")
             return false
         }
+        if (username.length > 20) {
+            toast.error("Username cannot be more than 20 characters.")
+            return false
+        }
         return true
     }
     

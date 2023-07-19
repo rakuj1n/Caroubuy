@@ -9,6 +9,7 @@ import { signIn, useSession, getProviders } from 'next-auth/react'
 import { StateContext } from '@/components/Context'
 import { getUser, request } from '@/utils/tokenAndFetch'
 import Loading from '@/components/Loading'
+import { useShoppingCart } from '@/components/ShoppingCartContext'
 
 
 
@@ -18,13 +19,19 @@ export default function Home() {
   const [providers, setProviders] = useState(null)
   const { data: session } = useSession()
 
+  // ShoppingContext--------------------------
+
+  const { fetchCartItems,getCart,getTotalQty,addItem,removeItem } = useShoppingCart()
+
+  // ShoppingContext--------------------------
+
   useEffect(() => {
     const setUp = async () => {
       const response = await getProviders()
       setProviders(response)
     }
     setUp()
-
+    fetchCartItems()
     const loggedInManual = getUser()
     if (loggedInManual) {
       glob.setState(prev => ({...prev, usermanual: loggedInManual}))
