@@ -50,9 +50,10 @@ export default function LogIn() {
                     setTimeout(() => {
                         router.push('/')
                     },1000)
+                } else {
+                    toast.error("Username/Password is incorrect. Please try again.")
                 }
             } catch (err) {
-                toast.error("Username/Password is incorrect. Please try again.")
                 console.log(err)
             } finally {
                 setTimeout(() => {                
