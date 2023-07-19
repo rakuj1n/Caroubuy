@@ -99,7 +99,7 @@ export default function CreateListing() {
                         <textarea onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.description} name='description' rows="5" cols="90" placeholder="Describe your listing"/>
                         {/* <input name='thumbnail' placeholder="Upload Thumbnail" type='file' onChange={handleFileChange}/> */}
                         <ImageUpload onChange={(value) => setImageSrc(value)} value={imageSrc}/>
-                        <button disabled={submitting}>Create Listing</button>
+                        <button className='create-listing-button' disabled={submitting}>Create Listing</button>
                     </form>
                 </div>
             </div>

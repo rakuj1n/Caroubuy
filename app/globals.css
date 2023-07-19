@@ -124,6 +124,12 @@ body {
  align-items: center;
 }
 
+.create-listing-button {
+  border:0.1px solid;
+  padding:10px;
+  border-radius: 10px;
+}
+
 .form-container {
   display: flex;
   flex-direction: column;
