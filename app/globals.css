@@ -753,6 +753,71 @@ body {
 
 /* purchase-history---------- */
 
+
+
+/* Navbar------ */
+
+.browse-nav {
+transition:all 100ms ease;
+}
+
+.browse-nav:hover {
+  scale:1.1;
+  transform: translateY(-3px);
+  color:green;
+}
+
+.mylist-nav {
+  transition:all 100ms ease;
+}
+
+.mylist-nav:hover {
+  scale:1.1;
+  transform: translateY(-2px);
+  color:green;
+}
+
+.create-nav {
+  transition:all 100ms ease;
+}
+
+.create-nav:hover {
+  scale:1.1;
+  transform: translateY(-2px);
+  color:green;
+}
+
+.basket-nav {
+  transition:all 100ms ease;
+}
+
+.basket-nav:hover {
+  scale:1.1;
+  transform: translateY(-2px);
+  color:green;
+}
+
+.profile-pic-nav {
+  transition:all 100ms ease;
+}
+
+.profile-pic-nav:hover {
+  scale:1.1;
+  transform: translateY(-2px);
+}
+
+.logout-nav {
+  transition:all 100ms ease;
+}
+
+.logout-nav:hover {
+  scale:1.1;
+  transform: translateY(-2px);
+  color:red;
+}
+
+/* Navbar------ */
+
 @media (max-height: 950px) {
   .listing-container {
     /* border: 1px solid blue; */
