@@ -5,7 +5,7 @@ import { StateContext } from "@/components/Context"
 import Feed from "@/components/Feed"
 import ImageUpload from "@/components/ImageUpload"
 import Loading from "@/components/Loading"
-import { Back } from "@/utils/svg"
+import { Back, receipt } from "@/utils/svg"
 import { getUser, request } from "@/utils/tokenAndFetch"
 import { getToken } from "next-auth/jwt"
 import { useSession } from "next-auth/react"
@@ -14,8 +14,9 @@ import { useRouter } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
 import ReactPaginate from 'react-paginate';
 import toast, {Toaster} from 'react-hot-toast'
+import Image from 'next/image'
 
-export default function PurchaseHistory() {
+export default function PurchaseHistory({params}) {
 
     const searchParams = useSearchParams()
     const success = searchParams.get('success')
@@ -26,6 +27,7 @@ export default function PurchaseHistory() {
     const glob = useContext(StateContext)
     const [fetchListing,setFetchListing] = useState([])
     const [filter,setFilter] = useState([])
+    const [receipts,setReceipts] = useState([])
 
     useEffect(() => {
         const loggedInManual = getUser()
@@ -50,11 +52,48 @@ export default function PurchaseHistory() {
         }
     },[purchaseSuccess])
 
+    useEffect(() => {
+        const fetchReceipts = async () => {
+            try {
+                console.log(params.profileid)
+                const data = await request(`/api/users/${params.profileid}/receipt`)
+                setReceipts(data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        fetchReceipts()
+    },[]) 
+    console.log(receipts)
     return (
-        <div>
-            <Toaster />
-            purchase history
-            fetch receipts and map
+        <div className="home-main">
+        <Toaster />
+          <div className="overall-page-container">
+            <div className="receipt-container">
+            {receipts?.map(item => {
+                return (
+                    <div className="receipt">
+                        <div className="receipt-details">
+                            <p><strong>Receipt Id: </strong>{item._id}</p>
+                            <p><strong>Purchased on </strong>{item.createdAt.split('T')[0]} at {item.createdAt.split('T')[1].slice(0, -5)}</p>
+                        </div>
+                        <div className="purchased-items">
+                            <strong>Items purchased:</strong>
+                            {item.successPurchase?.map(item => {
+                                return (
+                                    <div className="purchased-item">
+                                        <Image src={item.listingthumbnail} width={40} height={40}/>
+                                        <Link href={`/listing/${item._id}`}><p>{item.listingname}</p></Link>
+                                        <p>${item.listingprice}</p>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                )
+            })}
+            </div>
+          </div>
         </div>
     )
 }

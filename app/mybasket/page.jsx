@@ -80,22 +80,18 @@ export default function MyBasket() {
     async function handleCheckOut(e) {
       e.preventDefault()
       setSubmitting(true)
-      setStatus('loading')
       try {
         let sendData = getCart()
         let data = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/checkout`,"POST",sendData)
+        setStatus('loading')
         setCartManual([])
         router.push(`/profile/${glob.state.usermanual?.account || session?.user?.account}/purchase-history?success=true`)
       } catch (err) {
         console.log(err)
       } finally {
-        setStatus('success')
         setSubmitting(false)
       }
-    }
- 
-    //add in bought text for listing card and remove addtobasket option if bought listing.boughtby !== null
-    
+    } 
 
     if (status === 'loading') return <Loading />
 

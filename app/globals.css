@@ -711,6 +711,42 @@ body {
   border-radius: 5px;
 }
 
+/* purchase-history---------- */
+
+.receipt-container {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: flex-start;
+  gap:10px;
+  flex-wrap: wrap;
+  overflow-x: auto;
+}
+
+.receipt {
+  background-color: #c9d6ff61;
+  padding:20px;
+  border-radius: 20px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap:20px;
+}
+
+.purchased-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap:5px;
+}
+
+.purchased-item > a:hover {
+  color:white;
+}
+
+/* purchase-history---------- */
+
 @media (max-height: 950px) {
   .listing-container {
     /* border: 1px solid blue; */
