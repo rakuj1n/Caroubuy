@@ -58,13 +58,16 @@ export default function PurchaseHistory({params}) {
                 console.log(params.profileid)
                 const data = await request(`/api/users/${params.profileid}/receipt`)
                 setReceipts(data)
+                setStatus('success')
             } catch (err) {
                 console.log(err)
             }
         }
         fetchReceipts()
     },[]) 
-    console.log(receipts)
+
+    if (status === 'loading') return <Loading />
+
     return (
         <div className="home-main">
         <Toaster />
