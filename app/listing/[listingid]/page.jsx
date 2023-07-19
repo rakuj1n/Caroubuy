@@ -153,9 +153,11 @@ function handleBasket(e,itemid) {
                         <div className='heart-in-indiv' onClick={(e) => handleHeartClick(e,indivListing._id)}>
                         { isFav ? <FilledHeart/> : <Heart/> }
                         </div>
-                        <div className='basket-in-indiv' onClick={(e) => handleBasket(e,indivListing._id)}>
+                        { (!indivListing.buyer) &&
+                          <div className='basket-in-indiv' onClick={(e) => handleBasket(e,indivListing._id)}>
                             {(cart.includes(indivListing._id)) ? <AddToBasketGreen /> : <AddToBasket />}
-                        </div>
+                          </div>
+                        }
                       </div>
                       :
                       <></>

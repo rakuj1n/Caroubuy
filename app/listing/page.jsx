@@ -37,7 +37,8 @@ export default function Listing() {
       useEffect(() => {
         const fetchAllListing = async () => {
           const allListing = await request('/api/listing')
-          setFetchListing(allListing)
+          let stillPurchaseable = allListing.filter(item => !item.buyer)
+          setFetchListing(stillPurchaseable)
           setStatus('success')
         }
         fetchAllListing()

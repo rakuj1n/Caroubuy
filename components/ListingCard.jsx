@@ -98,9 +98,11 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
                 { isFav ? <FilledHeart/> : <Heart/> }
                 </div>
 
+                {(!item.buyer) &&
                 <div className='addtobasket' onClick={(e) => handleBasket(e,item._id)}>
                     {(cart.includes(item._id)) ? <AddToBasketGreen /> : <AddToBasket />}
                 </div>
+                }
             </> 
             :
             <></>
