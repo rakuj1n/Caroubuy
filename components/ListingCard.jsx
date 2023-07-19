@@ -90,6 +90,7 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
 
     return (
         <div className="card" key={key} onClick={() => handleGoToListing(item._id)}>
+            {item.buyer && <p className="sold-text sold">Sold</p>}
             {(!(usermanual || useroauth)) ?
             <></>
             : (usermanual != item.seller?.usermanual?._id || useroauth != item.seller?.useroauth?._id) ? 

@@ -55,10 +55,8 @@ export default function Listing() {
         }
         if (glob.state.usermanual?._id) {
             fetchMyListing(glob.state.usermanual?._id,'manual')
-            setStatus('success')
         } else {
             fetchMyListing(session?.user.id)
-            setStatus('success')
         }
       },[glob.state.usermanual?._id,session?.user.id])
 

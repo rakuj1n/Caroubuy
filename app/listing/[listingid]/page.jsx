@@ -165,6 +165,7 @@ function handleBasket(e,itemid) {
                     
                     <p><em>${indivListing.listingprice}</em></p>
                     <p>{indivListing.listingdescription}</p>
+                    {indivListing.buyer && <p className="sold-text">Sold</p>}
                     {(glob.state.usermanual?._id && (glob.state.usermanual?._id == indivListing.seller?.usermanual?._id) && !indivListing.buyer) ? 
                     <button onClick={() => handleDelete(indivListing._id)}>Delete Listing</button>
                     : (session?.user?.id && (session?.user?.id == indivListing.seller?.useroauth?._id) && !indivListing.buyer) ?
