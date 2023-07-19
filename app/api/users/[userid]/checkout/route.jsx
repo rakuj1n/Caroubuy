@@ -3,6 +3,7 @@ import Account from "@/models/account"
 import Listing from "@/models/listing"
 import UserManual from "@/models/usermanual"
 import UserOAuth from "@/models/useroauth"
+import Receipt from "@/models/receipt"
 
 export const GET = async (req,{params}) => {
     try {
@@ -20,6 +21,41 @@ export const GET = async (req,{params}) => {
         console.log(accountToChange)
 
         return new Response(JSON.stringify(listing3),{status:200})
+    } catch (err) {
+        return new Response('Failed request.',{status:500})
+    }
+}
+
+export const POST = async (req,{params}) => {
+    try {
+        await connectToDB()
+        let data = await req.json()
+        //for each listing id, check if .buyer exists
+        let listing = await Listing.find({_id:[...data]})
+        //if yes, log id into ErrorPurchase receipt creation later
+        let purchaseError = listing.filter(item => !!item.buyer)
+        //if no, change listing.buyer to params.userid and save
+        let purchaseSuccess = listing.filter(item => !item.buyer)
+        let result = await Listing.updateMany({ _id: { $in: purchaseSuccess }, buyer: { $exists: false } },
+            { $set: { buyer: params.userid }})
+        
+        let modifiedIds = await Listing.find(
+            { _id: { $in: purchaseSuccess }, buyer: params.userid },
+            { _id: 1 }
+        ).lean()
+        
+        modifiedIds = modifiedIds.map((doc) => doc._id)
+        
+        console.log('Modified IDs:', modifiedIds)
+        //create new receipt
+        let purchaseErrorArr = purchaseError.map(item => item._id)
+        let receipt = await Receipt.create({
+            account: params.userid,
+            successPurchase:[...modifiedIds],
+            errorPurchase:[...purchaseErrorArr]
+        })
+        console.log('hi')
+        return new Response(JSON.stringify(receipt),{status:200})
     } catch (err) {
         return new Response('Failed request.',{status:500})
     }

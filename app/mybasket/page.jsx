@@ -66,7 +66,6 @@ export default function MyBasket() {
       },[glob.state.usermanual?._id,session?.user?.account])
 
       useEffect(() => {
-        console.log('price')
         const price = async () =>{
           let data = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/checkout`,"GET")
             //---CHECKS---
@@ -78,8 +77,13 @@ export default function MyBasket() {
       },[getCart()])
 
     //when press checkout, submit the localstorage cart to server
-    //server check if item has been bought, using if listing.boughtby (?) !== null, do not update
-    //server updates left over items boughtby, creates a receipt using receipt model, send back receipt data
+    async function handleCheckOut() {
+      let sendData = getCart()
+      let data = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/checkout`,"POST",sendData)
+    }
+ 
+
+    //if success, push to purchase history with query param success to show toast.success
 
     //add in bought text for listing card and remove addtobasket option if bought listing.boughtby !== null
     
@@ -93,7 +97,7 @@ export default function MyBasket() {
               <div style={{display:'flex', gap:'50px', justifyContent:'center',alignItems:'center'}}>
                 <div>Total Quantity: <strong>{getTotalQty()}</strong></div>
                 <div>Total Amount: <strong>${totalAmt}</strong></div>
-                <button className='checkout-button'>Checkout</button>
+                <button onClick={handleCheckOut} className='checkout-button'>Checkout</button>
               </div>
                 <div className="profile-listing-feed">
                     <FeedOneRow data={checkOut?.cart?.filter(item => !item.buyer)} usermanualaccount={glob.state.usermanual?.account} usermanual={glob.state.usermanual?._id} useroauthaccount={session?.user?.account} useroauth={session?.user.id}/>
