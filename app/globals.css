@@ -27,7 +27,7 @@ body {
   background: -webkit-linear-gradient(to right, #E2E2E2, #c9d6ffa6);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #E2E2E2, #c9d6ffa6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   font-family: 'Bellota Text';
-  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif ;
+  /* font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif ; */
 }
 
 .home {
