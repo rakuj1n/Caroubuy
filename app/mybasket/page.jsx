@@ -77,14 +77,20 @@ export default function MyBasket() {
       },[getCart()])
 
     //when press checkout, submit the localstorage cart to server
-    async function handleCheckOut() {
-      let sendData = getCart()
-      let data = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/checkout`,"POST",sendData)
+    async function handleCheckOut(e) {
+      e.preventDefault()
+      setSubmitting(true)
+      try {
+        let sendData = getCart()
+        let data = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/checkout`,"POST",sendData)
+        router.push(`/profile/${glob.state.usermanual?.account || session?.user?.account}/purchase-history?success=true`)
+      } catch (err) {
+        console.log(err)
+      } finally {
+        setSubmitting(false)
+      }
     }
  
-
-    //if success, push to purchase history with query param success to show toast.success
-
     //add in bought text for listing card and remove addtobasket option if bought listing.boughtby !== null
     
 
@@ -97,7 +103,7 @@ export default function MyBasket() {
               <div style={{display:'flex', gap:'50px', justifyContent:'center',alignItems:'center'}}>
                 <div>Total Quantity: <strong>{getTotalQty()}</strong></div>
                 <div>Total Amount: <strong>${totalAmt}</strong></div>
-                <button onClick={handleCheckOut} className='checkout-button'>Checkout</button>
+                {(getTotalQty() > 0) && <button onClick={handleCheckOut} disabled={submitting} className='checkout-button'>Checkout</button>}
               </div>
                 <div className="profile-listing-feed">
                     <FeedOneRow data={checkOut?.cart?.filter(item => !item.buyer)} usermanualaccount={glob.state.usermanual?.account} usermanual={glob.state.usermanual?._id} useroauthaccount={session?.user?.account} useroauth={session?.user.id}/>
