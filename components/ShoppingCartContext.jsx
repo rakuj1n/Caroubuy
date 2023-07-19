@@ -19,6 +19,10 @@ export function ShoppingCartProvider({children}) {
 
     // glob.state.usermanual?.account || session?.user?.account
 
+    function setCartManual(itemsArr) {
+        setCartItems(itemsArr)
+    }
+
     async function fetchCartItems() {
         let res = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/cart`,"GET")
         setCartItems(res || [])
@@ -50,7 +54,7 @@ export function ShoppingCartProvider({children}) {
     }
 
     return (
-        <ShoppingCartContext.Provider value={{fetchCartItems,getCart, getTotalQty,addItem,removeItem}}>
+        <ShoppingCartContext.Provider value={{setCartManual,fetchCartItems,getCart, getTotalQty,addItem,removeItem}}>
             {children}
         </ShoppingCartContext.Provider>
     )

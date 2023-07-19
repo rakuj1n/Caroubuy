@@ -43,7 +43,7 @@ export default function Home() {
       setStatus('success')
     }
     getImage(glob.state.usermanual?._id)
-  },[glob.state.usermanual?._id])
+  },[glob.state.usermanual?._id,session?.user])
 
   if (status === 'loading') return <Loading />
 

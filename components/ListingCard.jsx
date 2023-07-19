@@ -10,7 +10,7 @@ import { useShoppingCart } from './ShoppingCartContext'
 export default function ListingCard({item,usermanual,useroauth,usermanualaccount,useroauthaccount,key}) {
 
     const router = useRouter()
-    const [isFav, setIsFav] = useState((item.favby.includes(useroauthaccount) || item.favby.includes(usermanualaccount)) ? true : false)
+    const [isFav, setIsFav] = useState((item.favby?.includes(useroauthaccount) || item.favby?.includes(usermanualaccount)) ? true : false)
 
     // ShoppingContext--------------------------
 
@@ -92,7 +92,7 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
         <div className="card" key={key} onClick={() => handleGoToListing(item._id)}>
             {(!(usermanual || useroauth)) ?
             <></>
-            : (usermanual != item.seller.usermanual?._id || useroauth != item.seller.useroauth?._id) ? 
+            : (usermanual != item.seller?.usermanual?._id || useroauth != item.seller?.useroauth?._id) ? 
             <>
                 <div className='heart' onClick={(e) => handleHeartClick(e,item._id)}>
                 { isFav ? <FilledHeart/> : <Heart/> }
@@ -112,7 +112,7 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
             <p className="card-body">
                 {item.listingdescription}
             </p>
-            <p className="footer">Listed by <span className="by-name">{item.seller.usermanual?.username || item.seller.useroauth?.username}</span> at <span className="date">${item.listingprice}</span></p>
+            <p className="footer">Listed by <span className="by-name">{item.seller?.usermanual?.username || item.seller?.useroauth?.username}</span> at <span className="date">${item.listingprice}</span></p>
         </div>
     )
 }
