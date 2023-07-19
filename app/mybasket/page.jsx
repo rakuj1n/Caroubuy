@@ -24,6 +24,7 @@ export default function MyBasket() {
     const glob = useContext(StateContext)
     const [account,setAccount] = useState({})
     const [checkOut,setCheckOut] = useState({})
+    const [totalAmt,setTotalAmt] = useState('')
 
   // ShoppingContext--------------------------
 
@@ -56,12 +57,25 @@ export default function MyBasket() {
               )
           }
           console.log('hi',data,filterOutBought,alreadyBought)
-          setCheckOut(data)
           // manually set cart items in local storage to filteredBought array
-          setCartManual(filterOutBought.map(item => item._id))
+          setCheckOut(data)
+          setCartManual(filterOutBought?.map(item => item._id))
+          setStatus('success')
         }
         fetchCart()
       },[glob.state.usermanual?._id,session?.user?.account])
+
+      useEffect(() => {
+        console.log('price')
+        const price = async () =>{
+          let data = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/checkout`,"GET")
+            //---CHECKS---
+            let filterOutBought = data?.cart.filter(item => !item.buyer)
+           // add prices
+           setTotalAmt(filterOutBought?.map(item => item.listingprice)?.reduce((acc,curr) => parseInt(acc) + parseInt(curr),0))
+        }
+        price()
+      },[getCart()])
 
     //when press checkout, submit the localstorage cart to server
     //server check if item has been bought, using if listing.boughtby (?) !== null, do not update
@@ -70,13 +84,17 @@ export default function MyBasket() {
     //add in bought text for listing card and remove addtobasket option if bought listing.boughtby !== null
     
 
-    // if (status === 'loading') return <Loading />
+    if (status === 'loading') return <Loading />
 
     return (
         <div className="home-main">
           <Toaster />
             <div className="overall-page-container">
-                
+              <div style={{display:'flex', gap:'50px', justifyContent:'center',alignItems:'center'}}>
+                <div>Total Quantity: <strong>{getTotalQty()}</strong></div>
+                <div>Total Amount: <strong>${totalAmt}</strong></div>
+                <button className='checkout-button'>Checkout</button>
+              </div>
                 <div className="profile-listing-feed">
                     <FeedOneRow data={checkOut?.cart?.filter(item => !item.buyer)} usermanualaccount={glob.state.usermanual?.account} usermanual={glob.state.usermanual?._id} useroauthaccount={session?.user?.account} useroauth={session?.user.id}/>
                 </div>
