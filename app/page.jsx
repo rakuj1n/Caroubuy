@@ -51,11 +51,11 @@ export default function Home() {
     <main className='home-main'>
       <motion.div>
         <motion.h2
-        className='welcome-to'
-          initial={{y:-50, opacity:0}}
-          animate={{y:0, opacity:100,duration:"3"}}
+        className='welcome-to slidein'
+          // initial={{y:-50, opacity:0}}
+          // animate={{y:0, opacity:100,duration:"3"}}
         >Welcome to</motion.h2>
-        <motion.h1 className='caroubuy'>Caroubuy</motion.h1>
+        <motion.h1 className='caroubuy slidedown'>Caroubuy</motion.h1>
 
         {providers && (!session?.user && !glob.state.usermanual) && 
         <div className='sign-in-container'>

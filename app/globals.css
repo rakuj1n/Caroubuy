@@ -347,6 +347,14 @@ body {
   color: #ff0019;
 }
 
+.previous, .next,.page {
+  transition: all 100ms ease;
+}
+
+.previous:hover, .next:hover,.page:hover {
+  color:white;
+}
+
 .listing-container {
   /* border: 1px solid blue; */
   margin-bottom: 20px;
@@ -764,6 +772,7 @@ body {
   color: white;
   font-weight: 800;
   font-size: 0.8rem;
+  opacity: 0;
 }
 
 .checkout-button {
@@ -833,6 +842,7 @@ transition:all 100ms ease;
 
 .mylist-nav {
   transition:all 100ms ease;
+  opacity: 0;
 }
 
 .mylist-nav:hover {
@@ -843,6 +853,7 @@ transition:all 100ms ease;
 
 .create-nav {
   transition:all 100ms ease;
+  opacity: 0;
 }
 
 .create-nav:hover {
@@ -853,6 +864,7 @@ transition:all 100ms ease;
 
 .basket-nav {
   transition:all 100ms ease;
+  opacity: 0;
 }
 
 .basket-nav:hover {
@@ -863,6 +875,7 @@ transition:all 100ms ease;
 
 .profile-pic-nav {
   transition:all 100ms ease;
+  opacity: 0;
 }
 
 .profile-pic-nav:hover {
@@ -903,19 +916,24 @@ transition:all 100ms ease;
 
 .slidein {
   animation: 0.4s ease slidein;
+  animation-fill-mode:forwards;
 }
 
 .slidein1 {
   animation: 0.8s ease 0.2s slidein;
+  animation-fill-mode:forwards;
 }
 .slidein2 {
   animation: 0.8s ease 0.3s slidein;
+  animation-fill-mode:forwards;
 }
 .slidein3 {
   animation: 0.8s ease 0.4s slidein;
+  animation-fill-mode:forwards;
 }
 .slidein4 {
   animation: 0.8s ease 0.5s slidein;
+  animation-fill-mode:forwards;
 }
 
 @keyframes slidein {

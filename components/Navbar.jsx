@@ -33,7 +33,7 @@ export default function Navbar() {
             <Link href='/mybasket'>
                 <div className="basket-container">
                     <Basket />
-                    {quantity ? <div className="basketqty"><p>{quantity}</p></div> : <></> }
+                    {quantity ? <div className="basketqty slidein2"><p>{quantity}</p></div> : <></> }
                 </div>
             </Link>
 

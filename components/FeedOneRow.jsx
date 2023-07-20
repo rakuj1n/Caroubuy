@@ -50,6 +50,9 @@ export default function FeedOneRow({data,usermanual,useroauth,filter,useroauthac
             renderOnZeroPageCount={null}
             containerClassName="pagination-container"
             activeClassName="active"
+            previousLinkClassName="previous"
+            nextLinkClassName="next"
+            pageLinkClassName="page"
             />
         </div>
     )
