@@ -72,7 +72,7 @@ export default function Home() {
           <p className='or'>or</p>
           <div className='manual-sign'>
             <motion.p className='or-sign-up-login'>
-              <Link href='/signup'>Sign Up</Link> / <Link href='login'>Login</Link>
+              <Link href='/signup'><p className='sign-up-text'>Sign Up</p></Link> / <Link href='/login'><p className='log-in-text'>Login</p></Link>
             </motion.p>
           </div>
         </div>

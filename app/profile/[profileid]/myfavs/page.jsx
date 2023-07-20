@@ -43,18 +43,16 @@ export default function MyFav({params}) {
         fetchAllListing()
       },[])
 
-      useEffect(() => {
-        setFilter(fetchListing)
-      },[fetchListing])
-
-
+      console.log(filter)
       if (status === 'loading') return <Loading />
 
     return (
         <div className="home-main">
             <div className="overall-page-container">
                 <div className="content-container">
-                    <Feed filter={filter} usermanualaccount={glob.state.usermanual?.account} usermanual={glob.state.usermanual?._id} useroauthaccount={session?.user?.account} useroauth={session?.user.id} data={filter}/>
+                    {filter.length > 0 ? <Feed filter={fetchListing} usermanualaccount={glob.state.usermanual?.account} usermanual={glob.state.usermanual?._id} useroauthaccount={session?.user?.account} useroauth={session?.user.id} data={filter}/>
+                    : <p>No listing.</p>
+                    }
                 </div>
             </div>
         </div>

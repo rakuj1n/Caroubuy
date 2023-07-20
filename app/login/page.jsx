@@ -77,7 +77,7 @@ export default function LogIn() {
                     <h2 className="sign-up">Log In</h2>
                     <input name='username' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} placeholder="Username" value={formData.username}/>
                     <input name='password' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="Password" value={formData.password}/>
-                    <button disabled={disableSubmit}>Enter</button>
+                    <button className='buttons' disabled={disableSubmit}>{disableSubmit ? "Please wait..." : "Enter"}</button>
                 </form>
     
             </div> 

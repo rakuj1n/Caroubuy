@@ -40,12 +40,33 @@ body {
   /* -webkit-text-fill-color: transparent; */
 }
 
+.buttons {
+  transition:all 100ms ease;
+  /* padding: 7px 20px;
+  border: 0.05rem solid ;
+  border-radius: 10px; */
+}
+
+.buttons:hover {
+  color:white;
+  /* border: 0.05rem solid; */
+}
+
 .about-link {
   position: absolute;
-  top: 0;
-  left: 0;
-  margin-top: 10px;
-  margin-left: 20px;
+  top: 20px;
+  left: 30px;
+  margin:20px;
+}
+
+.home-link {
+  transition:all 100ms ease;
+}
+
+.home-link:hover {
+  color: green;
+  scale:1.1;
+  transform: translateY(-2px);
 }
 
 .logout {
@@ -198,7 +219,14 @@ body {
 
 .back-sign-up {
   margin: 20px 0px;
+  transition: all 100ms ease;
 }
+
+.back-sign-up:hover {
+  margin: 20px 0px;
+  color: white;
+}
+
 
 .sign-in-container {
   display: flex;
@@ -218,6 +246,11 @@ body {
   border-radius: 15px;
   font-size:1.05rem;
   font-style: italic;
+  transition: all 100ms ease;
+}
+
+.provider-button:hover {
+  color:white;
 }
 
 .or {
@@ -230,10 +263,16 @@ body {
   padding: 10px;
   margin: 10px 0;
   font-size:1.05rem;
+  display: flex;
+  gap:10px;
 }
 
-.caroubuy {
-  
+.sign-up-text, .log-in-text {
+  transition: all 100ms ease;
+}
+
+.sign-up-text:hover, .log-in-text:hover {
+  color:white;
 }
 
 .overall-page-container {

@@ -73,7 +73,7 @@ export default function PurchaseHistory({params}) {
         <Toaster />
           <div className="overall-page-container">
             <div className="receipt-container">
-            {receipts?.map(item => {
+            {receipts.length > 0 ? (receipts?.map(item => {
                 return (
                     <div className="receipt">
                         <div className="receipt-details">
@@ -94,7 +94,8 @@ export default function PurchaseHistory({params}) {
                         </div>
                     </div>
                 )
-            })}
+            })):
+            <p>No purchases.</p>}
             </div>
           </div>
         </div>

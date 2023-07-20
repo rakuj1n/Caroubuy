@@ -30,15 +30,9 @@ export default function RootLayout({ children }) {
           <main>
             <div className='about-link'>
               <Link href='/'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 200 200">
-                  <defs>
-                    <linearGradient id="background-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" style={{stopColor: "#B4E2FF"}} />
-                      <stop offset="100%" style={{stopColor: "#fcfad2"}} />
-                    </linearGradient>
-                  </defs>
-                  <polygon points="100,30 170,70 170,130 100,170 30,130 30,70" fill="url(#background-gradient)" />
-                </svg>
+              <svg className='home-link' xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16">
+                <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146ZM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5Z"/>
+              </svg>
               </Link>
             </div>
 

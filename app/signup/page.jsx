@@ -92,7 +92,7 @@ export default function SignUp() {
                     <input name='email' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='email' placeholder="Email" value={formData.email}/>
                     <input name='password' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="Password" value={formData.password}/>
                     <input name='confirm' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="Confirm Password" value={formData.confirm}/>
-                    <button disabled={disableSubmit}>Create New User</button>
+                    <button className='buttons' disabled={disableSubmit}>{disableSubmit ? "Please wait..." : "Create New User"}</button>
                 </form>
     
             </div> 
