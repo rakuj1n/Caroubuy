@@ -23,9 +23,24 @@ export async function middleware(req) {
     return NextResponse.redirect(new URL('/',req.url))
   }
 
+  if ((!verifiedClientToken && !oauthtoken) && (path.startsWith('/create-listing'))) {
+    return NextResponse.redirect(new URL('/',req.url))
+  }
+
+  if ((verifiedClientToken || oauthtoken) && (path.startsWith('/login'))) {
+    return NextResponse.redirect(new URL('/',req.url))
+  }
+
+  if ((verifiedClientToken || oauthtoken) && (path.startsWith('/signup'))) {
+    return NextResponse.redirect(new URL('/',req.url))
+  }
+
+  if ((!verifiedClientToken && !oauthtoken) && (path.startsWith('/mylisting'))) {
+    return NextResponse.redirect(new URL('/',req.url))
+  }
 
 
-  
+
   if ((!verifiedToken && !oauthtoken) && (path.startsWith('/api/listing')) && method == "POST") {
     return new NextResponse(JSON.stringify({message: 'authentication failed.'}),{status:401})
   }

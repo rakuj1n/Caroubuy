@@ -88,17 +88,8 @@ export default function CreateListing() {
         // to be sent to next.js server component to handle to save in s3 and db. middleware?
       }
 
-// protect URL route on client side---------
-
-      useEffect(() => {
-        if (!glob.state.usermanual?._id && !session?.user) {
-            router.push('/login')
-        }
-      },[glob.state.usermanual?._id,session?.user])
-
     if (!glob.state.usermanual?._id && !session?.user) return <Loading />
 
-// protect URL route on client side---------
 
     return (
         <div className="home-main">

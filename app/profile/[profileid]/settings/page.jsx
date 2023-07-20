@@ -74,17 +74,9 @@ export default function Settings({params}) {
         }
       }
 
-    // protect URL route on client side---------
-
-    useEffect(() => {
-        if (!glob.state.usermanual?._id && !session?.user) {
-            router.push('/')
-        }
-    },[glob.state.usermanual?._id,session?.user])
 
     if (!glob.state.usermanual?._id && !session?.user) return <Loading />
 
-    // protect URL route on client side---------
 
     return (
         <div className="home-main">
