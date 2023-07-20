@@ -3,6 +3,7 @@ import UserManual from "@/models/usermanual"
 import Account from "@/models/account"
 import { createJWT } from "@/utils/tokenAndFetch"
 import bcrypt from 'bcrypt'
+import { cookies } from "next/dist/client/components/headers"
 
 
 export const POST = async (req,res) => {
@@ -21,6 +22,13 @@ export const POST = async (req,res) => {
         newUserManual.account = newaccountmanual._id
         await newUserManual.save()
         const token = createJWT(newUserManual)
+        cookies().set({
+            name: 'client-token',
+            value: token,
+            httpOnly: true,
+            maxAge: 86400,
+            path:'/'
+          })
         return new Response(JSON.stringify(token),{status:201})
     } catch (err) {
         return new Response('Failed.',{status:500})
