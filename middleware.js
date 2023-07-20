@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
-import jwt from 'jsonwebtoken'
 import { getToken } from "next-auth/jwt"
 import { verifyAuth } from './utils/auth'
+import squareWasm from './square.wasm?module'
  
 // Limit the middleware to paths starting with `/api/`
 // export const config = {
@@ -9,6 +9,10 @@ import { verifyAuth } from './utils/auth'
 // }
  
 export async function middleware(req) {
+  const m = await WebAssembly.instantiate(squareWasm)
+  const answer = m.exports.square(9)
+  
+
   const path = req.nextUrl.pathname
   const method = req.method
   let token = req.headers.get('authorization')
@@ -23,7 +27,7 @@ export async function middleware(req) {
   // ) {
   //   console.log('HI!!!',req.nextUrl.pathname,verifiedToken,oauthtoken)
   // }
-  console.log('middleware',req.nextUrl.pathname,verifiedToken,oauthtoken)
+  // console.log('middleware',req.nextUrl.pathname,verifiedToken,oauthtoken)
 
   //  PLEASE CHECK UNSIGNED-IN MYBASKET ROUTE IF SHOPPING CART LOCALSTORAGE BECOMES UNDEFINED HENCCEC SCREWING OTHER PUBLIUC ROUTES
     
