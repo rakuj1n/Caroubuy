@@ -13,8 +13,9 @@ export async function middleware(req) {
   const path = req.nextUrl.pathname
   const method = req.method
   let token = req.headers.get('authorization')
+  let clientToken = req.cookies.get('client-token')
   const oauthtoken = await getToken({req})
-
+  console.log(clientToken,token)
   const verifiedToken = token && (await verifyAuth(token.replace('Bearer ','')).catch((err) => {console.log(err)}))
    
   if ((!verifiedToken && !oauthtoken) && (path.startsWith('/api/listing')) && method == "POST") {

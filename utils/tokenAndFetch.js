@@ -22,7 +22,8 @@ export function getUser() {
     return token ? JSON.parse(atob(token.split('.')[1])).user : null
 }
 
-export function logOut() {
+export async function logOut() {
+    await request(`/api/users/logout`,"POST",{})
     localStorage.removeItem('token')
 }
 
