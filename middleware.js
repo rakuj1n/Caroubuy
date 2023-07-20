@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getToken } from "next-auth/jwt"
 import { verifyAuth } from './utils/auth'
-import squareWasm from './square.wasm?module'
+
  
 // Limit the middleware to paths starting with `/api/`
 // export const config = {
@@ -9,8 +9,7 @@ import squareWasm from './square.wasm?module'
 // }
  
 export async function middleware(req) {
-  const m = await WebAssembly.instantiate(squareWasm)
-  const answer = m.exports.square(9)
+
   
 
   const path = req.nextUrl.pathname
