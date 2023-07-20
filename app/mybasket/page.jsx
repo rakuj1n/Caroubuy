@@ -93,18 +93,8 @@ export default function MyBasket() {
       }
     } 
 
-    // protect URL route on client side---------
-
-    useEffect(() => {
-      if (!glob.state.usermanual?._id && !session?.user) {
-          router.push('/login')
-      }
-    },[glob.state.usermanual?._id,session?.user])
 
     if (!glob.state.usermanual?._id && !session?.user) return <Loading />
-
-    // protect URL route on client side---------
-
 
     if (status === 'loading') return <Loading />
 
