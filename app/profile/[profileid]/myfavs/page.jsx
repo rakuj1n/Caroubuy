@@ -43,14 +43,13 @@ export default function MyFav({params}) {
         fetchAllListing()
       },[])
 
-      console.log(filter)
       if (status === 'loading') return <Loading />
 
     return (
         <div className="home-main">
             <div className="overall-page-container">
                 <div className="content-container">
-                    {filter.length > 0 ? <Feed filter={fetchListing} usermanualaccount={glob.state.usermanual?.account} usermanual={glob.state.usermanual?._id} useroauthaccount={session?.user?.account} useroauth={session?.user.id} data={filter}/>
+                    {fetchListing?.length > 0 ? <Feed filter={fetchListing} usermanualaccount={glob.state.usermanual?.account} usermanual={glob.state.usermanual?._id} useroauthaccount={session?.user?.account} useroauth={session?.user.id} data={fetchListing}/>
                     : <p>No listing.</p>
                     }
                 </div>
