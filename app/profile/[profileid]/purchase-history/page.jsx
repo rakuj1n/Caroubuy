@@ -87,7 +87,7 @@ export default function PurchaseHistory({params}) {
             <div className="receipt-container">
             {receipts.length > 0 ? (receipts?.map(item => {
                 return (
-                    <div className="receipt">
+                    <div className="receipt slidein">
                         <div className="receipt-details">
                             <p><strong>Receipt Id: </strong>{item._id}</p>
                             <p><strong>Purchased on </strong>{item.createdAt.split('T')[0]} at {item.createdAt.split('T')[1].slice(0, -5)}</p>

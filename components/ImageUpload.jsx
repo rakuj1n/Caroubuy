@@ -21,7 +21,7 @@ export default function ImageUpload({onChange, value}) {
         >
         {({open}) => {
             return (
-                <div>
+                <div className="slidein" >
                     <div className='uploadimgfield' onClick={() => open?.()}>
                         {!value && <p>Click to upload Image</p>}
                     {value && (

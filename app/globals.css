@@ -149,6 +149,14 @@ body {
   border:0.1px solid;
   padding:10px;
   border-radius: 10px;
+  transition: all 100ms ease;
+}
+
+.create-listing-button:hover {
+  border:0.1px solid;
+  padding:10px;
+  border-radius: 10px;
+  color:white;
 }
 
 .form-container {
@@ -885,4 +893,56 @@ transition:all 100ms ease;
     grid-template-rows: 1fr;
     /* grid-template-columns: repeat(autofit,minmax(250px,1fr)); */
   }
+
+  .form-container-create-listing > h2 {
+    font-size: 2.5rem;
+  }
 }
+
+/* CSS keyframes---------- */
+
+.slidein {
+  animation: 0.4s ease slidein;
+}
+
+.slidein1 {
+  animation: 0.8s ease 0.2s slidein;
+}
+.slidein2 {
+  animation: 0.8s ease 0.3s slidein;
+}
+.slidein3 {
+  animation: 0.8s ease 0.4s slidein;
+}
+.slidein4 {
+  animation: 0.8s ease 0.5s slidein;
+}
+
+@keyframes slidein {
+  from {
+    opacity: 0;
+    transform: translateX(10%);
+  }
+  to {
+    opacity: 1;
+    transform:translateX(0%)
+  }
+}
+
+.slidedown {
+  animation: 0.4s ease slidedown;
+}
+
+@keyframes slidedown {
+  from {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+  to {
+    opacity: 1;
+    transform:translateY(0%)
+  }
+}
+
+
+/* CSS keyframes---------- */

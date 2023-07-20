@@ -9,9 +9,7 @@ import { verifyAuth } from './utils/auth'
 // }
  
 export async function middleware(req) {
-
   
-
   const path = req.nextUrl.pathname
   const method = req.method
   let token = req.headers.get('authorization')
@@ -19,24 +17,6 @@ export async function middleware(req) {
 
   const verifiedToken = token && (await verifyAuth(token.replace('Bearer ','')).catch((err) => {console.log(err)}))
    
-  // console.log('login this')
-  // if (
-  //   path.startsWith('/login') ||
-  //   path.startsWith('/listing')
-  // ) {
-  //   console.log('HI!!!',req.nextUrl.pathname,verifiedToken,oauthtoken)
-  // }
-  // console.log('middleware',req.nextUrl.pathname,verifiedToken,oauthtoken)
-
-  //  PLEASE CHECK UNSIGNED-IN MYBASKET ROUTE IF SHOPPING CART LOCALSTORAGE BECOMES UNDEFINED HENCCEC SCREWING OTHER PUBLIUC ROUTES
-    
-  // remember ONLY USE SPECIFIC ROUTES METHOD
-  
-  //URL paths (should not use token/tokenoauth since they are only present when accessing API routes)
-  //  following paths must require verifiedToken (and oauth session token) to access:
-
-  //api paths - return a new Response with 401 and unauthorised msg
-  //  following paths must require verifiedToken (and oauth session token) to access:
   if ((!verifiedToken && !oauthtoken) && (path.startsWith('/api/listing')) && method == "POST") {
     return new NextResponse(JSON.stringify({message: 'authentication failed.'}),{status:401})
   }

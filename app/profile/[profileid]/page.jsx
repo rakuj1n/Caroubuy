@@ -57,7 +57,7 @@ export default function Profile({params}) {
     return (
         <div className="home-main">
             <div className="overall-page-container">
-                <div className="profile-detail-section">
+                <div className="profile-detail-section slidein">
 
                     <Image alt='profile-pic' style={{borderRadius:'50%', objectFit:'cover', maxHeight:'55px', maxWidth:'55px'}} src={account?.profile?.image} width={55} height={55}/>
 
@@ -71,7 +71,7 @@ export default function Profile({params}) {
                         <Link href={`/profile/${params.profileid}/purchase-history`}>My Purchase History</Link>
                     </div>}
                 </div>
-                <div className="profile-listing-feed">
+                <div className="profile-listing-feed slidedown">
                     <FeedOneRow data={account?.listings} usermanualaccount={glob.state.usermanual?.account} usermanual={glob.state.usermanual?._id} useroauthaccount={session?.user?.account} useroauth={session?.user.id}/>
                 </div>
             </div>

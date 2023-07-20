@@ -112,12 +112,12 @@ export default function MyBasket() {
         <div className="home-main">
           <Toaster />
             <div className="overall-page-container">
-              <div style={{display:'flex', gap:'50px', justifyContent:'center',alignItems:'center'}}>
+              <div className='slidein' style={{display:'flex', gap:'50px', justifyContent:'center',alignItems:'center'}}>
                 <div>Total Quantity: <strong>{getTotalQty()}</strong></div>
                 <div>Total Amount: <strong>${totalAmt}</strong></div>
                 {(getTotalQty() > 0) && <button onClick={handleCheckOut} disabled={submitting} className='checkout-button'>Checkout</button>}
               </div>
-                <div className="profile-listing-feed">
+                <div className="profile-listing-feed slidedown">
                     <FeedOneRow data={checkOut?.cart?.filter(item => !item.buyer)} usermanualaccount={glob.state.usermanual?.account} usermanual={glob.state.usermanual?._id} useroauthaccount={session?.user?.account} useroauth={session?.user.id}/>
                 </div>
             </div>

@@ -60,7 +60,7 @@ export default function MyFav({params}) {
     return (
         <div className="home-main">
             <div className="overall-page-container">
-                <div className="content-container">
+                <div className="content-container slidedown">
                     {fetchListing?.length > 0 ? <Feed filter={fetchListing} usermanualaccount={glob.state.usermanual?.account} usermanual={glob.state.usermanual?._id} useroauthaccount={session?.user?.account} useroauth={session?.user.id} data={fetchListing}/>
                     : <p>No listing.</p>
                     }

@@ -38,7 +38,7 @@ export default function Navbar() {
             </Link>
 
             <Link href={`/profile/${session?.user?.account || glob.state?.usermanual?.account}`}>{ 
-            <Image className='profile-pic profile-pic-nav' alt='profile-pic' src={session?.user.image || glob.state?.userimage } width={50} height={50} /> ||
+            <Image className='profile-pic profile-pic-nav slidein4' alt='profile-pic' src={session?.user.image || glob.state?.userimage } width={50} height={50} /> ||
             <Profile />
             }</Link>
         </div> 

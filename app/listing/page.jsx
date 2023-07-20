@@ -60,7 +60,7 @@ export default function Listing() {
         <div className="home-main">
             <div className='searchinput' href='/'><input name='searchinput' onChange={handleSearchChange} placeholder="Search a listing"/></div>
             <div className="overall-page-container">
-                <div className="content-container">
+                <div className="content-container slidedown">
                     {filter?.length > 0 ?
                       <Feed filter={filter} usermanualaccount={glob.state.usermanual?.account} usermanual={glob.state.usermanual?._id} useroauthaccount={session?.user?.account} useroauth={session?.user.id} data={filter}/>
                     : <p>No listing.</p>

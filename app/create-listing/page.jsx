@@ -107,13 +107,13 @@ export default function CreateListing() {
                 {/* <Link className='back-above-content' href='/'><Back /></Link> */}
                 <div className="content-container">
                     <form onSubmit={handleSubmit} className="form-container-create-listing">
-                        <h2>Create Your Listing</h2>
-                        <input onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.listingname} name='listingname' type='text' placeholder="Listing Name"/>
-                        <input onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.price} name='price' type='number' step="0.01" placeholder="Enter a price"/>
-                        <textarea onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.description} name='description' rows="5" cols="90" placeholder="Describe your listing"/>
+                        <h2 className="slidein">Create Your Listing</h2>
+                        <input className="slidein" onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.listingname} name='listingname' type='text' placeholder="Listing Name"/>
+                        <input className="slidein" onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.price} name='price' type='number' step="0.01" placeholder="Enter a price"/>
+                        <textarea className="slidein" onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.description} name='description' rows="5" cols="90" placeholder="Describe your listing"/>
                         {/* <input name='thumbnail' placeholder="Upload Thumbnail" type='file' onChange={handleFileChange}/> */}
                         <ImageUpload onChange={(value) => setImageSrc(value)} value={imageSrc}/>
-                        <button className='create-listing-button' disabled={submitting}>Create Listing</button>
+                        <button className='create-listing-button slidein' disabled={submitting}>Create Listing</button>
                     </form>
                 </div>
             </div>

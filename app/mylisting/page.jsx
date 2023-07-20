@@ -78,7 +78,7 @@ export default function Listing() {
         <div className="home-main">
             <div className="overall-page-container">
                 {/* <Link className='back-above-content' href='/'><Back /></Link> */}
-                <div className="content-container">
+                <div className="content-container slidedown">
                     {fetchListing?.length > 0 ? <Feed usermanual={glob.state.usermanual?._id} useroauth={session?.user.id} data={fetchListing}/> : <p>No listings.</p>}
                 </div>
             </div>

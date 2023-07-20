@@ -25,7 +25,7 @@ export default function Logout() {
 
         {
         session?.user || glob.state.usermanual ?    
-        <div className='logout'>
+        <div className='logout slidein'>
             <div className='logout-button' onClick={handleLogOut}>
                 <Logoutbutton />
             </div>
