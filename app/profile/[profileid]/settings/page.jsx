@@ -1,6 +1,7 @@
 'use client'
 
 import { StateContext } from "@/components/Context"
+import Loading from "@/components/Loading"
 import ProfileImageUpload from "@/components/ProfileImageUpload"
 import { AddToBasket, FilledHeart, Heart } from "@/utils/svg"
 import { getUser, request } from "@/utils/tokenAndFetch"
@@ -72,6 +73,18 @@ export default function Settings({params}) {
             console.log(err)
         }
       }
+
+    // protect URL route on client side---------
+
+    useEffect(() => {
+        if (!glob.state.usermanual?._id && !session?.user) {
+            router.push('/')
+        }
+    },[glob.state.usermanual?._id,session?.user])
+
+    if (!glob.state.usermanual?._id && !session?.user) return <Loading />
+
+    // protect URL route on client side---------
 
     return (
         <div className="home-main">

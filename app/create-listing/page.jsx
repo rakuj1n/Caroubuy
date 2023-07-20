@@ -2,6 +2,7 @@
 
 import { StateContext } from "@/components/Context"
 import ImageUpload from "@/components/ImageUpload"
+import Loading from "@/components/Loading"
 import { Back } from "@/utils/svg"
 import { getUser, request } from "@/utils/tokenAndFetch"
 import { getToken } from "next-auth/jwt"
@@ -12,6 +13,7 @@ import { useContext, useEffect, useState } from "react"
 import toast, { Toaster } from 'react-hot-toast'
 
 export default function CreateListing() {
+    const [status,setStatus] = useState('loading')
     const [submitting,setSubmitting] = useState(false)
     const router = useRouter()
     const {data:session} = useSession()
@@ -85,6 +87,18 @@ export default function CreateListing() {
         // console.log(plainFormData)
         // to be sent to next.js server component to handle to save in s3 and db. middleware?
       }
+
+// protect URL route on client side---------
+
+      useEffect(() => {
+        if (!glob.state.usermanual?._id && !session?.user) {
+            router.push('/login')
+        }
+      },[glob.state.usermanual?._id,session?.user])
+
+    if (!glob.state.usermanual?._id && !session?.user) return <Loading />
+
+// protect URL route on client side---------
 
     return (
         <div className="home-main">

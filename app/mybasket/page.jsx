@@ -59,7 +59,7 @@ export default function MyBasket() {
           console.log('hi',data,filterOutBought,alreadyBought)
           // manually set cart items in local storage to filteredBought array
           setCheckOut(data)
-          setCartManual(filterOutBought?.map(item => item._id))
+          setCartManual(filterOutBought?.map(item => item._id) || [])
           setStatus('success')
         }
         fetchCart()
@@ -92,6 +92,19 @@ export default function MyBasket() {
         setSubmitting(false)
       }
     } 
+
+    // protect URL route on client side---------
+
+    useEffect(() => {
+      if (!glob.state.usermanual?._id && !session?.user) {
+          router.push('/login')
+      }
+    },[glob.state.usermanual?._id,session?.user])
+
+    if (!glob.state.usermanual?._id && !session?.user) return <Loading />
+
+    // protect URL route on client side---------
+
 
     if (status === 'loading') return <Loading />
 

@@ -5,7 +5,7 @@ import Listing from "@/models/listing"
 export const GET = async (req,{params}) => {
     try {
         await connectToDB()
-        let listings = await Listing.find({favby:params.userid}).populate('seller')
+        let listings = await Listing.find({favby:params.userid}).sort({createdAt:-1}).populate('seller')
         .populate({path:'seller',populate:{path:'usermanual',model:'UserManual'}})
         .populate({path:'seller',populate:{path:'useroauth',model:'UserOAuth'}})
         return new Response(JSON.stringify(listings),{status:200})

@@ -16,13 +16,13 @@ export async function middleware(req) {
 
   const verifiedToken = token && (await verifyAuth(token.replace('Bearer ','')).catch((err) => {console.log(err)}))
    
-  console.log('login this')
-  if (
-    path.startsWith('/login') ||
-    path.startsWith('/listing')
-  ) {
-    console.log('HI!!!',req.nextUrl.pathname,verifiedToken,oauthtoken)
-  }
+  // console.log('login this')
+  // if (
+  //   path.startsWith('/login') ||
+  //   path.startsWith('/listing')
+  // ) {
+  //   console.log('HI!!!',req.nextUrl.pathname,verifiedToken,oauthtoken)
+  // }
   console.log('middleware',req.nextUrl.pathname,verifiedToken,oauthtoken)
 
   //  PLEASE CHECK UNSIGNED-IN MYBASKET ROUTE IF SHOPPING CART LOCALSTORAGE BECOMES UNDEFINED HENCCEC SCREWING OTHER PUBLIUC ROUTES
@@ -31,7 +31,6 @@ export async function middleware(req) {
   
   //URL paths (should not use token/tokenoauth since they are only present when accessing API routes)
   //  following paths must require verifiedToken (and oauth session token) to access:
-  //  
 
   //api paths - return a new Response with 401 and unauthorised msg
   //  following paths must require verifiedToken (and oauth session token) to access:
@@ -50,14 +49,6 @@ export async function middleware(req) {
   if ((!verifiedToken && !oauthtoken) && (path == '/api/users') && method == "PUT") {
     return new NextResponse(JSON.stringify({message: 'authentication failed.'}),{status:401})
   }
-
-
-
-
-
-
-
-
 
   return NextResponse.next()
 }
@@ -85,3 +76,44 @@ export async function middleware(req) {
 //         console.log('Token verification result:', err ? 'Invalid token' : 'Token verified')
 //         return next()
 //     })
+
+
+// /api/listing
+// + GET
+// - POST
+
+// /api/profile/[profileid]
+// + GET
+// - PUT
+// =======================
+// /api/users/[userid]/cart
+// - GET
+// - POST
+// - DELETE
+// (ALL)
+
+// /api/users/[userid]/checkout
+// - GET
+// - POST
+// (ALL)
+
+// /api/users/[userid]/fav
+// (ALL)
+
+// /api/users/[userid]/image
+// (ALL)
+
+// /api/users/[userid]/receipt
+// (ALL)
+
+
+
+
+// /api/users/login
+// leave open
+
+// /api/users
+// - PUT
+// + POST
+
+//public users can only access /login, /signup, /, /listing, /listing/:listingid and maybe /profile/:profileid?
