@@ -81,18 +81,18 @@ export default function SignUp() {
     return (
         <section className="sign-up-page-container">
             <Toaster />
-            <div className="back-sign-up">
+            <div className="zero back-sign-up slidein">
                 <Link href='/'><Back /></Link>
             </div>
             <div className="sign-up-container">
 
                 <form className="form-container" onSubmit={handleSubmit}>
-                    <h2 className="sign-up">Sign Up</h2>
-                    <input name='username' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} placeholder="Username" value={formData.username}/>
-                    <input name='email' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='email' placeholder="Email" value={formData.email}/>
-                    <input name='password' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="Password" value={formData.password}/>
-                    <input name='confirm' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="Confirm Password" value={formData.confirm}/>
-                    <button className='buttons' disabled={disableSubmit}>{disableSubmit ? "Please wait..." : "Create New User"}</button>
+                    <h2 className="sign-up slidein">Sign Up</h2>
+                    <input className="zero slidein1" name='username' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} placeholder="Username" value={formData.username}/>
+                    <input className="zero slidein2" name='email' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='email' placeholder="Email" value={formData.email}/>
+                    <input className="zero slidein3" name='password' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="Password" value={formData.password}/>
+                    <input className="zero slidein4" name='confirm' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="Confirm Password" value={formData.confirm}/>
+                    <button className='zero buttons slidein4' disabled={disableSubmit}>{disableSubmit ? "Please wait..." : "Create New User"}</button>
                 </form>
     
             </div> 

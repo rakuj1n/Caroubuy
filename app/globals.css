@@ -914,6 +914,10 @@ transition:all 100ms ease;
 
 /* CSS keyframes---------- */
 
+.zero {
+  opacity: 0;
+}
+
 .slidein {
   animation: 0.4s ease slidein;
   animation-fill-mode:forwards;

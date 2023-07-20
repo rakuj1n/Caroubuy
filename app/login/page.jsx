@@ -68,16 +68,16 @@ export default function LogIn() {
     return (
         <section className="sign-up-page-container">
             <Toaster/>
-            <div className="back-sign-up">
+            <div className="zero back-sign-up slidein">
                 <Link href='/'><Back /></Link>
             </div>
             <div className="sign-up-container">
 
                 <form className="form-container" onSubmit={handleSubmit}>
-                    <h2 className="sign-up">Log In</h2>
-                    <input name='username' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} placeholder="Username" value={formData.username}/>
-                    <input name='password' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="Password" value={formData.password}/>
-                    <button className='buttons' disabled={disableSubmit}>{disableSubmit ? "Please wait..." : "Enter"}</button>
+                    <h2 className="zero sign-up slidein">Log In</h2>
+                    <input className='zero slidein1' name='username' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} placeholder="Username" value={formData.username}/>
+                    <input className='zero slidein2' name='password' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="Password" value={formData.password}/>
+                    <button className='zero buttons slidein3' disabled={disableSubmit}>{disableSubmit ? "Please wait..." : "Enter"}</button>
                 </form>
     
             </div> 

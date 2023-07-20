@@ -58,7 +58,7 @@ export default function Home() {
         <motion.h1 className='caroubuy slidedown'>Caroubuy</motion.h1>
 
         {providers && (!session?.user && !glob.state.usermanual) && 
-        <div className='sign-in-container'>
+        <div className='sign-in-container slidein'>
           <div className='sign-in-provider-list'>
             {Object.values(providers).map((provider) => (
                 <motion.button 
