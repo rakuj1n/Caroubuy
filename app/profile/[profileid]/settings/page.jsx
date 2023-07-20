@@ -74,9 +74,8 @@ export default function Settings({params}) {
         }
       }
 
-
     if (!glob.state.usermanual?._id && !session?.user) return <Loading />
-
+    if (params.profileid !== glob.state.usermanual?.account) return <Loading />
 
     return (
         <div className="home-main">

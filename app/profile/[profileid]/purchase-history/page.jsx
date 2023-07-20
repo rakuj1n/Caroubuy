@@ -77,7 +77,7 @@ export default function PurchaseHistory({params}) {
         <Toaster />
           <div className="overall-page-container">
             <div className="receipt-container">
-            {receipts.length > 0 ? (receipts?.map(item => {
+            {receipts?.length > 0 ? (receipts?.map(item => {
                 return (
                     <div className="receipt slidein">
                         <div className="receipt-details">

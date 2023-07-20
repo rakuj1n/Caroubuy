@@ -39,6 +39,18 @@ export async function middleware(req) {
     return NextResponse.redirect(new URL('/',req.url))
   }
 
+  if ((!verifiedClientToken && !oauthtoken) && (/profile\/.*\/myfavs/).test(path)) {
+    return NextResponse.redirect(new URL('/',req.url))
+  }
+
+  if ((!verifiedClientToken && !oauthtoken) && (/profile\/.*\/purchase-history/).test(path)) {
+    return NextResponse.redirect(new URL('/',req.url))
+  }
+
+  if ((!verifiedClientToken && !oauthtoken) && (/profile\/.*\/settings/).test(path)) {
+    return NextResponse.redirect(new URL('/',req.url))
+  }
+
 
 
   if ((!verifiedToken && !oauthtoken) && (path.startsWith('/api/listing')) && method == "POST") {
