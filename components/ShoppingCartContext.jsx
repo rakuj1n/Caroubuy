@@ -16,17 +16,19 @@ export function ShoppingCartProvider({children}) {
     const {data:session} = useSession()
     const glob = useContext(StateContext)
     const [cartItems,setCartItems] = useLocalStorage("shopping-cart",[])
+    const [totalAmt,setTotalAmt] = useLocalStorage("total-amt",0)
 
     // glob.state.usermanual?.account || session?.user?.account
 
-    function setCartManual(itemsArr) {
+    function setCartManual(itemsArr,total) {
         setCartItems(itemsArr)
+        setTotalAmt(total)
     }
 
     async function fetchCartItems() {
         let res = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/cart`,"GET")
-        setCartItems(res || [])
-        console.log(res)
+        setCartItems(res?.cart || [])
+        setTotalAmt(res?.total || 0)
     }
 
     function getCart() {
@@ -44,6 +46,8 @@ export function ShoppingCartProvider({children}) {
             }
         })
         let res = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/cart`,'POST',{id})
+        setTotalAmt(prev => parseInt(prev) + parseInt(res.listingprice))
+        console.log(res)
     }
 
     async function removeItem(id) {
@@ -51,10 +55,16 @@ export function ShoppingCartProvider({children}) {
             return prev.filter(item => item !== id)
         })
         let res = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/cart`,'DELETE',{id})
+        setTotalAmt(prev => parseInt(prev) - parseInt(res.listingprice))        
+        console.log(res)
+    }
+
+    function getTotalAmt() {
+        return totalAmt
     }
 
     return (
-        <ShoppingCartContext.Provider value={{setCartManual,fetchCartItems,getCart, getTotalQty,addItem,removeItem}}>
+        <ShoppingCartContext.Provider value={{getTotalAmt,setCartManual,fetchCartItems,getCart, getTotalQty,addItem,removeItem}}>
             {children}
         </ShoppingCartContext.Provider>
     )

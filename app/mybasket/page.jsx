@@ -29,7 +29,7 @@ export default function MyBasket() {
 
   // ShoppingContext--------------------------
 
-  const { setCartManual,fetchCartItems,getCart,getTotalQty,addItem,removeItem } = useShoppingCart()
+  const { getTotalAmt,setCartManual,fetchCartItems,getCart,getTotalQty,addItem,removeItem } = useShoppingCart()
 
   // ShoppingContext--------------------------
 
@@ -57,27 +57,17 @@ export default function MyBasket() {
               ${alreadyBought.map(item => item._id)}`
               )
           }
-          console.log('hi',data,filterOutBought,alreadyBought)
+          const filteredPrice = filterOutBought?.reduce((total, listing) => {
+            return total + parseInt(listing.listingprice)
+          }, 0)
+          console.log('hi',filterOutBought, filteredPrice)
           // manually set cart items in local storage to filteredBought array
           setCheckOut(data)
-          setCartManual(filterOutBought?.map(item => item._id) || [])
+          setCartManual((filterOutBought?.map(item => item._id) || []),filteredPrice)
           setStatus('success')
         }
         fetchCart()
       },[glob.state.usermanual?._id,session?.user?.account])
-
-      useEffect(() => {
-        const price = async () =>{
-          setLoadingPrice(true)
-          let data = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/checkout`,"GET")
-            //---CHECKS---
-            let filterOutBought = data?.cart.filter(item => !item.buyer)
-           // add prices
-           setTotalAmt(filterOutBought?.map(item => item.listingprice)?.reduce((acc,curr) => parseInt(acc) + parseInt(curr),0))
-           setLoadingPrice(false)
-        }
-        price()
-      },[getTotalQty()])
 
     //when press checkout, submit the localstorage cart to server
     async function handleCheckOut(e) {
@@ -87,7 +77,7 @@ export default function MyBasket() {
         let sendData = getCart()
         let data = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/checkout`,"POST",sendData)
         setStatus('loading')
-        setCartManual([])
+        setCartManual([],0)
         router.push(`/profile/${glob.state.usermanual?.account || session?.user?.account}/purchase-history?success=true`)
       } catch (err) {
         console.log(err)
@@ -107,7 +97,7 @@ export default function MyBasket() {
             <div className="overall-page-container">
               <div className='slidein' style={{display:'flex', gap:'50px', justifyContent:'center',alignItems:'center'}}>
                 <div>Total Quantity: <strong>{getTotalQty()}</strong></div>
-                <div>Total Amount: <strong>${loadingPrice ? "..." : totalAmt}</strong></div>
+                <div>Total Amount: <strong>${getTotalAmt()}</strong></div>
                 {(getTotalQty() > 0) && <button onClick={handleCheckOut} disabled={submitting} className='checkout-button'>Checkout</button>}
               </div>
                 <div className="profile-listing-feed slidedown">

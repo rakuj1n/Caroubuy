@@ -17,6 +17,7 @@ export default function Logout() {
     function handleLogOut() {
             logOut()
             localStorage.removeItem("shopping-cart")
+            localStorage.removeItem("total-amt")
             signOut({ callbackUrl: '/' })
     }
 
