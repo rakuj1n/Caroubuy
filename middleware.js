@@ -51,6 +51,18 @@ export async function middleware(req) {
     return NextResponse.redirect(new URL('/',req.url))
   }
 
+  if ((oauthtoken) && (/profile\/.*\/settings/).test(path)) {
+    return NextResponse.redirect(new URL('/',req.url))
+  }
+
+  if ((/^\/profile\/.*\/settings$/).test(path)) {
+    if (path.split("/")[2] !== verifiedClientToken.user.account) {
+      return NextResponse.redirect(new URL('/',req.url))
+    }
+  }
+
+
+
 
 
   if ((!verifiedToken && !oauthtoken) && (path.startsWith('/api/listing')) && method == "POST") {
@@ -67,6 +79,17 @@ export async function middleware(req) {
 
   if ((!verifiedToken && !oauthtoken) && (path == '/api/users') && method == "PUT") {
     return new NextResponse(JSON.stringify({message: 'authentication failed.'}),{status:401})
+  }
+
+  if ((oauthtoken) && (path == '/api/users') && method == "PUT") {
+    return new NextResponse(JSON.stringify({message: 'authentication failed.'}),{status:401})
+  }
+
+  if ((verifiedToken) && (path == '/api/users') && method == "PUT") {
+    const data = await req.json()
+    if (data.user !== verifiedClientToken?.user.account) {
+      return new NextResponse(JSON.stringify({message: 'authentication failed.'}),{status:401})
+    }
   }
 
   return NextResponse.next()
