@@ -65,7 +65,7 @@ export async function middleware(req) {
     return NextResponse.redirect(new URL('/',req.url))
   }
 
-  if ( (verifiedClientToken.user.role !== 'admin') && (path.startsWith('/dashboard')) ) {
+  if ( (verifiedClientToken?.user.role !== 'admin') && (path.startsWith('/dashboard')) ) {
     return NextResponse.redirect(new URL('/',req.url))
   }
 
