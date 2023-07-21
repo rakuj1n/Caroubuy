@@ -101,13 +101,13 @@ export default function Settings({params}) {
         <div className="home-main">
             <Toaster/>
             <div className="overall-page-container">
-                <form className="form-container" onSubmit={handleSubmit}>
+                <form className="form-container slidein" onSubmit={handleSubmit}>
                     <h2 className="sign-up">Change Password</h2>    
                     <input name='old' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="Current Password" value={formData.old}/>
                     <input name='new' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="New Password" value={formData.new}/>
                     <button disabled={formData.old === formData.new || submitting}>{submitting ? "Submitting..." : "Change Password"}</button>
                 </form>
-                <form style={{marginTop:'20px'}} className="form-container" onSubmit={handleSubmitPic}>
+                <form style={{marginTop:'20px'}} className="form-container slidedown" onSubmit={handleSubmitPic}>
                     <h2 className="sign-up">Change Profile Image</h2>    
                     <ProfileImageUpload onChange={(value) => setPicData(value)} value={picData}/>
                     <button disabled={picData.length === 0 || submitting}>{submitting ? "Submitting..." : "Change Profile Image"}</button>

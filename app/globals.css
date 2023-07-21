@@ -150,6 +150,7 @@ body {
   padding:10px;
   border-radius: 10px;
   transition: all 100ms ease;
+  opacity: 0;
 }
 
 .create-listing-button:hover {
@@ -211,11 +212,37 @@ body {
   border: 0.05rem solid #0011ff6f;
 }
 
+.input-container > input {
+  padding: 12px;
+  border: 1px solid rgb(139, 139, 139);
+  border-radius: 15px;
+  width: 300px;
+  background-color: transparent;
+}
+
+.input-container > input:focus {
+  outline: none;
+  border: 0.05rem solid #0011ff6f;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap:40px;
+}
+
+.container-with-image {
+  display: flex;
+  gap:40px;
+  opacity: 0;
+}
+
 .form-container-create-listing > textarea {
   padding: 12px;
   border: 1px solid rgb(139, 139, 139);
   border-radius: 15px;
   background-color: transparent;
+  opacity: 0;
 }
 
 .form-container-create-listing > textarea:focus {

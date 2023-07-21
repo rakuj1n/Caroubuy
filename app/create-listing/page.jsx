@@ -99,12 +99,16 @@ export default function CreateListing() {
                 <div className="content-container">
                     <form onSubmit={handleSubmit} className="form-container-create-listing">
                         <h2 className="slidein">Create Your Listing</h2>
-                        <input className="slidein" onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.listingname} name='listingname' type='text' placeholder="Listing Name"/>
-                        <input className="slidein" onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.price} name='price' type='number' step="0.01" placeholder="Enter a price"/>
-                        <textarea className="slidein" onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.description} name='description' rows="5" cols="90" placeholder="Describe your listing"/>
-                        {/* <input name='thumbnail' placeholder="Upload Thumbnail" type='file' onChange={handleFileChange}/> */}
+                        <div className="container-with-image slidein1">
+                            <div className="input-container">
+                                <input className="" onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.listingname} name='listingname' type='text' placeholder="Listing Name"/>
+                                <input className="" onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.price} name='price' type='number' step="0.01" placeholder="Enter a price"/>
+                            </div>
                         <ImageUpload onChange={(value) => setImageSrc(value)} value={imageSrc}/>
-                        <button className='create-listing-button slidein' disabled={submitting}>Create Listing</button>
+                        </div>
+                        <textarea className="text-area slidein2" onChange={(e) => setFormDetails(prev => ({...prev, [e.target.name]:e.target.value}))} value={formDetails.description} name='description' rows="5" cols="90" placeholder="Describe your listing"/>
+                        {/* <input name='thumbnail' placeholder="Upload Thumbnail" type='file' onChange={handleFileChange}/> */}
+                        <button className='create-listing-button slidein3' disabled={submitting}>Create Listing</button>
                     </form>
                 </div>
             </div>
