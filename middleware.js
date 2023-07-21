@@ -98,6 +98,18 @@ export async function middleware(req) {
     }
   }
 
+  if ((!verifiedToken && !oauthtoken) && (path == '/api/admin')) {
+    return new NextResponse(JSON.stringify({message: 'authentication failed.'}),{status:401})
+  }
+
+  if ((oauthtoken) && (path == '/api/admin')) {
+    return new NextResponse(JSON.stringify({message: 'authentication failed.'}),{status:401})
+  }
+
+  if ((verifiedToken?.user.role !== 'admin') && (path == '/api/admin')) {
+    return new NextResponse(JSON.stringify({message: 'authentication failed.'}),{status:401})
+  }
+
   return NextResponse.next()
 }
 
