@@ -11,6 +11,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
+import toast, {Toaster} from 'react-hot-toast'
 
 // PREVENT OAUTH USERS FROM ACCESSING THIS PAGE
 
@@ -51,26 +52,45 @@ export default function Settings({params}) {
         }
 
         try {
+            setSubmitting(true)
             const res = await request('/api/users','PUT',formData)
             console.log(res)
             if (res !== undefined) {
-                router.push(`/profile/${params.profileid}`)
+                toast.success('Password change successful! Redirecting...')
+                    setTimeout(() => {
+                        router.push(`/profile/${params.profileid}`)
+                    },1000)
+            } else {
+                toast.error("Password change is unsuccessful. Please try again.")
             }
         } catch (err) {
             console.log(err)
+        } finally {
+            setTimeout(() => {                
+                setSubmitting(false)
+            },2000)
         }
       }
 
       async function handleSubmitPic(e) {
         e.preventDefault()
-
+        setSubmitting(true)
         try {
             const res = await request(`/api/profile/${params.profileid}`,"PUT",picData)
             if (res !== undefined) {
-                router.push(`/profile/${params.profileid}`)
+                toast.success('Profile picture change successful! Redirecting...')
+                    setTimeout(() => {
+                        router.push(`/profile/${params.profileid}`)
+                    },1000)
+            } else {
+                toast.error("Profile picture change is unsuccessful. Please try again.")
             }
         } catch (err) {
             console.log(err)
+        } finally {
+            setTimeout(() => {                
+                setSubmitting(false)
+            },2000)
         }
       }
 
@@ -79,17 +99,18 @@ export default function Settings({params}) {
 
     return (
         <div className="home-main">
+            <Toaster/>
             <div className="overall-page-container">
                 <form className="form-container" onSubmit={handleSubmit}>
                     <h2 className="sign-up">Change Password</h2>    
                     <input name='old' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="Current Password" value={formData.old}/>
                     <input name='new' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="New Password" value={formData.new}/>
-                    <button disabled={formData.old === formData.new}>Change Password</button>
+                    <button disabled={formData.old === formData.new || submitting}>{submitting ? "Submitting..." : "Change Password"}</button>
                 </form>
                 <form style={{marginTop:'20px'}} className="form-container" onSubmit={handleSubmitPic}>
                     <h2 className="sign-up">Change Profile Image</h2>    
                     <ProfileImageUpload onChange={(value) => setPicData(value)} value={picData}/>
-                    <button disabled={picData.length === 0}>Change Profile Image</button>
+                    <button disabled={picData.length === 0 || submitting}>{submitting ? "Submitting..." : "Change Profile Image"}</button>
                 </form>
             </div>
         </div>
