@@ -19,6 +19,7 @@ export default function MyBasket() {
 
     const [status,setStatus] = useState('loading')
     const [submitting,setSubmitting] = useState(false)
+    const [loadingPrice,setLoadingPrice] = useState(false)
     const router = useRouter()
     const {data:session} = useSession()
     const glob = useContext(StateContext)
@@ -67,14 +68,16 @@ export default function MyBasket() {
 
       useEffect(() => {
         const price = async () =>{
+          setLoadingPrice(true)
           let data = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/checkout`,"GET")
             //---CHECKS---
             let filterOutBought = data?.cart.filter(item => !item.buyer)
            // add prices
            setTotalAmt(filterOutBought?.map(item => item.listingprice)?.reduce((acc,curr) => parseInt(acc) + parseInt(curr),0))
+           setLoadingPrice(false)
         }
         price()
-      },[getCart()])
+      },[getTotalQty()])
 
     //when press checkout, submit the localstorage cart to server
     async function handleCheckOut(e) {
@@ -104,7 +107,7 @@ export default function MyBasket() {
             <div className="overall-page-container">
               <div className='slidein' style={{display:'flex', gap:'50px', justifyContent:'center',alignItems:'center'}}>
                 <div>Total Quantity: <strong>{getTotalQty()}</strong></div>
-                <div>Total Amount: <strong>${totalAmt}</strong></div>
+                <div>Total Amount: <strong>${loadingPrice ? "..." : totalAmt}</strong></div>
                 {(getTotalQty() > 0) && <button onClick={handleCheckOut} disabled={submitting} className='checkout-button'>Checkout</button>}
               </div>
                 <div className="profile-listing-feed slidedown">
