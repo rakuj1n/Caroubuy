@@ -45,8 +45,8 @@ export function ShoppingCartProvider({children}) {
                 return [...prev, id]
             }
         })
-        let res = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/cart`,'POST',{id})
         setTotalAmt(prev => parseInt(prev) + parseInt(res.listingprice))
+        let res = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/cart`,'POST',{id})
         console.log(res)
     }
 
@@ -54,8 +54,8 @@ export function ShoppingCartProvider({children}) {
         setCartItems(prev => {
             return prev.filter(item => item !== id)
         })
-        let res = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/cart`,'DELETE',{id})
         setTotalAmt(prev => parseInt(prev) - parseInt(res.listingprice))        
+        let res = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/cart`,'DELETE',{id})
         console.log(res)
     }
 

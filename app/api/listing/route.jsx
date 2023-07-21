@@ -7,7 +7,6 @@ import UserOAuth from "@/models/useroauth"
 
 export const POST = async (req,res) => {
     const data = await req.json()
-    console.log('hi',data)
     try {
         await connectToDB()
         if (data.usermanualid) {

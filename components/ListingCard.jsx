@@ -30,7 +30,6 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
                 await request(`/api/users/${usermanual}/fav`,"PATCH",{
                     listingId
                 })
-                console.log('req done')
             } catch (err) {
                 console.log(err)
             }
@@ -39,7 +38,6 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
                 await request(`/api/users/${useroauth}/fav`,"PATCH",{
                     listingId
                 })
-                console.log('req done oauth')
             } catch (err) {
                 console.log(err)
             }
@@ -52,7 +50,6 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
                 await request(`/api/users/${usermanual}/fav`,"DELETE",{
                     listingId
                 })
-                console.log('DELETE done')
             } catch (err) {
                 console.log(err)
             }
@@ -61,7 +58,6 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
                 await request(`/api/users/${useroauth}/fav`,"DELETE",{
                     listingId
                 })
-                console.log('DELETE done oauth')
             } catch (err) {
                 console.log(err)
             }

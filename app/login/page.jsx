@@ -38,7 +38,6 @@ export default function LogIn() {
     async function handleSubmit(e) {
         e.preventDefault()
         if (handleValidation()) {
-            console.log('submitted')
             setDisableSubmit(true) //to set false once fetch is over
             try {
                 const response = await request('/api/users/login','POST',formData)

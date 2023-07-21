@@ -39,7 +39,6 @@ export default function Profile({params}) {
     useEffect(() => {
       const fetchindivaccount = async () => {
         try {
-            console.log('hello')
           const indivaccount = await request(`/api/profile/${params.profileid}`)
           setAccount(indivaccount)
           setStatus('success')

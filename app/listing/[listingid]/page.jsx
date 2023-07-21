@@ -88,7 +88,6 @@ export default function IndividualListing({params}) {
             await request(`/api/users/${glob.state.usermanual?._id}/fav`,"PATCH",{
                 listingId
             })
-            console.log('req done')
         } catch (err) {
             console.log(err)
         }
@@ -97,7 +96,6 @@ export default function IndividualListing({params}) {
             await request(`/api/users/${session?.user?.id}/fav`,"PATCH",{
                 listingId
             })
-            console.log('req done oauth')
         } catch (err) {
             console.log(err)
         }
@@ -110,7 +108,6 @@ async function handleDeleteFromFav(listingId) {
             await request(`/api/users/${glob.state.usermanual?._id}/fav`,"DELETE",{
                 listingId
             })
-            console.log('DELETE done')
         } catch (err) {
             console.log(err)
         }
@@ -119,7 +116,6 @@ async function handleDeleteFromFav(listingId) {
             await request(`/api/users/${session?.user?.id}/fav`,"DELETE",{
                 listingId
             })
-            console.log('DELETE done oauth')
         } catch (err) {
             console.log(err)
         }

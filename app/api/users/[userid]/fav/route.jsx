@@ -38,7 +38,6 @@ export const PATCH = async (req,{params}) => {
                 { $addToSet: { favby: (accountmanual._id) } }
                 )
         } 
-        console.log('success')
         return new Response(JSON.stringify(accountoauth || accountmanual),{status:200})
     } catch (err) {
         return new Response('Failed request.',{status:500})
@@ -69,7 +68,7 @@ export const DELETE = async (req,{params}) => {
                 { $pull: { favby: (accountmanual._id) } }
                 )
         } 
-        console.log('success')
+
        
         return new Response(JSON.stringify(accountoauth || accountmanual),{status:200})
     } catch (err) {

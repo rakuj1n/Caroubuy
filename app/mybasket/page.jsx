@@ -60,7 +60,6 @@ export default function MyBasket() {
           const filteredPrice = filterOutBought?.reduce((total, listing) => {
             return total + parseInt(listing.listingprice)
           }, 0)
-          console.log('hi',filterOutBought, filteredPrice)
           // manually set cart items in local storage to filteredBought array
           setCheckOut(data)
           setCartManual((filterOutBought?.map(item => item._id) || []),filteredPrice)

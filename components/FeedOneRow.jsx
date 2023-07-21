@@ -16,16 +16,10 @@ export default function FeedOneRow({data,usermanual,useroauth,filter,useroauthac
         const endOffset = itemOffset + itemsPerPage;
         setCurrentItems(data?.slice(itemOffset, endOffset))
         setPageCount(Math.ceil(data?.length / itemsPerPage))
-        console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     },[itemOffset,itemsPerPage,data])
-
-    console.log(usermanual,useroauth,useroauthaccount,usermanualaccount) 
     
     const handlePageClick = (event) => {
         const newOffset = (event.selected * itemsPerPage) % data?.length;
-        console.log(
-        `User requested page number ${event.selected}, which is offset ${newOffset}`
-        );
         setItemOffset(newOffset);
     }; 
 

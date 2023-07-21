@@ -8,7 +8,6 @@ import Receipt from "@/models/receipt"
 export const GET = async (req,res) => {
     try {
         await connectToDB()
-        console.log('hi! request got through')
         const listings = await Listing.find({}).sort({createdAt:-1}).populate('seller')
         const listings2 = await UserManual.populate(listings,{
             path:"seller.usermanual", select: 'username'

@@ -18,7 +18,7 @@ export const GET = async (req,{params}) => {
         let accountToChange = await Account.findOne({_id:params.userid})
         accountToChange.cart = filterOutBought
         await accountToChange.save()
-        console.log(accountToChange)
+
 
         return new Response(JSON.stringify(listing3),{status:200})
     } catch (err) {
@@ -54,7 +54,7 @@ export const POST = async (req,{params}) => {
             successPurchase:[...modifiedIds],
             errorPurchase:[...purchaseErrorArr]
         })
-        console.log('hi')
+
         return new Response(JSON.stringify(receipt),{status:200})
     } catch (err) {
         return new Response('Failed request.',{status:500})

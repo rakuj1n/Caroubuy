@@ -30,7 +30,6 @@ export const POST = async (req,{params}) => {
             { $addToSet: { cart: (data.id) } }
             )
         let listing = await Listing.findById(data.id)
-        console.log('success')
         return new Response(JSON.stringify(listing),{status:200})
     } catch (err) {
         return new Response('Failed request.',{status:500})
@@ -46,7 +45,6 @@ export const DELETE = async (req,{params}) => {
             { $pull: { cart: (data.id) } }
             )
             let listing = await Listing.findById(data.id)
-        console.log('success')
         return new Response(JSON.stringify(listing),{status:200})
     } catch (err) {
         return new Response('Failed request.',{status:500})

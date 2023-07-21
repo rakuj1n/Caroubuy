@@ -30,9 +30,7 @@ export const GET = async (req,{params}) => {
 export const PUT = async (req,{params}) => {
     try {
         const data = await req.json()
-        console.log(data)
         const account = await Account.findById(params.profileid)
-        console.log(account)
         account.image = data
         await account.save()
         return new Response(JSON.stringify("Success"),{status:200})

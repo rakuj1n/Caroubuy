@@ -52,7 +52,6 @@ export default function SignUp() {
     async function handleSubmit(e) {
         e.preventDefault()
         if (handleValidation()) {
-            console.log('submitted')
             setDisableSubmit(true) 
             try {
                 const response = await request('/api/users','POST',formData)

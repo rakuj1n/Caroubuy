@@ -55,7 +55,6 @@ export default function PurchaseHistory({params}) {
     useEffect(() => {
         const fetchReceipts = async () => {
             try {
-                console.log(params.profileid)
                 const data = await request(`/api/users/${params.profileid}/receipt`)
                 setReceipts(data)
                 setStatus('success')

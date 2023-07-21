@@ -45,11 +45,11 @@ export default function Settings({params}) {
         e.preventDefault()
 
         if (formData.old.length < 8) {
-            return console.log('enter old password')
+            return toast.error("Please re-enter your current password.")
         }
 
         if (formData.new.length < 8) {
-            return console.log('enter new password')
+            return toast.error("New password has to be at least 8 characters. Please try again.")
         }
 
         try {
