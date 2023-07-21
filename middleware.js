@@ -17,7 +17,7 @@ export async function middleware(req) {
   const oauthtoken = await getToken({req})
   const verifiedToken = token && (await verifyAuth(token.replace('Bearer ','')).catch((err) => {console.log(err)}))
   const verifiedClientToken = clientToken && (await verifyAuth(clientToken).catch((err) => {console.log(err)}))
-  
+
 
   if ((!verifiedClientToken && !oauthtoken) && (path.startsWith('/mybasket'))) {
     return NextResponse.redirect(new URL('/',req.url))
@@ -61,7 +61,13 @@ export async function middleware(req) {
     }
   }
 
+  if ( (oauthtoken) && (path.startsWith('/dashboard')) ) {
+    return NextResponse.redirect(new URL('/',req.url))
+  }
 
+  if ( (verifiedClientToken.user.role !== 'admin') && (path.startsWith('/dashboard')) ) {
+    return NextResponse.redirect(new URL('/',req.url))
+  }
 
 
 
