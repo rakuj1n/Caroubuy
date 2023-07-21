@@ -991,7 +991,28 @@ transition:all 100ms ease;
     opacity: 1;
     transform:translateY(0%)
   }
+
+  
 }
 
+.slidedownfornav {
+  animation: 0.7s ease slidedownfornav;
+  animation-fill-mode:forwards;
+}
+
+@keyframes slidedownfornav {
+  from {
+    opacity: 0;
+    transform: translateY(-40%);
+    height:0%;
+  }
+  to {
+    opacity: 1;
+    transform:translateY(-50%);
+    height:405px;
+  }
+
+  
+}
 
 /* CSS keyframes---------- */

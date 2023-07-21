@@ -25,7 +25,7 @@ export default function Navbar() {
         {
         session?.user || glob.state.usermanual ? 
 
-        <div className="navbar-container">
+        <div className="zero navbar-container slidedownfornav">
             <Link href='/listing'><Browse /></Link>
             <Link href='/mylisting'><Mylist /></Link>
             <Link href='/create-listing'><Createlisting /></Link>
