@@ -940,6 +940,30 @@ transition:all 100ms ease;
   }
 }
 
+/* settings------------ */
+
+.select-type {
+  display: flex;
+  gap:40px;
+  transition: all 200ms ease;
+  font-size: 1.1rem;
+}
+
+.select-type > p:hover {
+  color:white;
+  cursor: pointer;
+}
+
+.settings-button{
+  transition: all 200ms ease;
+}
+
+.settings-button:hover {
+  color:white;
+}
+
+/* settings------------ */
+
 /* CSS keyframes---------- */
 
 .zero {

@@ -16,6 +16,7 @@ import toast, {Toaster} from 'react-hot-toast'
 // PREVENT OAUTH USERS FROM ACCESSING THIS PAGE
 
 export default function Settings({params}) {
+    const [currSelected, setCurrSelected] = useState('password')
     const [submitting,setSubmitting] = useState(false)
     const router = useRouter()
     const {data:session} = useSession()
@@ -100,18 +101,21 @@ export default function Settings({params}) {
     return (
         <div className="home-main">
             <Toaster/>
+            <div className="select-type slidedown"><p style={{color: currSelected==="password" ? 'white' : ''}} onClick={() => setCurrSelected('password')}>Change password</p><p style={{color: currSelected==='image' ? 'white' : ''}} onClick={() => setCurrSelected('image')}>Change profile picture</p></div>
             <div className="overall-page-container">
+                {(currSelected === 'password') && 
                 <form className="form-container slidein" onSubmit={handleSubmit}>
                     <h2 className="sign-up">Change Password</h2>    
                     <input name='old' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="Current Password" value={formData.old}/>
                     <input name='new' onChange={(e) => setFormData(prev => ({...prev, [e.target.name]:e.target.value}))} type='password' placeholder="New Password" value={formData.new}/>
-                    <button disabled={formData.old === formData.new || submitting}>{submitting ? "Submitting..." : "Change Password"}</button>
-                </form>
-                <form style={{marginTop:'20px'}} className="form-container slidedown" onSubmit={handleSubmitPic}>
+                    <button className='settings-button' disabled={formData.old === formData.new || submitting}>{submitting ? "Submitting..." : "Change Password"}</button>
+                </form>}
+                {(currSelected === 'image') && 
+                    <form style={{marginTop:'20px'}} className="form-container slidedown" onSubmit={handleSubmitPic}>
                     <h2 className="sign-up">Change Profile Image</h2>    
                     <ProfileImageUpload onChange={(value) => setPicData(value)} value={picData}/>
-                    <button disabled={picData.length === 0 || submitting}>{submitting ? "Submitting..." : "Change Profile Image"}</button>
-                </form>
+                    <button className='settings-button' disabled={picData.length === 0 || submitting}>{submitting ? "Submitting..." : "Change Profile Image"}</button>
+                </form>}
             </div>
         </div>
     )
