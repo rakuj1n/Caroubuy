@@ -25,7 +25,7 @@ export default function IndividualListing({params}) {
 
     // ShoppingContext--------------------------
 
-    const { getCart,getTotalQty,addItem,removeItem } = useShoppingCart()
+    const { addFav,removeFav,getCart,getTotalQty,addItem,removeItem } = useShoppingCart()
     const cart = getCart()
 
     // ShoppingContext--------------------------
@@ -85,6 +85,7 @@ export default function IndividualListing({params}) {
   async function handleAddToFav(listingId) {
     if (glob.state.usermanual?.account) {
         try {
+          addFav(listingId)
             await request(`/api/users/${glob.state.usermanual?._id}/fav`,"PATCH",{
                 listingId
             })
@@ -93,6 +94,7 @@ export default function IndividualListing({params}) {
         }
     } else {
         try {
+          addFav(listingId)
             await request(`/api/users/${session?.user?.id}/fav`,"PATCH",{
                 listingId
             })
@@ -105,6 +107,7 @@ export default function IndividualListing({params}) {
 async function handleDeleteFromFav(listingId) {
     if (glob.state.usermanual?.account) {
         try {
+            removeFav(listingId)
             await request(`/api/users/${glob.state.usermanual?._id}/fav`,"DELETE",{
                 listingId
             })
@@ -113,6 +116,7 @@ async function handleDeleteFromFav(listingId) {
         }
     } else {
         try {
+            removeFav(listingId)
             await request(`/api/users/${session?.user?.id}/fav`,"DELETE",{
                 listingId
             })
