@@ -18,8 +18,7 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
     const fav = getFavArr()
     
     // ShoppingContext--------------------------
-    
-    const [isFav, setIsFav] = useState((fav?.includes(item._id) || fav?.includes(item._id)) ? true : false)
+
 
     function handleGoToListing(listingId) {
         router.push(`/listing/${listingId}`)
@@ -71,11 +70,9 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
 
     function handleHeartClick(e,itemid) {
         e.stopPropagation()
-        if (isFav) {
-            setIsFav(prev => !prev)
+        if (fav?.includes(item._id)) {
             return handleDeleteFromFav(itemid)
         } else {
-            setIsFav(prev => !prev)
             return handleAddToFav(itemid)
         }
     }
@@ -97,7 +94,7 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
             : (usermanual != item.seller?.usermanual?._id || useroauth != item.seller?.useroauth?._id) ? 
             <>
                 <div className='heart' onClick={(e) => handleHeartClick(e,item._id)}>
-                { isFav ? <FilledHeart/> : <Heart/> }
+                { fav.includes(item._id) ? <FilledHeart/> : <Heart/> }
                 </div>
 
                 {(!item.buyer) &&
