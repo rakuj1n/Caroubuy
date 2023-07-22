@@ -45,18 +45,16 @@ export function ShoppingCartProvider({children}) {
                 return [...prev, id]
             }
         })
-        setTotalAmt(prev => parseInt(prev) + parseInt(res.listingprice))
         let res = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/cart`,'POST',{id})
-        console.log(res)
+        setTotalAmt(prev => parseInt(prev) + parseInt(res.listingprice))
     }
 
     async function removeItem(id) {
         setCartItems(prev => {
             return prev.filter(item => item !== id)
         })
-        setTotalAmt(prev => parseInt(prev) - parseInt(res.listingprice))        
         let res = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/cart`,'DELETE',{id})
-        console.log(res)
+        setTotalAmt(prev => parseInt(prev) - parseInt(res.listingprice))        
     }
 
     function getTotalAmt() {
