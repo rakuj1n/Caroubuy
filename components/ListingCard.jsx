@@ -10,15 +10,16 @@ import { useShoppingCart } from './ShoppingCartContext'
 export default function ListingCard({item,usermanual,useroauth,usermanualaccount,useroauthaccount,key}) {
 
     const router = useRouter()
-    const [isFav, setIsFav] = useState((item.favby?.includes(useroauthaccount) || item.favby?.includes(usermanualaccount)) ? true : false)
-
+    
     // ShoppingContext--------------------------
-
-    const { getCart,getTotalQty,addItem,removeItem } = useShoppingCart()
+    
+    const { getFavArr,addFav,removeFav,getCart,getTotalQty,addItem,removeItem } = useShoppingCart()
     const cart = getCart()
-
+    const fav = getFavArr()
+    
     // ShoppingContext--------------------------
-
+    
+    const [isFav, setIsFav] = useState((fav?.includes(item._id) || fav?.includes(item._id)) ? true : false)
 
     function handleGoToListing(listingId) {
         router.push(`/listing/${listingId}`)
@@ -27,6 +28,7 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
     async function handleAddToFav(listingId) {
         if (usermanual) {
             try {
+                addFav(listingId)
                 await request(`/api/users/${usermanual}/fav`,"PATCH",{
                     listingId
                 })
@@ -35,6 +37,7 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
             }
         } else {
             try {
+                addFav(listingId)
                 await request(`/api/users/${useroauth}/fav`,"PATCH",{
                     listingId
                 })
@@ -47,6 +50,7 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
     async function handleDeleteFromFav(listingId) {
         if (usermanual) {
             try {
+                removeFav(listingId)
                 await request(`/api/users/${usermanual}/fav`,"DELETE",{
                     listingId
                 })
@@ -55,6 +59,7 @@ export default function ListingCard({item,usermanual,useroauth,usermanualaccount
             }
         } else {
             try {
+                removeFav(listingId)
                 await request(`/api/users/${useroauth}/fav`,"DELETE",{
                     listingId
                 })
