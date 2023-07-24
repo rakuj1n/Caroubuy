@@ -36,7 +36,6 @@ export function ShoppingCartProvider({children}) {
             let res2 = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/fav`,"GET")
             let favsArr = res2?.map(item => item._id)
             setFavArr(favsArr || [])
-            console.log('fav')
         }
         cart()
         fav()
