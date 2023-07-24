@@ -1,7 +1,7 @@
 'use client'
 
 import { useSession } from "next-auth/react"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Image from 'next/image'
 import { Browse, Mylist, Createlisting, Profile, Basket } from "@/utils/svg"
 import { StateContext } from "./Context"
@@ -15,10 +15,14 @@ export default function Navbar() {
 
     // ShoppingContext--------------------------
 
-    const { getTotalQty } = useShoppingCart()
+    const { fetchCartItems,getTotalQty } = useShoppingCart()
     const quantity = getTotalQty()
 
     // ShoppingContext--------------------------
+
+    useEffect(() => {
+        fetchCartItems()
+    },[session?.user,glob?.state?.usermanual])
 
     return (
     <>

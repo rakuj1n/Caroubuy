@@ -31,7 +31,7 @@ export default function Home() {
       setProviders(response)
     }
     setUp()
-    fetchCartItems()
+
     const loggedInManual = getUser()
     if (loggedInManual) {
       glob.setState(prev => ({...prev, usermanual: loggedInManual}))
