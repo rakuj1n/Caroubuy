@@ -26,13 +26,20 @@ export function ShoppingCartProvider({children}) {
         setTotalAmt(total)
     }
 
-    async function fetchCartItems() {
-        let res = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/cart`,"GET")
-        let res2 = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/fav`,"GET")
-        let favsArr = res2?.map(item => item._id)
-        setCartItems(res?.cart || [])
-        setTotalAmt(res?.total || 0)
-        setFavArr(favsArr || [])
+    function fetchCartItems() {
+        const cart = async () => {
+            let res = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/cart`,"GET")
+            setCartItems(res?.cart || [])
+            setTotalAmt(res?.total || 0)
+        }
+        const fav = async () => {
+            let res2 = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/fav`,"GET")
+            let favsArr = res2?.map(item => item._id)
+            setFavArr(favsArr || [])
+            console.log('fav')
+        }
+        cart()
+        fav()
     }
 
     function getCart() {
