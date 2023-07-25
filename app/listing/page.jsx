@@ -49,7 +49,7 @@ export default function Listing() {
       },[fetchListing])
 
       function handleSearchChange(e) {
-        const filtered = fetchListing.filter(item => item.listingname.includes(e.target.value))
+        const filtered = fetchListing.filter(item => item.listingname.toLowerCase().includes(e.target.value.toLowerCase()))
         setFilter(filtered)
         if (e.target.value === '') setFilter(fetchListing)
       }

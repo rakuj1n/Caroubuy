@@ -5,6 +5,7 @@ import Logout from '@/components/Logout'
 import Navbar from '@/components/Navbar'
 import Provider from '@/components/Provider'
 import {StateProvider} from '@/components/Context'
+import toast, {Toaster} from 'react-hot-toast'
 
 export const metadata = {
   title: 'Caroubuy',
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
         <Provider>
 
           <main>
+            <Toaster />
             <div className='about-link'>
               <Link href='/'>
               <svg className='home-link' xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16">

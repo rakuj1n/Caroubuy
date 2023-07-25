@@ -79,7 +79,6 @@ export default function SignUp() {
     
     return (
         <section className="sign-up-page-container">
-            <Toaster />
             <div className="zero back-sign-up slidein">
                 <Link href='/'><Back /></Link>
             </div>

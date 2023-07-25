@@ -73,7 +73,6 @@ export default function PurchaseHistory({params}) {
 
     return (
         <div className="home-main">
-        <Toaster />
           <div className="overall-page-container">
             <div className="receipt-container">
             {receipts?.length > 0 ? (receipts?.map(item => {

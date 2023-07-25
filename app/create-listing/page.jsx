@@ -77,9 +77,11 @@ export default function CreateListing() {
                 usermanualid: glob.state.usermanual?._id,
                 useroauthid: session?.user.id
             })
+            toast.success("Listing successfully created.")
             router.push('/mylisting')
         } catch (err) {
             console.log(err)
+            toast.error("Something went wrong. Please try again.")
         }
 
         // 'Content-Type': 'multipart/form-data' auto set when sending formdata???
@@ -93,7 +95,6 @@ export default function CreateListing() {
 
     return (
         <div className="home-main">
-            <Toaster />
             <div className="overall-page-container">
                 {/* <Link className='back-above-content' href='/'><Back /></Link> */}
                 <div className="content-container">

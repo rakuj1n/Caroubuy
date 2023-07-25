@@ -5,6 +5,7 @@ import { useLocalStorage } from "./useLocalStorage";
 import { useSession } from "next-auth/react";
 import { StateContext } from "./Context";
 import { request } from "@/utils/tokenAndFetch";
+import toast from 'react-hot-toast'
 
 const ShoppingCartContext = createContext({})
 
@@ -57,6 +58,7 @@ export function ShoppingCartProvider({children}) {
         })
         let res = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/cart`,'POST',{id})
         setTotalAmt(prev => parseInt(prev) + parseInt(res.listingprice))
+        toast.success('Listing added to cart.')
     }
 
     async function removeItem(id) {
@@ -64,7 +66,8 @@ export function ShoppingCartProvider({children}) {
             return prev.filter(item => item !== id)
         })
         let res = await request(`/api/users/${glob.state.usermanual?.account || session?.user?.account}/cart`,'DELETE',{id})
-        setTotalAmt(prev => parseInt(prev) - parseInt(res.listingprice))        
+        setTotalAmt(prev => parseInt(prev) - parseInt(res.listingprice))
+        toast.success('Listing removed from cart.')        
     }
 
     function getTotalAmt() {
@@ -81,12 +84,14 @@ export function ShoppingCartProvider({children}) {
                 return [...prev,id]
             }
         })
+        toast.success('Listing added to favourites.')
     }
 
     function removeFav(id) {
         setFavArr(prev => {
             return prev.filter(item => item !== id)
         })
+        toast.success('Listing removed from favourites.')
     }
  
     return (

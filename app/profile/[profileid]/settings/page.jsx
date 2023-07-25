@@ -100,7 +100,6 @@ export default function Settings({params}) {
 
     return (
         <div className="home-main">
-            <Toaster/>
             <div className="select-type slidedown"><p style={{color: currSelected==="password" ? 'white' : ''}} onClick={() => setCurrSelected('password')}>Change password</p><p style={{color: currSelected==='image' ? 'white' : ''}} onClick={() => setCurrSelected('image')}>Change profile picture</p></div>
             <div className="overall-page-container">
                 {(currSelected === 'password') && 

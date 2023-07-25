@@ -92,7 +92,6 @@ export default function MyBasket() {
 
     return (
         <div className="home-main">
-          <Toaster />
             <div className="overall-page-container">
               <div className='slidein' style={{display:'flex', gap:'50px', justifyContent:'center',alignItems:'center'}}>
                 <div>Total Quantity: <strong>{getTotalQty()}</strong></div>
