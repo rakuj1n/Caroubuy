@@ -16,6 +16,10 @@ A carousell-inspired website where users can upload and sell their wares as well
 ## Getting Started
 - Head over https://caroubuy.vercel.app/ to start uploading and buying items!
 
+## Future enhancements
+- Social features like chat, following, followers etc.
+- Stripe integration
+
 ## Credits
 
 - Listing card design from https://uiverse.io/Sashank02/new-warthog-10 
